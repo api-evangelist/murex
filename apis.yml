@@ -1,0 +1,120 @@
+name: Murex
+description: 'Murex is a global fintech leader in trading, treasury, risk management and post-trade operations software. Their MX.3 platform provides comprehensive solutions for capital markets across asset classes.
+
+  '
+image: https://www.murex.com/sites/default/files/murex-logo.png
+url: https://www.murex.com
+created: '2024-01-01'
+modified: '2024-01-01'
+apis:
+- name: Murex MX.3 Trading API
+  description: 'API for executing trades, managing orders, and accessing real-time market data across multiple asset classes including derivatives, fixed income, equities, and FX.
+
+    '
+  image: https://www.murex.com/sites/default/files/mx3-icon.png
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  baseURL: https://api.murex.com/v1/trading
+  tags:
+  - Trading
+  - Orders
+  - Execution
+  - Market Data
+  properties:
+  - type: Documentation
+    url: https://docs.murex.com/mx3/trading-api
+  - type: OpenAPI
+    url: https://api.murex.com/specs/trading-v1.yaml
+  - type: Authentication
+    url: https://docs.murex.com/authentication
+- name: Murex MX.3 Risk API
+  description: 'Comprehensive risk management API providing real-time risk calculations, VaR, stress testing, and regulatory compliance metrics.
+
+    '
+  image: https://www.murex.com/sites/default/files/risk-icon.png
+  humanURL: https://www.murex.com/en/solutions/risk-management
+  baseURL: https://api.murex.com/v1/risk
+  tags:
+  - Risk Management
+  - VaR
+  - Stress Testing
+  - Compliance
+  properties:
+  - type: Documentation
+    url: https://docs.murex.com/mx3/risk-api
+  - type: OpenAPI
+    url: https://api.murex.com/specs/risk-v1.yaml
+- name: Murex MX.3 Position API
+  description: 'API for accessing portfolio positions, P&L calculations, and position management across all asset classes and trading desks.
+
+    '
+  image: https://www.murex.com/sites/default/files/position-icon.png
+  humanURL: https://www.murex.com/en/solutions/position-management
+  baseURL: https://api.murex.com/v1/position
+  tags:
+  - Positions
+  - Portfolio
+  - P&L
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://docs.murex.com/mx3/position-api
+  - type: OpenAPI
+    url: https://api.murex.com/specs/position-v1.yaml
+- name: Murex MX.3 Market Data API
+  description: 'Real-time and historical market data API providing quotes, curves, volatility surfaces, and reference data for pricing and valuation.
+
+    '
+  image: https://www.murex.com/sites/default/files/marketdata-icon.png
+  humanURL: https://www.murex.com/en/solutions/market-data
+  baseURL: https://api.murex.com/v1/marketdata
+  tags:
+  - Market Data
+  - Pricing
+  - Curves
+  - Reference Data
+  properties:
+  - type: Documentation
+    url: https://docs.murex.com/mx3/marketdata-api
+  - type: OpenAPI
+    url: https://api.murex.com/specs/marketdata-v1.yaml
+- name: Murex MX.3 Post-Trade API
+  description: 'Post-trade processing API for confirmations, settlements, reconciliations, and regulatory reporting workflows.
+
+    '
+  image: https://www.murex.com/sites/default/files/posttrade-icon.png
+  humanURL: https://www.murex.com/en/solutions/post-trade
+  baseURL: https://api.murex.com/v1/posttrade
+  tags:
+  - Post-Trade
+  - Settlement
+  - Confirmations
+  - Reconciliation
+  properties:
+  - type: Documentation
+    url: https://docs.murex.com/mx3/posttrade-api
+  - type: OpenAPI
+    url: https://api.murex.com/specs/posttrade-v1.yaml
+common:
+- type: Portal
+  url: https://developer.murex.com
+- type: Support
+  url: https://www.murex.com/en/support
+- type: Status
+  url: https://status.murex.com
+- type: Terms of Service
+  url: https://www.murex.com/en/legal/terms
+- type: Privacy Policy
+  url: https://www.murex.com/en/legal/privacy
+- type: Contact
+  url: https://www.murex.com/en/contact
+maintainers:
+- FN: Murex API Team
+  email: api-support@murex.com
+  url: https://developer.murex.com
+tags:
+- Financial Services
+- Trading
+- Risk Management
+- Capital Markets
+- Fintech
+- Enterprise Software
