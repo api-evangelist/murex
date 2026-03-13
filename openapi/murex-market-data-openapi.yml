@@ -1,0 +1,700 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data API
+  description: >-
+    Real-time and historical market data API providing quotes, yield curves,
+    volatility surfaces, and reference data for pricing and valuation on the
+    Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api
+servers:
+  - url: https://api.murex.com/v1/marketdata
+    description: Murex MX.3 Market Data API
+tags:
+  - name: Quotes
+    description: Real-time and historical price quotes
+  - name: Curves
+    description: Yield curves and forward curves
+  - name: Volatility
+    description: Volatility surfaces and skew data
+  - name: FX Rates
+    description: Foreign exchange rates and crosses
+  - name: Reference Data
+    description: Market reference and static data
+security:
+  - bearerAuth: []
+paths:
+  /quotes:
+    get:
+      operationId: getQuotes
+      summary: Get market quotes
+      description: >-
+        Retrieve real-time or delayed market quotes for specified instruments.
+      tags:
+        - Quotes
+      parameters:
+        - name: instrumentIds
+          in: query
+          required: true
+          description: Comma-separated list of instrument identifiers
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: Comma-separated list of quote fields to return
+          schema:
+            type: string
+            example: bid,ask,mid,last,volume
+      responses:
+        '200':
+          description: Market quotes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quote'
+        '401':
+          description: Unauthorized
+  /quotes/history:
+    get:
+      operationId: getQuoteHistory
+      summary: Get historical quotes
+      description: >-
+        Retrieve historical price data for a specified instrument and date range.
+      tags:
+        - Quotes
+      parameters:
+        - name: instrumentId
+          in: query
+          required: true
+          description: Instrument identifier
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          required: true
+          description: Start date
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          required: true
+          description: End date
+          schema:
+            type: string
+            format: date
+        - name: frequency
+          in: query
+          description: Data frequency
+          schema:
+            type: string
+            enum:
+              - Daily
+              - Weekly
+              - Monthly
+            default: Daily
+      responses:
+        '200':
+          description: Historical quote data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instrumentId:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HistoricalQuote'
+        '401':
+          description: Unauthorized
+  /curves:
+    get:
+      operationId: listCurves
+      summary: List available curves
+      description: >-
+        Retrieve a list of available yield curves and forward curves.
+      tags:
+        - Curves
+      parameters:
+        - name: currency
+          in: query
+          description: Filter by currency
+          schema:
+            type: string
+        - name: curveType
+          in: query
+          description: Filter by curve type
+          schema:
+            type: string
+            enum:
+              - Yield
+              - Discount
+              - Forward
+              - Basis
+              - Credit
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of available curves
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CurveDefinition'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /curves/{curveId}:
+    get:
+      operationId: getCurve
+      summary: Get curve data
+      description: >-
+        Retrieve curve data points including tenors and rates for a
+        specific curve.
+      tags:
+        - Curves
+      parameters:
+        - name: curveId
+          in: path
+          required: true
+          description: Curve unique identifier
+          schema:
+            type: string
+        - name: asOfDate
+          in: query
+          description: Curve valuation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Curve data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurveData'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Curve not found
+  /volatility/surfaces:
+    get:
+      operationId: listVolatilitySurfaces
+      summary: List volatility surfaces
+      description: >-
+        Retrieve available volatility surfaces for options pricing.
+      tags:
+        - Volatility
+      parameters:
+        - name: underlying
+          in: query
+          description: Filter by underlying instrument or index
+          schema:
+            type: string
+        - name: assetClass
+          in: query
+          description: Filter by asset class
+          schema:
+            type: string
+            enum:
+              - FX
+              - IRD
+              - Equity
+              - Commodity
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of volatility surfaces
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VolatilitySurfaceDefinition'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /volatility/surfaces/{surfaceId}:
+    get:
+      operationId: getVolatilitySurface
+      summary: Get volatility surface data
+      description: >-
+        Retrieve volatility surface data with strike and tenor dimensions.
+      tags:
+        - Volatility
+      parameters:
+        - name: surfaceId
+          in: path
+          required: true
+          description: Volatility surface identifier
+          schema:
+            type: string
+        - name: asOfDate
+          in: query
+          description: Surface valuation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Volatility surface data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolatilitySurfaceData'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Surface not found
+  /fx/rates:
+    get:
+      operationId: getFxRates
+      summary: Get FX rates
+      description: >-
+        Retrieve foreign exchange spot and forward rates.
+      tags:
+        - FX Rates
+      parameters:
+        - name: currencyPairs
+          in: query
+          required: true
+          description: Comma-separated currency pairs (e.g., EURUSD,GBPUSD)
+          schema:
+            type: string
+        - name: rateType
+          in: query
+          description: Rate type
+          schema:
+            type: string
+            enum:
+              - Spot
+              - Forward
+            default: Spot
+        - name: tenor
+          in: query
+          description: Forward tenor (required when rateType is Forward)
+          schema:
+            type: string
+            example: 1M
+      responses:
+        '200':
+          description: FX rates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FxRate'
+        '401':
+          description: Unauthorized
+  /fx/rates/history:
+    get:
+      operationId: getFxRateHistory
+      summary: Get FX rate history
+      description: >-
+        Retrieve historical FX rates for a currency pair over a date range.
+      tags:
+        - FX Rates
+      parameters:
+        - name: currencyPair
+          in: query
+          required: true
+          description: Currency pair (e.g., EURUSD)
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Historical FX rates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  currencyPair:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        rate:
+                          type: number
+        '401':
+          description: Unauthorized
+  /reference/calendars:
+    get:
+      operationId: listCalendars
+      summary: List market calendars
+      description: >-
+        Retrieve available market and business day calendars.
+      tags:
+        - Reference Data
+      parameters:
+        - name: country
+          in: query
+          description: Filter by country code
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of calendars
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Calendar'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /reference/currencies:
+    get:
+      operationId: listCurrencies
+      summary: List currencies
+      description: >-
+        Retrieve supported currencies and their configurations.
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: List of currencies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Currency'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  schemas:
+    Quote:
+      type: object
+      properties:
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        bid:
+          type: number
+          description: Bid price
+        ask:
+          type: number
+          description: Ask price
+        mid:
+          type: number
+          description: Mid price
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        high:
+          type: number
+          description: Day high
+        low:
+          type: number
+          description: Day low
+        open:
+          type: number
+          description: Day open
+        close:
+          type: number
+          description: Previous close
+        currency:
+          type: string
+          description: Quote currency
+        timestamp:
+          type: string
+          format: date-time
+          description: Quote timestamp
+    HistoricalQuote:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        open:
+          type: number
+        high:
+          type: number
+        low:
+          type: number
+        close:
+          type: number
+        volume:
+          type: number
+    CurveDefinition:
+      type: object
+      properties:
+        curveId:
+          type: string
+          description: Unique curve identifier
+        name:
+          type: string
+          description: Curve display name
+        currency:
+          type: string
+          description: Curve currency
+        curveType:
+          type: string
+          enum:
+            - Yield
+            - Discount
+            - Forward
+            - Basis
+            - Credit
+          description: Curve type
+        dayCountConvention:
+          type: string
+          description: Day count convention (e.g., ACT/360, ACT/365)
+        interpolationMethod:
+          type: string
+          description: Interpolation method used
+    CurveData:
+      type: object
+      properties:
+        curveId:
+          type: string
+          description: Curve identifier
+        name:
+          type: string
+          description: Curve name
+        asOfDate:
+          type: string
+          format: date
+          description: Valuation date
+        currency:
+          type: string
+        curveType:
+          type: string
+        points:
+          type: array
+          description: Curve data points
+          items:
+            type: object
+            properties:
+              tenor:
+                type: string
+                description: Tenor label (e.g., ON, 1W, 1M, 3M, 1Y)
+              date:
+                type: string
+                format: date
+                description: Maturity date
+              rate:
+                type: number
+                description: Rate or yield value
+              discountFactor:
+                type: number
+                description: Discount factor
+    VolatilitySurfaceDefinition:
+      type: object
+      properties:
+        surfaceId:
+          type: string
+          description: Unique surface identifier
+        name:
+          type: string
+          description: Surface display name
+        underlying:
+          type: string
+          description: Underlying instrument or index
+        assetClass:
+          type: string
+          description: Asset class
+        quoteType:
+          type: string
+          enum:
+            - LogNormal
+            - Normal
+            - ShiftedLogNormal
+          description: Volatility quote convention
+    VolatilitySurfaceData:
+      type: object
+      properties:
+        surfaceId:
+          type: string
+        name:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        underlying:
+          type: string
+        points:
+          type: array
+          description: Volatility surface data points
+          items:
+            type: object
+            properties:
+              tenor:
+                type: string
+                description: Option expiry tenor
+              strike:
+                type: number
+                description: Strike price or delta
+              strikeType:
+                type: string
+                enum:
+                  - Absolute
+                  - Delta
+                  - Moneyness
+              volatility:
+                type: number
+                description: Implied volatility value
+    FxRate:
+      type: object
+      properties:
+        currencyPair:
+          type: string
+          description: Currency pair (e.g., EURUSD)
+        baseCurrency:
+          type: string
+          description: Base currency
+        quoteCurrency:
+          type: string
+          description: Quote currency
+        bid:
+          type: number
+          description: Bid rate
+        ask:
+          type: number
+          description: Ask rate
+        mid:
+          type: number
+          description: Mid rate
+        rateType:
+          type: string
+          enum:
+            - Spot
+            - Forward
+          description: Rate type
+        tenor:
+          type: string
+          description: Forward tenor if applicable
+        timestamp:
+          type: string
+          format: date-time
+          description: Rate timestamp
+    Calendar:
+      type: object
+      properties:
+        calendarId:
+          type: string
+          description: Calendar identifier
+        name:
+          type: string
+          description: Calendar name
+        country:
+          type: string
+          description: Country code
+        description:
+          type: string
+          description: Calendar description
+        holidays:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              name:
+                type: string
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO 4217 currency code
+        name:
+          type: string
+          description: Currency name
+        decimalPlaces:
+          type: integer
+          description: Number of decimal places
+        dayCountConvention:
+          type: string
+          description: Default day count convention
+        spotLag:
+          type: integer
+          description: Spot settlement lag in business days
+        calendar:
+          type: string
+          description: Associated business day calendar

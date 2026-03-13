@@ -1,0 +1,607 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Position API
+  description: >-
+    API for accessing portfolio positions, P&L calculations, and position
+    management across all asset classes and trading desks on the Murex
+    MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+externalDocs:
+  description: Murex MX.3 Position API Documentation
+  url: https://docs.murex.com/mx3/position-api
+servers:
+  - url: https://api.murex.com/v1/position
+    description: Murex MX.3 Position API
+tags:
+  - name: Positions
+    description: Portfolio position retrieval and management
+  - name: P&L
+    description: Profit and loss calculations and reporting
+  - name: Cash Flows
+    description: Cash flow projections and management
+  - name: Accounting
+    description: Accounting entries and journal operations
+security:
+  - bearerAuth: []
+paths:
+  /positions:
+    get:
+      operationId: listPositions
+      summary: List positions
+      description: >-
+        Retrieve portfolio positions with optional filtering by portfolio,
+        asset class, instrument, and date.
+      tags:
+        - Positions
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: assetClass
+          in: query
+          description: Filter by asset class
+          schema:
+            type: string
+            enum:
+              - FX
+              - IRD
+              - Equity
+              - Credit
+              - Commodity
+              - FixedIncome
+        - name: instrumentId
+          in: query
+          description: Filter by instrument identifier
+          schema:
+            type: string
+        - name: asOfDate
+          in: query
+          description: Position date
+          schema:
+            type: string
+            format: date
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of positions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Position'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /positions/{positionId}:
+    get:
+      operationId: getPosition
+      summary: Get a position
+      description: Retrieve details of a specific position.
+      tags:
+        - Positions
+      parameters:
+        - name: positionId
+          in: path
+          required: true
+          description: Position unique identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Position details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Position not found
+  /positions/summary:
+    get:
+      operationId: getPositionSummary
+      summary: Get position summary
+      description: >-
+        Retrieve aggregated position summary by portfolio, desk, asset
+        class, or currency.
+      tags:
+        - Positions
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: groupBy
+          in: query
+          description: Grouping dimension for aggregation
+          schema:
+            type: string
+            enum:
+              - assetClass
+              - currency
+              - portfolio
+              - desk
+              - counterparty
+        - name: asOfDate
+          in: query
+          description: Position date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Aggregated position summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionSummary'
+        '401':
+          description: Unauthorized
+  /pnl:
+    get:
+      operationId: getPnL
+      summary: Get P&L report
+      description: >-
+        Retrieve profit and loss calculations including realized, unrealized,
+        and total P&L with attribution by risk factor.
+      tags:
+        - P&L
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: fromDate
+          in: query
+          description: Start date for P&L period
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: End date for P&L period
+          schema:
+            type: string
+            format: date
+        - name: currency
+          in: query
+          description: Reporting currency
+          schema:
+            type: string
+      responses:
+        '200':
+          description: P&L report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PnLReport'
+        '401':
+          description: Unauthorized
+  /pnl/explain:
+    get:
+      operationId: getPnLExplain
+      summary: Get P&L explanation
+      description: >-
+        Retrieve P&L attribution and explanation decomposed by risk factors
+        including market moves, theta, new deals, and amendments.
+      tags:
+        - P&L
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - name: date
+          in: query
+          required: true
+          description: P&L explanation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: P&L explanation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PnLExplain'
+        '401':
+          description: Unauthorized
+  /cashflows:
+    get:
+      operationId: listCashFlows
+      summary: List cash flows
+      description: >-
+        Retrieve projected and historical cash flows across portfolios.
+      tags:
+        - Cash Flows
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - name: fromDate
+          in: query
+          description: Start date for cash flow period
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: End date for cash flow period
+          schema:
+            type: string
+            format: date
+        - name: currency
+          in: query
+          description: Filter by currency
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Cash flow type filter
+          schema:
+            type: string
+            enum:
+              - Projected
+              - Settled
+              - All
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of cash flows
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CashFlow'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /accounting/entries:
+    get:
+      operationId: listAccountingEntries
+      summary: List accounting entries
+      description: >-
+        Retrieve accounting journal entries generated from trade and
+        position events.
+      tags:
+        - Accounting
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - name: fromDate
+          in: query
+          description: Start date
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: End date
+          schema:
+            type: string
+            format: date
+        - name: eventType
+          in: query
+          description: Filter by accounting event type
+          schema:
+            type: string
+            enum:
+              - TradeEntry
+              - Accrual
+              - Revaluation
+              - Settlement
+              - Maturity
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of accounting entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountingEntry'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  schemas:
+    Position:
+      type: object
+      properties:
+        positionId:
+          type: string
+          description: Unique position identifier
+        portfolioId:
+          type: string
+          description: Portfolio or book identifier
+        portfolioName:
+          type: string
+          description: Portfolio display name
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        assetClass:
+          type: string
+          description: Asset class
+        quantity:
+          type: number
+          description: Position quantity or notional
+        marketValue:
+          type: number
+          description: Current market value
+        averageCost:
+          type: number
+          description: Average cost basis
+        unrealizedPnL:
+          type: number
+          description: Unrealized profit or loss
+        realizedPnL:
+          type: number
+          description: Realized profit or loss
+        currency:
+          type: string
+          description: Position currency (ISO 4217)
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        counterpartyName:
+          type: string
+          description: Counterparty display name
+        tradeDate:
+          type: string
+          format: date
+          description: Original trade date
+        valueDate:
+          type: string
+          format: date
+          description: Value or settlement date
+        maturityDate:
+          type: string
+          format: date
+          description: Maturity date
+        asOfDate:
+          type: string
+          format: date
+          description: Position as-of date
+    PositionSummary:
+      type: object
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        totalMarketValue:
+          type: number
+          description: Total market value
+        totalUnrealizedPnL:
+          type: number
+          description: Total unrealized P&L
+        currency:
+          type: string
+          description: Reporting currency
+        groups:
+          type: array
+          items:
+            type: object
+            properties:
+              groupKey:
+                type: string
+                description: Grouping key value
+              marketValue:
+                type: number
+              unrealizedPnL:
+                type: number
+              positionCount:
+                type: integer
+    PnLReport:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+        currency:
+          type: string
+          description: Reporting currency
+        realizedPnL:
+          type: number
+          description: Total realized P&L
+        unrealizedPnL:
+          type: number
+          description: Total unrealized P&L
+        totalPnL:
+          type: number
+          description: Total P&L (realized + unrealized)
+        byAssetClass:
+          type: array
+          items:
+            type: object
+            properties:
+              assetClass:
+                type: string
+              realizedPnL:
+                type: number
+              unrealizedPnL:
+                type: number
+              totalPnL:
+                type: number
+    PnLExplain:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        date:
+          type: string
+          format: date
+        totalPnL:
+          type: number
+          description: Total P&L for the day
+        currency:
+          type: string
+        attribution:
+          type: object
+          properties:
+            marketMoves:
+              type: number
+              description: P&L from market movements
+            theta:
+              type: number
+              description: P&L from time decay
+            newDeals:
+              type: number
+              description: P&L from new deal entries
+            amendments:
+              type: number
+              description: P&L from trade amendments
+            cashflows:
+              type: number
+              description: P&L from settled cash flows
+            fxTranslation:
+              type: number
+              description: P&L from FX translation effects
+            unexplained:
+              type: number
+              description: Unexplained residual P&L
+    CashFlow:
+      type: object
+      properties:
+        cashFlowId:
+          type: string
+          description: Cash flow identifier
+        tradeId:
+          type: string
+          description: Associated trade identifier
+        portfolioId:
+          type: string
+          description: Portfolio identifier
+        type:
+          type: string
+          enum:
+            - Coupon
+            - Principal
+            - Premium
+            - Fee
+            - Dividend
+            - FXSettlement
+            - Margin
+          description: Cash flow type
+        amount:
+          type: number
+          description: Cash flow amount
+        currency:
+          type: string
+          description: Cash flow currency (ISO 4217)
+        paymentDate:
+          type: string
+          format: date
+          description: Payment or settlement date
+        status:
+          type: string
+          enum:
+            - Projected
+            - Confirmed
+            - Settled
+            - Failed
+          description: Cash flow status
+        direction:
+          type: string
+          enum:
+            - Pay
+            - Receive
+          description: Cash flow direction
+    AccountingEntry:
+      type: object
+      properties:
+        entryId:
+          type: string
+          description: Accounting entry identifier
+        tradeId:
+          type: string
+          description: Associated trade identifier
+        portfolioId:
+          type: string
+          description: Portfolio identifier
+        eventType:
+          type: string
+          enum:
+            - TradeEntry
+            - Accrual
+            - Revaluation
+            - Settlement
+            - Maturity
+          description: Accounting event type
+        debitAccount:
+          type: string
+          description: Debit account code
+        creditAccount:
+          type: string
+          description: Credit account code
+        amount:
+          type: number
+          description: Entry amount
+        currency:
+          type: string
+          description: Entry currency (ISO 4217)
+        postingDate:
+          type: string
+          format: date
+          description: Accounting posting date
+        valueDate:
+          type: string
+          format: date
+          description: Value date
+        description:
+          type: string
+          description: Entry description

@@ -1,0 +1,680 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Risk API
+  description: >-
+    Comprehensive risk management API providing real-time risk calculations,
+    Value at Risk (VaR), stress testing, sensitivity analysis, and regulatory
+    compliance metrics on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+externalDocs:
+  description: Murex MX.3 Risk API Documentation
+  url: https://docs.murex.com/mx3/risk-api
+servers:
+  - url: https://api.murex.com/v1/risk
+    description: Murex MX.3 Risk API
+tags:
+  - name: VaR
+    description: Value at Risk calculations and reports
+  - name: Sensitivities
+    description: Greek and sensitivity calculations
+  - name: Stress Testing
+    description: Stress testing and scenario analysis
+  - name: Limits
+    description: Risk limit monitoring and management
+  - name: Regulatory
+    description: Regulatory capital and compliance metrics
+security:
+  - bearerAuth: []
+paths:
+  /var:
+    get:
+      operationId: getVaR
+      summary: Get VaR calculations
+      description: >-
+        Retrieve Value at Risk calculations for specified portfolios,
+        desks, or entity levels.
+      tags:
+        - VaR
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: method
+          in: query
+          description: VaR calculation methodology
+          schema:
+            type: string
+            enum:
+              - Historical
+              - MonteCarlo
+              - Parametric
+        - name: confidenceLevel
+          in: query
+          description: Confidence level as a percentage
+          schema:
+            type: number
+            default: 99
+        - name: holdingPeriod
+          in: query
+          description: Holding period in days
+          schema:
+            type: integer
+            default: 1
+        - name: asOfDate
+          in: query
+          description: Calculation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: VaR calculation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaRResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Portfolio or desk not found
+  /var/history:
+    get:
+      operationId: getVaRHistory
+      summary: Get VaR history
+      description: >-
+        Retrieve historical VaR values over a date range for trend analysis
+        and backtesting.
+      tags:
+        - VaR
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: fromDate
+          in: query
+          required: true
+          description: Start date for history
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          required: true
+          description: End date for history
+          schema:
+            type: string
+            format: date
+        - name: method
+          in: query
+          description: VaR calculation methodology
+          schema:
+            type: string
+            enum:
+              - Historical
+              - MonteCarlo
+              - Parametric
+      responses:
+        '200':
+          description: Historical VaR values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VaRHistoryEntry'
+        '401':
+          description: Unauthorized
+  /sensitivities:
+    get:
+      operationId: getSensitivities
+      summary: Get risk sensitivities
+      description: >-
+        Retrieve Greek calculations and risk sensitivities for portfolios
+        including delta, gamma, vega, theta, and rho.
+      tags:
+        - Sensitivities
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: assetClass
+          in: query
+          description: Filter by asset class
+          schema:
+            type: string
+            enum:
+              - FX
+              - IRD
+              - Equity
+              - Credit
+              - Commodity
+              - FixedIncome
+        - name: greeks
+          in: query
+          description: Comma-separated list of Greeks to compute
+          schema:
+            type: string
+            example: delta,gamma,vega,theta,rho
+        - name: asOfDate
+          in: query
+          description: Calculation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Sensitivity calculations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitivityResult'
+        '401':
+          description: Unauthorized
+  /sensitivities/pv01:
+    get:
+      operationId: getPV01
+      summary: Get PV01 sensitivities
+      description: >-
+        Retrieve PV01 (price value of a basis point) sensitivities by
+        currency and tenor bucket.
+      tags:
+        - Sensitivities
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: currency
+          in: query
+          description: Filter by currency
+          schema:
+            type: string
+        - name: asOfDate
+          in: query
+          description: Calculation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: PV01 sensitivity results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PV01Result'
+        '401':
+          description: Unauthorized
+  /stress-tests:
+    get:
+      operationId: listStressTests
+      summary: List stress test scenarios
+      description: >-
+        Retrieve available stress test scenarios and their configurations.
+      tags:
+        - Stress Testing
+      parameters:
+        - name: type
+          in: query
+          description: Filter by scenario type
+          schema:
+            type: string
+            enum:
+              - Historical
+              - Hypothetical
+              - Regulatory
+      responses:
+        '200':
+          description: List of stress test scenarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StressTestScenario'
+        '401':
+          description: Unauthorized
+  /stress-tests/{scenarioId}/run:
+    post:
+      operationId: runStressTest
+      summary: Run a stress test
+      description: >-
+        Execute a stress test scenario against specified portfolios
+        and return the impact analysis.
+      tags:
+        - Stress Testing
+      parameters:
+        - name: scenarioId
+          in: path
+          required: true
+          description: Stress test scenario identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StressTestRequest'
+      responses:
+        '200':
+          description: Stress test results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StressTestResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Scenario not found
+  /limits:
+    get:
+      operationId: listLimits
+      summary: List risk limits
+      description: >-
+        Retrieve configured risk limits and their current utilization.
+      tags:
+        - Limits
+      parameters:
+        - $ref: '#/components/parameters/portfolioId'
+        - $ref: '#/components/parameters/deskId'
+        - name: status
+          in: query
+          description: Filter by limit status
+          schema:
+            type: string
+            enum:
+              - Active
+              - Breached
+              - Warning
+              - Inactive
+      responses:
+        '200':
+          description: List of risk limits
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RiskLimit'
+        '401':
+          description: Unauthorized
+  /limits/{limitId}:
+    get:
+      operationId: getLimit
+      summary: Get a risk limit
+      description: Retrieve details of a specific risk limit.
+      tags:
+        - Limits
+      parameters:
+        - name: limitId
+          in: path
+          required: true
+          description: Risk limit identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Risk limit details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskLimit'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Risk limit not found
+  /regulatory/capital:
+    get:
+      operationId: getRegulatoryCapital
+      summary: Get regulatory capital metrics
+      description: >-
+        Retrieve regulatory capital calculations including RWA, CVA, and
+        capital ratios for Basel III/IV compliance.
+      tags:
+        - Regulatory
+      parameters:
+        - name: framework
+          in: query
+          description: Regulatory framework
+          schema:
+            type: string
+            enum:
+              - BaselIII
+              - BaselIV
+              - FRTB
+        - name: asOfDate
+          in: query
+          description: Calculation date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Regulatory capital metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegulatoryCapital'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
+  schemas:
+    VaRResult:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+          description: Portfolio identifier
+        asOfDate:
+          type: string
+          format: date
+          description: Calculation date
+        method:
+          type: string
+          description: VaR methodology used
+        confidenceLevel:
+          type: number
+          description: Confidence level percentage
+        holdingPeriod:
+          type: integer
+          description: Holding period in days
+        varAmount:
+          type: number
+          description: VaR amount in base currency
+        currency:
+          type: string
+          description: Base currency for the VaR calculation
+        componentVaR:
+          type: array
+          description: VaR decomposition by risk factor or asset class
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              varAmount:
+                type: number
+        calculatedAt:
+          type: string
+          format: date-time
+          description: Calculation timestamp
+    VaRHistoryEntry:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        varAmount:
+          type: number
+        pnl:
+          type: number
+          description: Actual P&L for the day
+        breach:
+          type: boolean
+          description: Whether VaR was breached
+    SensitivityResult:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        greeks:
+          type: object
+          properties:
+            delta:
+              type: number
+              description: First-order price sensitivity
+            gamma:
+              type: number
+              description: Second-order price sensitivity
+            vega:
+              type: number
+              description: Sensitivity to volatility
+            theta:
+              type: number
+              description: Time decay
+            rho:
+              type: number
+              description: Sensitivity to interest rates
+        byAssetClass:
+          type: array
+          items:
+            type: object
+            properties:
+              assetClass:
+                type: string
+              delta:
+                type: number
+              gamma:
+                type: number
+              vega:
+                type: number
+    PV01Result:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalPV01:
+          type: number
+          description: Total PV01 across all tenors
+        byCurrency:
+          type: array
+          items:
+            type: object
+            properties:
+              currency:
+                type: string
+              totalPV01:
+                type: number
+              tenorBuckets:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tenor:
+                      type: string
+                      description: Tenor bucket (e.g., 1M, 3M, 1Y, 5Y, 10Y)
+                    pv01:
+                      type: number
+    StressTestScenario:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+          description: Unique scenario identifier
+        name:
+          type: string
+          description: Scenario name
+        description:
+          type: string
+          description: Scenario description
+        type:
+          type: string
+          enum:
+            - Historical
+            - Hypothetical
+            - Regulatory
+          description: Scenario type
+        shocks:
+          type: array
+          description: Market factor shocks in the scenario
+          items:
+            type: object
+            properties:
+              riskFactor:
+                type: string
+              shockType:
+                type: string
+                enum:
+                  - Absolute
+                  - Relative
+              shockValue:
+                type: number
+    StressTestRequest:
+      type: object
+      required:
+        - portfolioIds
+      properties:
+        portfolioIds:
+          type: array
+          items:
+            type: string
+          description: Portfolios to stress test
+        asOfDate:
+          type: string
+          format: date
+    StressTestResult:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+        scenarioName:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalImpact:
+          type: number
+          description: Total P&L impact in base currency
+        currency:
+          type: string
+        byPortfolio:
+          type: array
+          items:
+            type: object
+            properties:
+              portfolioId:
+                type: string
+              impact:
+                type: number
+        byRiskFactor:
+          type: array
+          items:
+            type: object
+            properties:
+              riskFactor:
+                type: string
+              impact:
+                type: number
+        calculatedAt:
+          type: string
+          format: date-time
+    RiskLimit:
+      type: object
+      properties:
+        limitId:
+          type: string
+          description: Unique limit identifier
+        name:
+          type: string
+          description: Limit name
+        limitType:
+          type: string
+          enum:
+            - VaR
+            - Notional
+            - Sensitivity
+            - PV01
+            - CreditExposure
+          description: Type of risk limit
+        portfolioId:
+          type: string
+          description: Associated portfolio
+        deskId:
+          type: string
+          description: Associated trading desk
+        limitValue:
+          type: number
+          description: Maximum limit value
+        currentUtilization:
+          type: number
+          description: Current utilization amount
+        utilizationPercent:
+          type: number
+          description: Utilization as percentage of limit
+        currency:
+          type: string
+          description: Limit currency
+        status:
+          type: string
+          enum:
+            - Active
+            - Breached
+            - Warning
+            - Inactive
+          description: Current limit status
+        warningThreshold:
+          type: number
+          description: Warning threshold as percentage
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    RegulatoryCapital:
+      type: object
+      properties:
+        framework:
+          type: string
+          description: Regulatory framework
+        asOfDate:
+          type: string
+          format: date
+        riskWeightedAssets:
+          type: number
+          description: Total risk-weighted assets
+        creditRWA:
+          type: number
+          description: Credit risk-weighted assets
+        marketRWA:
+          type: number
+          description: Market risk-weighted assets
+        operationalRWA:
+          type: number
+          description: Operational risk-weighted assets
+        cvaCharge:
+          type: number
+          description: Credit Valuation Adjustment capital charge
+        tier1Capital:
+          type: number
+          description: Tier 1 capital
+        totalCapital:
+          type: number
+          description: Total capital
+        capitalRatio:
+          type: number
+          description: Capital adequacy ratio
+        currency:
+          type: string
+          description: Reporting currency

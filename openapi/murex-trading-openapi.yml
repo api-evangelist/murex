@@ -1,0 +1,676 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Trading API
+  description: >-
+    API for executing trades, managing orders, and accessing real-time market
+    data across multiple asset classes including derivatives, fixed income,
+    equities, and FX on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+externalDocs:
+  description: Murex MX.3 Trading API Documentation
+  url: https://docs.murex.com/mx3/trading-api
+servers:
+  - url: https://api.murex.com/v1/trading
+    description: Murex MX.3 Trading API
+tags:
+  - name: Orders
+    description: Order creation, modification, and lifecycle management
+  - name: Trades
+    description: Trade execution and trade blotter operations
+  - name: Instruments
+    description: Financial instrument reference data
+  - name: Portfolios
+    description: Trading portfolio and book management
+security:
+  - bearerAuth: []
+paths:
+  /orders:
+    get:
+      operationId: listOrders
+      summary: List orders
+      description: >-
+        Retrieve a list of orders with optional filtering by status, asset
+        class, portfolio, and date range.
+      tags:
+        - Orders
+      parameters:
+        - $ref: '#/components/parameters/assetClass'
+        - $ref: '#/components/parameters/portfolio'
+        - name: status
+          in: query
+          description: Filter by order status
+          schema:
+            type: string
+            enum:
+              - Pending
+              - Submitted
+              - PartiallyFilled
+              - Filled
+              - Cancelled
+              - Rejected
+        - name: fromDate
+          in: query
+          description: Start date for order search
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: End date for order search
+          schema:
+            type: string
+            format: date
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  totalCount:
+                    type: integer
+                    description: Total number of matching orders
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createOrder
+      summary: Create an order
+      description: >-
+        Submit a new order for execution across any supported asset class.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid order request
+        '401':
+          description: Unauthorized
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Get an order
+      description: Retrieve details of a specific order by ID.
+      tags:
+        - Orders
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+    put:
+      operationId: updateOrder
+      summary: Update an order
+      description: >-
+        Modify an existing order. Only orders in Pending or Submitted status
+        can be modified.
+      tags:
+        - Orders
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid update request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+  /orders/{orderId}/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Cancel an order
+      description: >-
+        Cancel a pending or submitted order.
+      tags:
+        - Orders
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+      responses:
+        '200':
+          description: Order cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Order cannot be cancelled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+  /trades:
+    get:
+      operationId: listTrades
+      summary: List trades
+      description: >-
+        Retrieve trade blotter entries with optional filtering by asset class,
+        portfolio, counterparty, and date range.
+      tags:
+        - Trades
+      parameters:
+        - $ref: '#/components/parameters/assetClass'
+        - $ref: '#/components/parameters/portfolio'
+        - name: counterpartyId
+          in: query
+          description: Filter by counterparty identifier
+          schema:
+            type: string
+        - name: tradeDate
+          in: query
+          description: Filter by trade date
+          schema:
+            type: string
+            format: date
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of trades
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trade'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /trades/{tradeId}:
+    get:
+      operationId: getTrade
+      summary: Get a trade
+      description: Retrieve details of a specific trade by ID.
+      tags:
+        - Trades
+      parameters:
+        - $ref: '#/components/parameters/tradeId'
+      responses:
+        '200':
+          description: Trade details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trade'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Trade not found
+  /instruments:
+    get:
+      operationId: listInstruments
+      summary: List instruments
+      description: >-
+        Search and retrieve financial instrument reference data.
+      tags:
+        - Instruments
+      parameters:
+        - $ref: '#/components/parameters/assetClass'
+        - name: query
+          in: query
+          description: Search query for instrument name or identifier
+          schema:
+            type: string
+        - name: currency
+          in: query
+          description: Filter by instrument currency
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of instruments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Instrument'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /instruments/{instrumentId}:
+    get:
+      operationId: getInstrument
+      summary: Get an instrument
+      description: Retrieve details of a specific financial instrument.
+      tags:
+        - Instruments
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          description: Instrument unique identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instrument'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Instrument not found
+  /portfolios:
+    get:
+      operationId: listPortfolios
+      summary: List portfolios
+      description: >-
+        Retrieve available trading portfolios and books.
+      tags:
+        - Portfolios
+      parameters:
+        - name: deskId
+          in: query
+          description: Filter by trading desk identifier
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of portfolios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Portfolio'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /portfolios/{portfolioId}:
+    get:
+      operationId: getPortfolio
+      summary: Get a portfolio
+      description: Retrieve details of a specific trading portfolio.
+      tags:
+        - Portfolios
+      parameters:
+        - name: portfolioId
+          in: path
+          required: true
+          description: Portfolio unique identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Portfolio details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Portfolio not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+  parameters:
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      description: Order unique identifier
+      schema:
+        type: string
+    tradeId:
+      name: tradeId
+      in: path
+      required: true
+      description: Trade unique identifier
+      schema:
+        type: string
+    assetClass:
+      name: assetClass
+      in: query
+      description: Filter by asset class
+      schema:
+        type: string
+        enum:
+          - FX
+          - IRD
+          - Equity
+          - Credit
+          - Commodity
+          - FixedIncome
+    portfolio:
+      name: portfolio
+      in: query
+      description: Filter by portfolio or book name
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  schemas:
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier
+        status:
+          type: string
+          enum:
+            - Pending
+            - Submitted
+            - PartiallyFilled
+            - Filled
+            - Cancelled
+            - Rejected
+          description: Current order status
+        side:
+          type: string
+          enum:
+            - Buy
+            - Sell
+          description: Order side
+        assetClass:
+          type: string
+          description: Asset class of the instrument
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        quantity:
+          type: number
+          description: Order quantity or notional amount
+        price:
+          type: number
+          description: Order price or rate
+        currency:
+          type: string
+          description: Order currency (ISO 4217)
+        portfolioId:
+          type: string
+          description: Target portfolio or book
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        orderType:
+          type: string
+          enum:
+            - Market
+            - Limit
+            - Stop
+          description: Order type
+        timeInForce:
+          type: string
+          enum:
+            - GTC
+            - DAY
+            - IOC
+            - FOK
+          description: Time in force instruction
+        filledQuantity:
+          type: number
+          description: Quantity filled so far
+        averagePrice:
+          type: number
+          description: Average fill price
+        createdAt:
+          type: string
+          format: date-time
+          description: Order creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    CreateOrderRequest:
+      type: object
+      required:
+        - side
+        - instrumentId
+        - quantity
+        - portfolioId
+        - orderType
+      properties:
+        side:
+          type: string
+          enum:
+            - Buy
+            - Sell
+        instrumentId:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        currency:
+          type: string
+        portfolioId:
+          type: string
+        counterpartyId:
+          type: string
+        orderType:
+          type: string
+          enum:
+            - Market
+            - Limit
+            - Stop
+        timeInForce:
+          type: string
+          enum:
+            - GTC
+            - DAY
+            - IOC
+            - FOK
+          default: DAY
+    UpdateOrderRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+        price:
+          type: number
+        timeInForce:
+          type: string
+          enum:
+            - GTC
+            - DAY
+            - IOC
+            - FOK
+    Trade:
+      type: object
+      properties:
+        tradeId:
+          type: string
+          description: Unique trade identifier
+        orderId:
+          type: string
+          description: Associated order identifier
+        status:
+          type: string
+          enum:
+            - Active
+            - Amended
+            - Cancelled
+            - Matured
+            - Terminated
+          description: Trade lifecycle status
+        side:
+          type: string
+          enum:
+            - Buy
+            - Sell
+          description: Trade side
+        assetClass:
+          type: string
+          description: Asset class of the traded instrument
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        quantity:
+          type: number
+          description: Trade quantity or notional amount
+        price:
+          type: number
+          description: Execution price or rate
+        currency:
+          type: string
+          description: Trade currency (ISO 4217)
+        portfolioId:
+          type: string
+          description: Portfolio or book
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        counterpartyName:
+          type: string
+          description: Counterparty display name
+        tradeDate:
+          type: string
+          format: date
+          description: Trade execution date
+        valueDate:
+          type: string
+          format: date
+          description: Settlement or value date
+        maturityDate:
+          type: string
+          format: date
+          description: Maturity date for term instruments
+        createdAt:
+          type: string
+          format: date-time
+          description: Trade creation timestamp
+    Instrument:
+      type: object
+      properties:
+        instrumentId:
+          type: string
+          description: Unique instrument identifier
+        name:
+          type: string
+          description: Instrument name
+        assetClass:
+          type: string
+          description: Asset class classification
+        instrumentType:
+          type: string
+          description: Specific instrument type (e.g., IRS, CDS, FXForward)
+        currency:
+          type: string
+          description: Primary currency (ISO 4217)
+        secondaryCurrency:
+          type: string
+          description: Secondary currency for FX instruments
+        issuer:
+          type: string
+          description: Issuer name for bonds and credit instruments
+        maturityDate:
+          type: string
+          format: date
+          description: Maturity or expiry date
+        isin:
+          type: string
+          description: International Securities Identification Number
+        ticker:
+          type: string
+          description: Market ticker symbol
+    Portfolio:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+          description: Unique portfolio identifier
+        name:
+          type: string
+          description: Portfolio or book name
+        deskId:
+          type: string
+          description: Trading desk identifier
+        deskName:
+          type: string
+          description: Trading desk name
+        currency:
+          type: string
+          description: Portfolio base currency (ISO 4217)
+        entity:
+          type: string
+          description: Legal entity
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+          description: Portfolio status

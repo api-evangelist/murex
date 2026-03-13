@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.murex.com/schemas/murex/trade.json",
+  "title": "Murex Trade",
+  "description": "Represents a financial trade executed on the Murex MX.3 platform across any supported asset class including derivatives, fixed income, equities, FX, and commodities.",
+  "type": "object",
+  "required": ["tradeId", "side", "assetClass", "instrumentId", "quantity", "price", "currency", "portfolioId", "tradeDate"],
+  "properties": {
+    "tradeId": {
+      "type": "string",
+      "description": "Unique trade identifier assigned by MX.3"
+    },
+    "externalTradeId": {
+      "type": "string",
+      "description": "External trade reference from a connected system"
+    },
+    "orderId": {
+      "type": "string",
+      "description": "Associated order identifier if the trade originated from an order"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Active", "Amended", "Cancelled", "Matured", "Terminated"],
+      "description": "Current trade lifecycle status"
+    },
+    "side": {
+      "type": "string",
+      "enum": ["Buy", "Sell"],
+      "description": "Trade side from the perspective of the booking entity"
+    },
+    "assetClass": {
+      "type": "string",
+      "enum": ["FX", "IRD", "Equity", "Credit", "Commodity", "FixedIncome"],
+      "description": "Asset class classification of the traded instrument"
+    },
+    "instrumentId": {
+      "type": "string",
+      "description": "MX.3 instrument identifier"
+    },
+    "instrumentName": {
+      "type": "string",
+      "description": "Instrument display name"
+    },
+    "instrumentType": {
+      "type": "string",
+      "description": "Specific instrument type (e.g., IRS, CDS, FXForward, Bond, Option)"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Trade quantity, notional amount, or number of contracts"
+    },
+    "price": {
+      "type": "number",
+      "description": "Trade execution price, rate, or spread"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "Primary trade currency in ISO 4217 format"
+    },
+    "secondaryCurrency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "Secondary currency for FX and cross-currency instruments"
+    },
+    "portfolioId": {
+      "type": "string",
+      "description": "Portfolio or book where the trade is booked"
+    },
+    "portfolioName": {
+      "type": "string",
+      "description": "Portfolio display name"
+    },
+    "deskId": {
+      "type": "string",
+      "description": "Trading desk identifier"
+    },
+    "counterparty": {
+      "$ref": "#/$defs/Counterparty"
+    },
+    "tradeDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Trade execution date"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Settlement or value date"
+    },
+    "maturityDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Maturity or expiry date for term instruments"
+    },
+    "entity": {
+      "type": "string",
+      "description": "Legal entity that is party to the trade"
+    },
+    "trader": {
+      "type": "string",
+      "description": "Trader who executed the trade"
+    },
+    "salesPerson": {
+      "type": "string",
+      "description": "Sales person associated with the trade"
+    },
+    "isin": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}[A-Z0-9]{9}[0-9]$",
+      "description": "International Securities Identification Number"
+    },
+    "uti": {
+      "type": "string",
+      "description": "Unique Transaction Identifier for regulatory reporting"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Trade creation timestamp in MX.3"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last modification timestamp"
+    }
+  },
+  "$defs": {
+    "Counterparty": {
+      "type": "object",
+      "description": "Counterparty to the trade",
+      "properties": {
+        "counterpartyId": {
+          "type": "string",
+          "description": "Counterparty unique identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Counterparty legal name"
+        },
+        "lei": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]{20}$",
+          "description": "Legal Entity Identifier"
+        },
+        "country": {
+          "type": "string",
+          "description": "Counterparty domicile country code"
+        }
+      }
+    }
+  }
+}

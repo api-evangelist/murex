@@ -5,7 +5,7 @@ description: 'Murex is a global fintech leader in trading, treasury, risk manage
 image: https://www.murex.com/sites/default/files/murex-logo.png
 url: https://www.murex.com
 created: '2024-01-01'
-modified: '2024-01-01'
+modified: '2026-03-04'
 apis:
 - name: Murex MX.3 Trading API
   description: 'API for executing trades, managing orders, and accessing real-time market data across multiple asset classes including derivatives, fixed income, equities, and FX.
@@ -26,6 +26,8 @@ apis:
     url: https://api.murex.com/specs/trading-v1.yaml
   - type: Authentication
     url: https://docs.murex.com/authentication
+  - type: OpenAPI
+    url: openapi/murex-trading-openapi.yml
 - name: Murex MX.3 Risk API
   description: 'Comprehensive risk management API providing real-time risk calculations, VaR, stress testing, and regulatory compliance metrics.
 
@@ -43,6 +45,8 @@ apis:
     url: https://docs.murex.com/mx3/risk-api
   - type: OpenAPI
     url: https://api.murex.com/specs/risk-v1.yaml
+  - type: OpenAPI
+    url: openapi/murex-risk-openapi.yml
 - name: Murex MX.3 Position API
   description: 'API for accessing portfolio positions, P&L calculations, and position management across all asset classes and trading desks.
 
@@ -60,6 +64,8 @@ apis:
     url: https://docs.murex.com/mx3/position-api
   - type: OpenAPI
     url: https://api.murex.com/specs/position-v1.yaml
+  - type: OpenAPI
+    url: openapi/murex-position-openapi.yml
 - name: Murex MX.3 Market Data API
   description: 'Real-time and historical market data API providing quotes, curves, volatility surfaces, and reference data for pricing and valuation.
 
@@ -77,6 +83,8 @@ apis:
     url: https://docs.murex.com/mx3/marketdata-api
   - type: OpenAPI
     url: https://api.murex.com/specs/marketdata-v1.yaml
+  - type: OpenAPI
+    url: openapi/murex-market-data-openapi.yml
 - name: Murex MX.3 Post-Trade API
   description: 'Post-trade processing API for confirmations, settlements, reconciliations, and regulatory reporting workflows.
 
@@ -94,6 +102,8 @@ apis:
     url: https://docs.murex.com/mx3/posttrade-api
   - type: OpenAPI
     url: https://api.murex.com/specs/posttrade-v1.yaml
+  - type: OpenAPI
+    url: openapi/murex-post-trade-openapi.yml
 common:
 - type: Portal
   url: https://developer.murex.com
@@ -107,10 +117,15 @@ common:
   url: https://www.murex.com/en/legal/privacy
 - type: Contact
   url: https://www.murex.com/en/contact
+- type: JSON-LD
+  url: json-ld/murex-context.jsonld
+- type: JSONSchema
+  url: json-schema/murex-trade-schema.json
+- type: JSONSchema
+  url: json-schema/murex-position-schema.json
 maintainers:
-- FN: Murex API Team
-  email: api-support@murex.com
-  url: https://developer.murex.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 tags:
 - Financial Services
 - Trading

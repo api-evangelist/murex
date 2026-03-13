@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.murex.com/schemas/murex/position.json",
+  "title": "Murex Position",
+  "description": "Represents a portfolio position in the Murex MX.3 platform, including market value, P&L, and risk attributes for a specific instrument holding within a portfolio or book.",
+  "type": "object",
+  "required": ["positionId", "portfolioId", "instrumentId", "quantity", "currency", "asOfDate"],
+  "properties": {
+    "positionId": {
+      "type": "string",
+      "description": "Unique position identifier"
+    },
+    "portfolioId": {
+      "type": "string",
+      "description": "Portfolio or book identifier where the position is held"
+    },
+    "portfolioName": {
+      "type": "string",
+      "description": "Portfolio display name"
+    },
+    "deskId": {
+      "type": "string",
+      "description": "Trading desk identifier"
+    },
+    "deskName": {
+      "type": "string",
+      "description": "Trading desk display name"
+    },
+    "instrumentId": {
+      "type": "string",
+      "description": "MX.3 instrument identifier"
+    },
+    "instrumentName": {
+      "type": "string",
+      "description": "Instrument display name"
+    },
+    "assetClass": {
+      "type": "string",
+      "enum": ["FX", "IRD", "Equity", "Credit", "Commodity", "FixedIncome"],
+      "description": "Asset class classification"
+    },
+    "instrumentType": {
+      "type": "string",
+      "description": "Specific instrument type"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Position quantity, notional amount, or number of contracts"
+    },
+    "marketValue": {
+      "type": "number",
+      "description": "Current mark-to-market value of the position"
+    },
+    "averageCost": {
+      "type": "number",
+      "description": "Average cost basis of the position"
+    },
+    "unrealizedPnL": {
+      "type": "number",
+      "description": "Unrealized profit or loss"
+    },
+    "realizedPnL": {
+      "type": "number",
+      "description": "Cumulative realized profit or loss"
+    },
+    "accruedInterest": {
+      "type": "number",
+      "description": "Accrued interest for fixed income positions"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "Position currency in ISO 4217 format"
+    },
+    "counterparty": {
+      "$ref": "#/$defs/Counterparty"
+    },
+    "tradeDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Original trade date"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Value or settlement date"
+    },
+    "maturityDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Maturity or expiry date"
+    },
+    "asOfDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Position valuation date"
+    },
+    "entity": {
+      "type": "string",
+      "description": "Legal entity holding the position"
+    },
+    "riskMeasures": {
+      "$ref": "#/$defs/RiskMeasures"
+    }
+  },
+  "$defs": {
+    "Counterparty": {
+      "type": "object",
+      "description": "Counterparty to the position",
+      "properties": {
+        "counterpartyId": {
+          "type": "string",
+          "description": "Counterparty unique identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Counterparty legal name"
+        },
+        "lei": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]{20}$",
+          "description": "Legal Entity Identifier"
+        }
+      }
+    },
+    "RiskMeasures": {
+      "type": "object",
+      "description": "Position-level risk sensitivities and measures",
+      "properties": {
+        "delta": {
+          "type": "number",
+          "description": "First-order price sensitivity"
+        },
+        "gamma": {
+          "type": "number",
+          "description": "Second-order price sensitivity"
+        },
+        "vega": {
+          "type": "number",
+          "description": "Sensitivity to implied volatility"
+        },
+        "theta": {
+          "type": "number",
+          "description": "Time decay"
+        },
+        "rho": {
+          "type": "number",
+          "description": "Sensitivity to interest rate changes"
+        },
+        "pv01": {
+          "type": "number",
+          "description": "Price value of a basis point"
+        },
+        "cs01": {
+          "type": "number",
+          "description": "Credit spread sensitivity per basis point"
+        }
+      }
+    }
+  }
+}

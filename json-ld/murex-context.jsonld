@@ -1,0 +1,254 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "murex": "https://docs.murex.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+
+    "Trade": {
+      "@id": "murex:Trade",
+      "@context": {
+        "tradeId": "murex:tradeId",
+        "externalTradeId": "murex:externalTradeId",
+        "status": "murex:tradeStatus",
+        "side": "murex:tradeSide",
+        "assetClass": "murex:assetClass",
+        "instrumentId": "murex:instrumentId",
+        "instrumentName": "schema:name",
+        "instrumentType": "murex:instrumentType",
+        "quantity": {
+          "@id": "murex:quantity",
+          "@type": "xsd:decimal"
+        },
+        "price": {
+          "@id": "murex:price",
+          "@type": "xsd:decimal"
+        },
+        "currency": "murex:currency",
+        "portfolioId": "murex:portfolioId",
+        "counterpartyName": "schema:name",
+        "tradeDate": {
+          "@id": "murex:tradeDate",
+          "@type": "xsd:date"
+        },
+        "valueDate": {
+          "@id": "murex:valueDate",
+          "@type": "xsd:date"
+        },
+        "maturityDate": {
+          "@id": "murex:maturityDate",
+          "@type": "xsd:date"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Position": {
+      "@id": "murex:Position",
+      "@context": {
+        "positionId": "murex:positionId",
+        "portfolioId": "murex:portfolioId",
+        "portfolioName": "schema:name",
+        "instrumentId": "murex:instrumentId",
+        "assetClass": "murex:assetClass",
+        "quantity": {
+          "@id": "murex:quantity",
+          "@type": "xsd:decimal"
+        },
+        "marketValue": {
+          "@id": "murex:marketValue",
+          "@type": "xsd:decimal"
+        },
+        "unrealizedPnL": {
+          "@id": "murex:unrealizedPnL",
+          "@type": "xsd:decimal"
+        },
+        "realizedPnL": {
+          "@id": "murex:realizedPnL",
+          "@type": "xsd:decimal"
+        },
+        "currency": "murex:currency",
+        "asOfDate": {
+          "@id": "murex:asOfDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "Order": {
+      "@id": "murex:Order",
+      "@context": {
+        "orderId": "murex:orderId",
+        "status": "murex:orderStatus",
+        "side": "murex:tradeSide",
+        "instrumentId": "murex:instrumentId",
+        "quantity": {
+          "@id": "murex:quantity",
+          "@type": "xsd:decimal"
+        },
+        "price": {
+          "@id": "murex:price",
+          "@type": "xsd:decimal"
+        },
+        "orderType": "murex:orderType",
+        "timeInForce": "murex:timeInForce",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Instrument": {
+      "@id": "murex:Instrument",
+      "@context": {
+        "instrumentId": "murex:instrumentId",
+        "name": "schema:name",
+        "assetClass": "murex:assetClass",
+        "instrumentType": "murex:instrumentType",
+        "currency": "murex:currency",
+        "isin": "murex:isin",
+        "ticker": "murex:ticker",
+        "maturityDate": {
+          "@id": "murex:maturityDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "Portfolio": {
+      "@id": "murex:Portfolio",
+      "@context": {
+        "portfolioId": "murex:portfolioId",
+        "name": "schema:name",
+        "deskId": "murex:deskId",
+        "deskName": "schema:name",
+        "currency": "murex:currency",
+        "entity": "murex:legalEntity"
+      }
+    },
+
+    "VaRResult": {
+      "@id": "murex:VaRResult",
+      "@context": {
+        "method": "murex:varMethod",
+        "confidenceLevel": {
+          "@id": "murex:confidenceLevel",
+          "@type": "xsd:decimal"
+        },
+        "holdingPeriod": {
+          "@id": "murex:holdingPeriod",
+          "@type": "xsd:integer"
+        },
+        "varAmount": {
+          "@id": "murex:varAmount",
+          "@type": "xsd:decimal"
+        },
+        "currency": "murex:currency",
+        "asOfDate": {
+          "@id": "murex:asOfDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "RiskLimit": {
+      "@id": "murex:RiskLimit",
+      "@context": {
+        "limitId": "murex:limitId",
+        "name": "schema:name",
+        "limitType": "murex:limitType",
+        "limitValue": {
+          "@id": "murex:limitValue",
+          "@type": "xsd:decimal"
+        },
+        "currentUtilization": {
+          "@id": "murex:currentUtilization",
+          "@type": "xsd:decimal"
+        },
+        "status": "murex:limitStatus"
+      }
+    },
+
+    "Settlement": {
+      "@id": "murex:Settlement",
+      "@context": {
+        "settlementId": "murex:settlementId",
+        "tradeId": "murex:tradeId",
+        "status": "murex:settlementStatus",
+        "amount": {
+          "@id": "murex:amount",
+          "@type": "xsd:decimal"
+        },
+        "currency": "murex:currency",
+        "direction": "murex:direction",
+        "settlementDate": {
+          "@id": "murex:settlementDate",
+          "@type": "xsd:date"
+        },
+        "paymentMethod": "murex:paymentMethod"
+      }
+    },
+
+    "Confirmation": {
+      "@id": "murex:Confirmation",
+      "@context": {
+        "confirmationId": "murex:confirmationId",
+        "tradeId": "murex:tradeId",
+        "status": "murex:confirmationStatus",
+        "confirmationType": "murex:confirmationType",
+        "counterpartyName": "schema:name",
+        "sentAt": {
+          "@id": "murex:sentAt",
+          "@type": "xsd:dateTime"
+        },
+        "matchedAt": {
+          "@id": "murex:matchedAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "MarginCall": {
+      "@id": "murex:MarginCall",
+      "@context": {
+        "marginCallId": "murex:marginCallId",
+        "agreementId": "murex:agreementId",
+        "direction": "murex:direction",
+        "callAmount": {
+          "@id": "murex:callAmount",
+          "@type": "xsd:decimal"
+        },
+        "currency": "murex:currency",
+        "exposure": {
+          "@id": "murex:exposure",
+          "@type": "xsd:decimal"
+        },
+        "status": "murex:marginCallStatus",
+        "callDate": {
+          "@id": "murex:callDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "CurveData": {
+      "@id": "murex:CurveData",
+      "@context": {
+        "curveId": "murex:curveId",
+        "name": "schema:name",
+        "currency": "murex:currency",
+        "curveType": "murex:curveType",
+        "asOfDate": {
+          "@id": "murex:asOfDate",
+          "@type": "xsd:date"
+        }
+      }
+    }
+  }
+}
