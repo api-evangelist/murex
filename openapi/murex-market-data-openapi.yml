@@ -33,7 +33,7 @@ paths:
   /quotes:
     get:
       operationId: getQuotes
-      summary: Get market quotes
+      summary: Murex Get market quotes
       description: >-
         Retrieve real-time or delayed market quotes for specified instruments.
       tags:
@@ -68,7 +68,7 @@ paths:
   /quotes/history:
     get:
       operationId: getQuoteHistory
-      summary: Get historical quotes
+      summary: Murex Get historical quotes
       description: >-
         Retrieve historical price data for a specified instrument and date range.
       tags:
@@ -123,7 +123,7 @@ paths:
   /curves:
     get:
       operationId: listCurves
-      summary: List available curves
+      summary: Murex List available curves
       description: >-
         Retrieve a list of available yield curves and forward curves.
       tags:
@@ -166,7 +166,7 @@ paths:
   /curves/{curveId}:
     get:
       operationId: getCurve
-      summary: Get curve data
+      summary: Murex Get curve data
       description: >-
         Retrieve curve data points including tenors and rates for a
         specific curve.
@@ -199,7 +199,7 @@ paths:
   /volatility/surfaces:
     get:
       operationId: listVolatilitySurfaces
-      summary: List volatility surfaces
+      summary: Murex List volatility surfaces
       description: >-
         Retrieve available volatility surfaces for options pricing.
       tags:
@@ -241,7 +241,7 @@ paths:
   /volatility/surfaces/{surfaceId}:
     get:
       operationId: getVolatilitySurface
-      summary: Get volatility surface data
+      summary: Murex Get volatility surface data
       description: >-
         Retrieve volatility surface data with strike and tenor dimensions.
       tags:
@@ -273,7 +273,7 @@ paths:
   /fx/rates:
     get:
       operationId: getFxRates
-      summary: Get FX rates
+      summary: Murex Get FX rates
       description: >-
         Retrieve foreign exchange spot and forward rates.
       tags:
@@ -317,7 +317,7 @@ paths:
   /fx/rates/history:
     get:
       operationId: getFxRateHistory
-      summary: Get FX rate history
+      summary: Murex Get FX rate history
       description: >-
         Retrieve historical FX rates for a currency pair over a date range.
       tags:
@@ -366,7 +366,7 @@ paths:
   /reference/calendars:
     get:
       operationId: listCalendars
-      summary: List market calendars
+      summary: Murex List market calendars
       description: >-
         Retrieve available market and business day calendars.
       tags:
@@ -398,7 +398,7 @@ paths:
   /reference/currencies:
     get:
       operationId: listCurrencies
-      summary: List currencies
+      summary: Murex List currencies
       description: >-
         Retrieve supported currencies and their configurations.
       tags:

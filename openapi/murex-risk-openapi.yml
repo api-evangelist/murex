@@ -33,7 +33,7 @@ paths:
   /var:
     get:
       operationId: getVaR
-      summary: Get VaR calculations
+      summary: Murex Get VaR calculations
       description: >-
         Retrieve Value at Risk calculations for specified portfolios,
         desks, or entity levels.
@@ -83,7 +83,7 @@ paths:
   /var/history:
     get:
       operationId: getVaRHistory
-      summary: Get VaR history
+      summary: Murex Get VaR history
       description: >-
         Retrieve historical VaR values over a date range for trend analysis
         and backtesting.
@@ -132,7 +132,7 @@ paths:
   /sensitivities:
     get:
       operationId: getSensitivities
-      summary: Get risk sensitivities
+      summary: Murex Get risk sensitivities
       description: >-
         Retrieve Greek calculations and risk sensitivities for portfolios
         including delta, gamma, vega, theta, and rho.
@@ -177,7 +177,7 @@ paths:
   /sensitivities/pv01:
     get:
       operationId: getPV01
-      summary: Get PV01 sensitivities
+      summary: Murex Get PV01 sensitivities
       description: >-
         Retrieve PV01 (price value of a basis point) sensitivities by
         currency and tenor bucket.
@@ -209,7 +209,7 @@ paths:
   /stress-tests:
     get:
       operationId: listStressTests
-      summary: List stress test scenarios
+      summary: Murex List stress test scenarios
       description: >-
         Retrieve available stress test scenarios and their configurations.
       tags:
@@ -241,7 +241,7 @@ paths:
   /stress-tests/{scenarioId}/run:
     post:
       operationId: runStressTest
-      summary: Run a stress test
+      summary: Murex Run a stress test
       description: >-
         Execute a stress test scenario against specified portfolios
         and return the impact analysis.
@@ -274,7 +274,7 @@ paths:
   /limits:
     get:
       operationId: listLimits
-      summary: List risk limits
+      summary: Murex List risk limits
       description: >-
         Retrieve configured risk limits and their current utilization.
       tags:
@@ -309,7 +309,7 @@ paths:
   /limits/{limitId}:
     get:
       operationId: getLimit
-      summary: Get a risk limit
+      summary: Murex Get a risk limit
       description: Retrieve details of a specific risk limit.
       tags:
         - Limits
@@ -334,7 +334,7 @@ paths:
   /regulatory/capital:
     get:
       operationId: getRegulatoryCapital
-      summary: Get regulatory capital metrics
+      summary: Murex Get regulatory capital metrics
       description: >-
         Retrieve regulatory capital calculations including RWA, CVA, and
         capital ratios for Basel III/IV compliance.

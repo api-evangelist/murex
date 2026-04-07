@@ -31,7 +31,7 @@ paths:
   /positions:
     get:
       operationId: listPositions
-      summary: List positions
+      summary: Murex List positions
       description: >-
         Retrieve portfolio positions with optional filtering by portfolio,
         asset class, instrument, and date.
@@ -84,7 +84,7 @@ paths:
   /positions/{positionId}:
     get:
       operationId: getPosition
-      summary: Get a position
+      summary: Murex Get a position
       description: Retrieve details of a specific position.
       tags:
         - Positions
@@ -109,7 +109,7 @@ paths:
   /positions/summary:
     get:
       operationId: getPositionSummary
-      summary: Get position summary
+      summary: Murex Get position summary
       description: >-
         Retrieve aggregated position summary by portfolio, desk, asset
         class, or currency.
@@ -147,7 +147,7 @@ paths:
   /pnl:
     get:
       operationId: getPnL
-      summary: Get P&L report
+      summary: Murex Get P&L report
       description: >-
         Retrieve profit and loss calculations including realized, unrealized,
         and total P&L with attribution by risk factor.
@@ -185,7 +185,7 @@ paths:
   /pnl/explain:
     get:
       operationId: getPnLExplain
-      summary: Get P&L explanation
+      summary: Murex Get P&L explanation
       description: >-
         Retrieve P&L attribution and explanation decomposed by risk factors
         including market moves, theta, new deals, and amendments.
@@ -212,7 +212,7 @@ paths:
   /cashflows:
     get:
       operationId: listCashFlows
-      summary: List cash flows
+      summary: Murex List cash flows
       description: >-
         Retrieve projected and historical cash flows across portfolios.
       tags:
@@ -266,7 +266,7 @@ paths:
   /accounting/entries:
     get:
       operationId: listAccountingEntries
-      summary: List accounting entries
+      summary: Murex List accounting entries
       description: >-
         Retrieve accounting journal entries generated from trade and
         position events.

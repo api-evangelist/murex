@@ -32,7 +32,7 @@ paths:
   /confirmations:
     get:
       operationId: listConfirmations
-      summary: List confirmations
+      summary: Murex List confirmations
       description: >-
         Retrieve trade confirmations with optional filtering by status,
         counterparty, and date range.
@@ -89,7 +89,7 @@ paths:
   /confirmations/{confirmationId}:
     get:
       operationId: getConfirmation
-      summary: Get a confirmation
+      summary: Murex Get a confirmation
       description: Retrieve details of a specific trade confirmation.
       tags:
         - Confirmations
@@ -114,7 +114,7 @@ paths:
   /confirmations/{confirmationId}/match:
     post:
       operationId: matchConfirmation
-      summary: Match a confirmation
+      summary: Murex Match a confirmation
       description: >-
         Mark a confirmation as matched after counterparty agreement.
       tags:
@@ -142,7 +142,7 @@ paths:
   /settlements:
     get:
       operationId: listSettlements
-      summary: List settlements
+      summary: Murex List settlements
       description: >-
         Retrieve settlement instructions and their processing status.
       tags:
@@ -191,7 +191,7 @@ paths:
   /settlements/{settlementId}:
     get:
       operationId: getSettlement
-      summary: Get a settlement
+      summary: Murex Get a settlement
       description: Retrieve details of a specific settlement instruction.
       tags:
         - Settlements
@@ -216,7 +216,7 @@ paths:
   /settlements/{settlementId}/instruct:
     post:
       operationId: instructSettlement
-      summary: Instruct a settlement
+      summary: Murex Instruct a settlement
       description: >-
         Send settlement instructions to the payment or securities
         settlement system.
@@ -245,7 +245,7 @@ paths:
   /reconciliations:
     get:
       operationId: listReconciliations
-      summary: List reconciliations
+      summary: Murex List reconciliations
       description: >-
         Retrieve reconciliation results for positions, cash balances,
         and trade matching.
@@ -302,7 +302,7 @@ paths:
   /reconciliations/{reconciliationId}:
     get:
       operationId: getReconciliation
-      summary: Get a reconciliation item
+      summary: Murex Get a reconciliation item
       description: Retrieve details of a specific reconciliation item.
       tags:
         - Reconciliations
@@ -327,7 +327,7 @@ paths:
   /regulatory/reports:
     get:
       operationId: listRegulatoryReports
-      summary: List regulatory reports
+      summary: Murex List regulatory reports
       description: >-
         Retrieve regulatory trade reports for EMIR, MiFID II, Dodd-Frank,
         and other reporting regimes.
@@ -389,7 +389,7 @@ paths:
   /regulatory/reports/{reportId}:
     get:
       operationId: getRegulatoryReport
-      summary: Get a regulatory report
+      summary: Murex Get a regulatory report
       description: Retrieve details of a specific regulatory report submission.
       tags:
         - Regulatory Reporting
@@ -414,7 +414,7 @@ paths:
   /collateral/agreements:
     get:
       operationId: listCollateralAgreements
-      summary: List collateral agreements
+      summary: Murex List collateral agreements
       description: >-
         Retrieve CSA and collateral agreements with margin call status.
       tags:
@@ -455,7 +455,7 @@ paths:
   /collateral/margin-calls:
     get:
       operationId: listMarginCalls
-      summary: List margin calls
+      summary: Murex List margin calls
       description: >-
         Retrieve margin call calculations and their settlement status.
       tags:

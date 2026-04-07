@@ -31,7 +31,7 @@ paths:
   /orders:
     get:
       operationId: listOrders
-      summary: List orders
+      summary: Murex List orders
       description: >-
         Retrieve a list of orders with optional filtering by status, asset
         class, portfolio, and date range.
@@ -85,7 +85,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createOrder
-      summary: Create an order
+      summary: Murex Create an order
       description: >-
         Submit a new order for execution across any supported asset class.
       tags:
@@ -110,7 +110,7 @@ paths:
   /orders/{orderId}:
     get:
       operationId: getOrder
-      summary: Get an order
+      summary: Murex Get an order
       description: Retrieve details of a specific order by ID.
       tags:
         - Orders
@@ -129,7 +129,7 @@ paths:
           description: Order not found
     put:
       operationId: updateOrder
-      summary: Update an order
+      summary: Murex Update an order
       description: >-
         Modify an existing order. Only orders in Pending or Submitted status
         can be modified.
@@ -159,7 +159,7 @@ paths:
   /orders/{orderId}/cancel:
     post:
       operationId: cancelOrder
-      summary: Cancel an order
+      summary: Murex Cancel an order
       description: >-
         Cancel a pending or submitted order.
       tags:
@@ -182,7 +182,7 @@ paths:
   /trades:
     get:
       operationId: listTrades
-      summary: List trades
+      summary: Murex List trades
       description: >-
         Retrieve trade blotter entries with optional filtering by asset class,
         portfolio, counterparty, and date range.
@@ -223,7 +223,7 @@ paths:
   /trades/{tradeId}:
     get:
       operationId: getTrade
-      summary: Get a trade
+      summary: Murex Get a trade
       description: Retrieve details of a specific trade by ID.
       tags:
         - Trades
@@ -243,7 +243,7 @@ paths:
   /instruments:
     get:
       operationId: listInstruments
-      summary: List instruments
+      summary: Murex List instruments
       description: >-
         Search and retrieve financial instrument reference data.
       tags:
@@ -281,7 +281,7 @@ paths:
   /instruments/{instrumentId}:
     get:
       operationId: getInstrument
-      summary: Get an instrument
+      summary: Murex Get an instrument
       description: Retrieve details of a specific financial instrument.
       tags:
         - Instruments
@@ -306,7 +306,7 @@ paths:
   /portfolios:
     get:
       operationId: listPortfolios
-      summary: List portfolios
+      summary: Murex List portfolios
       description: >-
         Retrieve available trading portfolios and books.
       tags:
@@ -338,7 +338,7 @@ paths:
   /portfolios/{portfolioId}:
     get:
       operationId: getPortfolio
-      summary: Get a portfolio
+      summary: Murex Get a portfolio
       description: Retrieve details of a specific trading portfolio.
       tags:
         - Portfolios
