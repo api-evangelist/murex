@@ -16,16 +16,16 @@ servers:
   - url: https://api.murex.com/v1/posttrade
     description: Murex MX.3 Post-Trade API
 tags:
+  - name: Collateral
+    description: Collateral management and margin operations
   - name: Confirmations
     description: Trade confirmation generation and matching
-  - name: Settlements
-    description: Settlement instruction management and processing
   - name: Reconciliations
     description: Position and cash reconciliation operations
   - name: Regulatory Reporting
     description: Regulatory trade and transaction reporting
-  - name: Collateral
-    description: Collateral management and margin operations
+  - name: Settlements
+    description: Settlement instruction management and processing
 security:
   - bearerAuth: []
 paths:

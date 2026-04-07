@@ -17,14 +17,14 @@ servers:
   - url: https://api.murex.com/v1/trading
     description: Murex MX.3 Trading API
 tags:
-  - name: Orders
-    description: Order creation, modification, and lifecycle management
-  - name: Trades
-    description: Trade execution and trade blotter operations
   - name: Instruments
     description: Financial instrument reference data
+  - name: Orders
+    description: Order creation, modification, and lifecycle management
   - name: Portfolios
     description: Trading portfolio and book management
+  - name: Trades
+    description: Trade execution and trade blotter operations
 security:
   - bearerAuth: []
 paths:

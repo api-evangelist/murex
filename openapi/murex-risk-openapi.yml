@@ -17,16 +17,16 @@ servers:
   - url: https://api.murex.com/v1/risk
     description: Murex MX.3 Risk API
 tags:
-  - name: VaR
-    description: Value at Risk calculations and reports
-  - name: Sensitivities
-    description: Greek and sensitivity calculations
-  - name: Stress Testing
-    description: Stress testing and scenario analysis
   - name: Limits
     description: Risk limit monitoring and management
   - name: Regulatory
     description: Regulatory capital and compliance metrics
+  - name: Sensitivities
+    description: Greek and sensitivity calculations
+  - name: Stress Testing
+    description: Stress testing and scenario analysis
+  - name: VaR
+    description: Value at Risk calculations and reports
 security:
   - bearerAuth: []
 paths:

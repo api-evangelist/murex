@@ -17,16 +17,16 @@ servers:
   - url: https://api.murex.com/v1/marketdata
     description: Murex MX.3 Market Data API
 tags:
-  - name: Quotes
-    description: Real-time and historical price quotes
   - name: Curves
     description: Yield curves and forward curves
-  - name: Volatility
-    description: Volatility surfaces and skew data
   - name: FX Rates
     description: Foreign exchange rates and crosses
+  - name: Quotes
+    description: Real-time and historical price quotes
   - name: Reference Data
     description: Market reference and static data
+  - name: Volatility
+    description: Volatility surfaces and skew data
 security:
   - bearerAuth: []
 paths:

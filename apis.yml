@@ -8,33 +8,33 @@ created: '2024-01-01'
 modified: '2026-03-16'
 specificationVersion: '0.19'
 tags:
-- Financial Services
-- Trading
-- Risk Management
-- Capital Markets
-- Fintech
-- Enterprise Software
-apis:
-- name: Murex MX.3 Platform
-  description: Comprehensive capital markets platform providing trading, risk management, and post-trade operations across all asset classes.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-  humanURL: https://www.murex.com/en/solutions/mx3-platform
-  tags:
-  - Trading
-  - Risk Management
   - Capital Markets
-  properties:
-  - type: Documentation
-    url: https://www.murex.com/en/solutions/mx3-platform
+  - Enterprise Software
+  - Financial Services
+  - Fintech
+  - Risk Management
+  - Trading
+apis:
+  - name: Murex MX.3 Platform
+    description: Comprehensive capital markets platform providing trading, risk management, and post-trade operations across all asset classes.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.murex.com/en/solutions/mx3-platform
+    tags:
+      - Capital Markets
+      - Risk Management
+      - Trading
+    properties:
+      - type: Documentation
+        url: https://www.murex.com/en/solutions/mx3-platform
 common:
-- type: Website
-  url: https://www.murex.com
-- type: Support
-  url: https://www.murex.com/en/support
-- type: Terms of Service
-  url: https://www.murex.com/en/legal/terms
-- type: Privacy Policy
-  url: https://www.murex.com/en/legal/privacy
+  - type: Website
+    url: https://www.murex.com
+  - type: Support
+    url: https://www.murex.com/en/support
+  - type: Terms of Service
+    url: https://www.murex.com/en/legal/terms
+  - type: Privacy Policy
+    url: https://www.murex.com/en/legal/privacy
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com

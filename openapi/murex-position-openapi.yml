@@ -17,14 +17,14 @@ servers:
   - url: https://api.murex.com/v1/position
     description: Murex MX.3 Position API
 tags:
-  - name: Positions
-    description: Portfolio position retrieval and management
-  - name: P&L
-    description: Profit and loss calculations and reporting
-  - name: Cash Flows
-    description: Cash flow projections and management
   - name: Accounting
     description: Accounting entries and journal operations
+  - name: Cash Flows
+    description: Cash flow projections and management
+  - name: P&L
+    description: Profit and loss calculations and reporting
+  - name: Positions
+    description: Portfolio position retrieval and management
 security:
   - bearerAuth: []
 paths:
