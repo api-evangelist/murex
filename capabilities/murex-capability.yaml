@@ -1,0 +1,563 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Market Data API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference
+    data for pricing and valuation on the Murex MX.3 platform.
+  tags:
+  - Murex
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: murex
+    baseUri: https://api.murex.com/v1/marketdata
+    description: Murex MX.3 Market Data API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{MUREX_TOKEN}}'
+    resources:
+    - name: quotes
+      path: /quotes
+      operations:
+      - name: getquotes
+        method: GET
+        description: Murex Get market quotes
+        inputParameters:
+        - name: instrumentIds
+          in: query
+          type: string
+          required: true
+          description: Comma-separated list of instrument identifiers
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated list of quote fields to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: quotes-history
+      path: /quotes/history
+      operations:
+      - name: getquotehistory
+        method: GET
+        description: Murex Get historical quotes
+        inputParameters:
+        - name: instrumentId
+          in: query
+          type: string
+          required: true
+          description: Instrument identifier
+        - name: fromDate
+          in: query
+          type: string
+          required: true
+          description: Start date
+        - name: toDate
+          in: query
+          type: string
+          required: true
+          description: End date
+        - name: frequency
+          in: query
+          type: string
+          description: Data frequency
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: curves
+      path: /curves
+      operations:
+      - name: listcurves
+        method: GET
+        description: Murex List available curves
+        inputParameters:
+        - name: currency
+          in: query
+          type: string
+          description: Filter by currency
+        - name: curveType
+          in: query
+          type: string
+          description: Filter by curve type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: curves-curveid
+      path: /curves/{curveId}
+      operations:
+      - name: getcurve
+        method: GET
+        description: Murex Get curve data
+        inputParameters:
+        - name: curveId
+          in: path
+          type: string
+          required: true
+          description: Curve unique identifier
+        - name: asOfDate
+          in: query
+          type: string
+          description: Curve valuation date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: volatility-surfaces
+      path: /volatility/surfaces
+      operations:
+      - name: listvolatilitysurfaces
+        method: GET
+        description: Murex List volatility surfaces
+        inputParameters:
+        - name: underlying
+          in: query
+          type: string
+          description: Filter by underlying instrument or index
+        - name: assetClass
+          in: query
+          type: string
+          description: Filter by asset class
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: volatility-surfaces-surfaceid
+      path: /volatility/surfaces/{surfaceId}
+      operations:
+      - name: getvolatilitysurface
+        method: GET
+        description: Murex Get volatility surface data
+        inputParameters:
+        - name: surfaceId
+          in: path
+          type: string
+          required: true
+          description: Volatility surface identifier
+        - name: asOfDate
+          in: query
+          type: string
+          description: Surface valuation date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: fx-rates
+      path: /fx/rates
+      operations:
+      - name: getfxrates
+        method: GET
+        description: Murex Get FX rates
+        inputParameters:
+        - name: currencyPairs
+          in: query
+          type: string
+          required: true
+          description: Comma-separated currency pairs (e.g., EURUSD,GBPUSD)
+        - name: rateType
+          in: query
+          type: string
+          description: Rate type
+        - name: tenor
+          in: query
+          type: string
+          description: Forward tenor (required when rateType is Forward)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: fx-rates-history
+      path: /fx/rates/history
+      operations:
+      - name: getfxratehistory
+        method: GET
+        description: Murex Get FX rate history
+        inputParameters:
+        - name: currencyPair
+          in: query
+          type: string
+          required: true
+          description: Currency pair (e.g., EURUSD)
+        - name: fromDate
+          in: query
+          type: string
+          required: true
+        - name: toDate
+          in: query
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reference-calendars
+      path: /reference/calendars
+      operations:
+      - name: listcalendars
+        method: GET
+        description: Murex List market calendars
+        inputParameters:
+        - name: country
+          in: query
+          type: string
+          description: Filter by country code
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reference-currencies
+      path: /reference/currencies
+      operations:
+      - name: listcurrencies
+        method: GET
+        description: Murex List currencies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: murex-rest
+    description: REST adapter for Murex MX.3 Market Data API.
+    resources:
+    - path: /quotes
+      name: getquotes
+      operations:
+      - method: GET
+        name: getquotes
+        description: Murex Get market quotes
+        call: murex.getquotes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /quotes/history
+      name: getquotehistory
+      operations:
+      - method: GET
+        name: getquotehistory
+        description: Murex Get historical quotes
+        call: murex.getquotehistory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /curves
+      name: listcurves
+      operations:
+      - method: GET
+        name: listcurves
+        description: Murex List available curves
+        call: murex.listcurves
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /curves/{curveId}
+      name: getcurve
+      operations:
+      - method: GET
+        name: getcurve
+        description: Murex Get curve data
+        call: murex.getcurve
+        with:
+          curveId: rest.curveId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /volatility/surfaces
+      name: listvolatilitysurfaces
+      operations:
+      - method: GET
+        name: listvolatilitysurfaces
+        description: Murex List volatility surfaces
+        call: murex.listvolatilitysurfaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /volatility/surfaces/{surfaceId}
+      name: getvolatilitysurface
+      operations:
+      - method: GET
+        name: getvolatilitysurface
+        description: Murex Get volatility surface data
+        call: murex.getvolatilitysurface
+        with:
+          surfaceId: rest.surfaceId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /fx/rates
+      name: getfxrates
+      operations:
+      - method: GET
+        name: getfxrates
+        description: Murex Get FX rates
+        call: murex.getfxrates
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /fx/rates/history
+      name: getfxratehistory
+      operations:
+      - method: GET
+        name: getfxratehistory
+        description: Murex Get FX rate history
+        call: murex.getfxratehistory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /reference/calendars
+      name: listcalendars
+      operations:
+      - method: GET
+        name: listcalendars
+        description: Murex List market calendars
+        call: murex.listcalendars
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /reference/currencies
+      name: listcurrencies
+      operations:
+      - method: GET
+        name: listcurrencies
+        description: Murex List currencies
+        call: murex.listcurrencies
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: murex-mcp
+    transport: http
+    description: MCP adapter for Murex MX.3 Market Data API for AI agent use.
+    tools:
+    - name: getquotes
+      description: Murex Get market quotes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.getquotes
+      with:
+        instrumentIds: tools.instrumentIds
+        fields: tools.fields
+      inputParameters:
+      - name: instrumentIds
+        type: string
+        description: Comma-separated list of instrument identifiers
+        required: true
+      - name: fields
+        type: string
+        description: Comma-separated list of quote fields to return
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getquotehistory
+      description: Murex Get historical quotes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.getquotehistory
+      with:
+        instrumentId: tools.instrumentId
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+        frequency: tools.frequency
+      inputParameters:
+      - name: instrumentId
+        type: string
+        description: Instrument identifier
+        required: true
+      - name: fromDate
+        type: string
+        description: Start date
+        required: true
+      - name: toDate
+        type: string
+        description: End date
+        required: true
+      - name: frequency
+        type: string
+        description: Data frequency
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcurves
+      description: Murex List available curves
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.listcurves
+      with:
+        currency: tools.currency
+        curveType: tools.curveType
+      inputParameters:
+      - name: currency
+        type: string
+        description: Filter by currency
+      - name: curveType
+        type: string
+        description: Filter by curve type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcurve
+      description: Murex Get curve data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.getcurve
+      with:
+        curveId: tools.curveId
+        asOfDate: tools.asOfDate
+      inputParameters:
+      - name: curveId
+        type: string
+        description: Curve unique identifier
+        required: true
+      - name: asOfDate
+        type: string
+        description: Curve valuation date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listvolatilitysurfaces
+      description: Murex List volatility surfaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.listvolatilitysurfaces
+      with:
+        underlying: tools.underlying
+        assetClass: tools.assetClass
+      inputParameters:
+      - name: underlying
+        type: string
+        description: Filter by underlying instrument or index
+      - name: assetClass
+        type: string
+        description: Filter by asset class
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getvolatilitysurface
+      description: Murex Get volatility surface data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.getvolatilitysurface
+      with:
+        surfaceId: tools.surfaceId
+        asOfDate: tools.asOfDate
+      inputParameters:
+      - name: surfaceId
+        type: string
+        description: Volatility surface identifier
+        required: true
+      - name: asOfDate
+        type: string
+        description: Surface valuation date
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfxrates
+      description: Murex Get FX rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.getfxrates
+      with:
+        currencyPairs: tools.currencyPairs
+        rateType: tools.rateType
+        tenor: tools.tenor
+      inputParameters:
+      - name: currencyPairs
+        type: string
+        description: Comma-separated currency pairs (e.g., EURUSD,GBPUSD)
+        required: true
+      - name: rateType
+        type: string
+        description: Rate type
+      - name: tenor
+        type: string
+        description: Forward tenor (required when rateType is Forward)
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfxratehistory
+      description: Murex Get FX rate history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.getfxratehistory
+      with:
+        currencyPair: tools.currencyPair
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      inputParameters:
+      - name: currencyPair
+        type: string
+        description: Currency pair (e.g., EURUSD)
+        required: true
+      - name: fromDate
+        type: string
+        description: fromDate
+        required: true
+      - name: toDate
+        type: string
+        description: toDate
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcalendars
+      description: Murex List market calendars
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.listcalendars
+      with:
+        country: tools.country
+      inputParameters:
+      - name: country
+        type: string
+        description: Filter by country code
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcurrencies
+      description: Murex List currencies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: murex.listcurrencies
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    MUREX_TOKEN: MUREX_TOKEN
