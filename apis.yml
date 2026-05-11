@@ -35,6 +35,32 @@ common:
     url: https://www.murex.com/en/legal/terms
   - type: Privacy Policy
     url: https://www.murex.com/en/legal/privacy
+  - type: Integrations
+    url: https://www.murex.com/en/partners
+integrations:
+  - name: Murex
+  - name: Awards Murex 2024
+  - name: Filters
+  - name: map-pin
+  - name: Accenture
+  - name: CAPCO
+  - name: DXC Luxoft
+  - name: Synechron
+  - name: Aurion Pro
+  - name: Capgemini
+  - name: d-fine-logo
+  - name: Elenjical
+  - name: exprivia
+  - name: Fenixys
+  - name: Finsurge
+  - name: First Derivative
+  - name: Indigo
+  - name: LTIMindtree
+  - name: Management Solutions
+  - name: NTT DATA
+  - name: Publicis Sapient
+  - name: Sequel
+  - name: Viseo
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
