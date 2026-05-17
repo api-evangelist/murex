@@ -31,9 +31,9 @@ common:
     url: https://www.murex.com
   - type: Support
     url: https://www.murex.com/en/support
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.murex.com/en/legal/terms
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.murex.com/en/legal/privacy
   - type: Integrations
     url: https://www.murex.com/en/partners
