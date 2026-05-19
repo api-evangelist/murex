@@ -1,0 +1,181 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Post-Trade API — Confirmations
+  description: 'Murex MX.3 Post-Trade API — Confirmations. 3 operations. Lead operation: Murex List confirmations. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Confirmations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: post-trade-confirmations
+    baseUri: https://api.murex.com/v1/posttrade
+    description: Murex MX.3 Post-Trade API — Confirmations business capability. Self-contained, no shared references.
+    resources:
+    - name: confirmations
+      path: /confirmations
+      operations:
+      - name: listconfirmations
+        method: GET
+        description: Murex List confirmations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by confirmation status
+        - name: counterpartyId
+          in: query
+          type: string
+          description: Filter by counterparty
+        - name: fromDate
+          in: query
+          type: string
+          description: Start date
+        - name: toDate
+          in: query
+          type: string
+          description: End date
+    - name: confirmations-confirmationId
+      path: /confirmations/{confirmationId}
+      operations:
+      - name: getconfirmation
+        method: GET
+        description: Murex Get a confirmation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: confirmationId
+          in: path
+          type: string
+          description: Confirmation unique identifier
+          required: true
+    - name: confirmations-confirmationId-match
+      path: /confirmations/{confirmationId}/match
+      operations:
+      - name: matchconfirmation
+        method: POST
+        description: Murex Match a confirmation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: confirmationId
+          in: path
+          type: string
+          description: Confirmation identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: post-trade-confirmations-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Post-Trade API — Confirmations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/confirmations
+      name: confirmations
+      description: REST surface for confirmations.
+      operations:
+      - method: GET
+        name: listconfirmations
+        description: Murex List confirmations
+        call: post-trade-confirmations.listconfirmations
+        with:
+          status: rest.status
+          counterpartyId: rest.counterpartyId
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/confirmations/{confirmationid}
+      name: confirmations-confirmationid
+      description: REST surface for confirmations-confirmationId.
+      operations:
+      - method: GET
+        name: getconfirmation
+        description: Murex Get a confirmation
+        call: post-trade-confirmations.getconfirmation
+        with:
+          confirmationId: rest.confirmationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/confirmations/{confirmationid}/match
+      name: confirmations-confirmationid-match
+      description: REST surface for confirmations-confirmationId-match.
+      operations:
+      - method: POST
+        name: matchconfirmation
+        description: Murex Match a confirmation
+        call: post-trade-confirmations.matchconfirmation
+        with:
+          confirmationId: rest.confirmationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: post-trade-confirmations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Post-Trade API — Confirmations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: murex-list-confirmations
+      description: Murex List confirmations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-confirmations.listconfirmations
+      with:
+        status: tools.status
+        counterpartyId: tools.counterpartyId
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-confirmation
+      description: Murex Get a confirmation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-confirmations.getconfirmation
+      with:
+        confirmationId: tools.confirmationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-match-confirmation
+      description: Murex Match a confirmation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: post-trade-confirmations.matchconfirmation
+      with:
+        confirmationId: tools.confirmationId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Risk API — VaR
+  description: 'Murex MX.3 Risk API — VaR. 2 operations. Lead operation: Murex Get VaR calculations. Self-contained Naftiko
+    capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - VaR
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: risk-var
+    baseUri: https://api.murex.com/v1/risk
+    description: Murex MX.3 Risk API — VaR business capability. Self-contained, no shared references.
+    resources:
+    - name: var
+      path: /var
+      operations:
+      - name: getvar
+        method: GET
+        description: Murex Get VaR calculations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: method
+          in: query
+          type: string
+          description: VaR calculation methodology
+        - name: confidenceLevel
+          in: query
+          type: number
+          description: Confidence level as a percentage
+        - name: holdingPeriod
+          in: query
+          type: integer
+          description: Holding period in days
+        - name: asOfDate
+          in: query
+          type: string
+          description: Calculation date
+    - name: var-history
+      path: /var/history
+      operations:
+      - name: getvarhistory
+        method: GET
+        description: Murex Get VaR history
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fromDate
+          in: query
+          type: string
+          description: Start date for history
+          required: true
+        - name: toDate
+          in: query
+          type: string
+          description: End date for history
+          required: true
+        - name: method
+          in: query
+          type: string
+          description: VaR calculation methodology
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: risk-var-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Risk API — VaR. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/var
+      name: var
+      description: REST surface for var.
+      operations:
+      - method: GET
+        name: getvar
+        description: Murex Get VaR calculations
+        call: risk-var.getvar
+        with:
+          method: rest.method
+          confidenceLevel: rest.confidenceLevel
+          holdingPeriod: rest.holdingPeriod
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/var/history
+      name: var-history
+      description: REST surface for var-history.
+      operations:
+      - method: GET
+        name: getvarhistory
+        description: Murex Get VaR history
+        call: risk-var.getvarhistory
+        with:
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+          method: rest.method
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: risk-var-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Risk API — VaR. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: murex-get-var-calculations
+      description: Murex Get VaR calculations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: risk-var.getvar
+      with:
+        method: tools.method
+        confidenceLevel: tools.confidenceLevel
+        holdingPeriod: tools.holdingPeriod
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-var-history
+      description: Murex Get VaR history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: risk-var.getvarhistory
+      with:
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+        method: tools.method
+      outputParameters:
+      - type: object
+        mapping: $.

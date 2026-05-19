@@ -1,0 +1,121 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Trading API — Portfolios
+  description: 'Murex MX.3 Trading API — Portfolios. 2 operations. Lead operation: Murex List portfolios. Self-contained Naftiko
+    capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Portfolios
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: trading-portfolios
+    baseUri: https://api.murex.com/v1/trading
+    description: Murex MX.3 Trading API — Portfolios business capability. Self-contained, no shared references.
+    resources:
+    - name: portfolios
+      path: /portfolios
+      operations:
+      - name: listportfolios
+        method: GET
+        description: Murex List portfolios
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deskId
+          in: query
+          type: string
+          description: Filter by trading desk identifier
+    - name: portfolios-portfolioId
+      path: /portfolios/{portfolioId}
+      operations:
+      - name: getportfolio
+        method: GET
+        description: Murex Get a portfolio
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: portfolioId
+          in: path
+          type: string
+          description: Portfolio unique identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: trading-portfolios-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Trading API — Portfolios. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/portfolios
+      name: portfolios
+      description: REST surface for portfolios.
+      operations:
+      - method: GET
+        name: listportfolios
+        description: Murex List portfolios
+        call: trading-portfolios.listportfolios
+        with:
+          deskId: rest.deskId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/portfolios/{portfolioid}
+      name: portfolios-portfolioid
+      description: REST surface for portfolios-portfolioId.
+      operations:
+      - method: GET
+        name: getportfolio
+        description: Murex Get a portfolio
+        call: trading-portfolios.getportfolio
+        with:
+          portfolioId: rest.portfolioId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: trading-portfolios-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Trading API — Portfolios. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-list-portfolios
+      description: Murex List portfolios
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: trading-portfolios.listportfolios
+      with:
+        deskId: tools.deskId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-portfolio
+      description: Murex Get a portfolio
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: trading-portfolios.getportfolio
+      with:
+        portfolioId: tools.portfolioId
+      outputParameters:
+      - type: object
+        mapping: $.

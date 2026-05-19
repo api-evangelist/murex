@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Market Data API — FX Rates
+  description: 'Murex MX.3 Market Data API — FX Rates. 2 operations. Lead operation: Murex Get FX rates. Self-contained Naftiko
+    capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - FX Rates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: market-data-fx-rates
+    baseUri: https://api.murex.com/v1/marketdata
+    description: Murex MX.3 Market Data API — FX Rates business capability. Self-contained, no shared references.
+    resources:
+    - name: fx-rates
+      path: /fx/rates
+      operations:
+      - name: getfxrates
+        method: GET
+        description: Murex Get FX rates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: currencyPairs
+          in: query
+          type: string
+          description: Comma-separated currency pairs (e.g., EURUSD,GBPUSD)
+          required: true
+        - name: rateType
+          in: query
+          type: string
+          description: Rate type
+        - name: tenor
+          in: query
+          type: string
+          description: Forward tenor (required when rateType is Forward)
+    - name: fx-rates-history
+      path: /fx/rates/history
+      operations:
+      - name: getfxratehistory
+        method: GET
+        description: Murex Get FX rate history
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: currencyPair
+          in: query
+          type: string
+          description: Currency pair (e.g., EURUSD)
+          required: true
+        - name: fromDate
+          in: query
+          type: string
+          required: true
+        - name: toDate
+          in: query
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: market-data-fx-rates-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Market Data API — FX Rates. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/fx/rates
+      name: fx-rates
+      description: REST surface for fx-rates.
+      operations:
+      - method: GET
+        name: getfxrates
+        description: Murex Get FX rates
+        call: market-data-fx-rates.getfxrates
+        with:
+          currencyPairs: rest.currencyPairs
+          rateType: rest.rateType
+          tenor: rest.tenor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/fx/rates/history
+      name: fx-rates-history
+      description: REST surface for fx-rates-history.
+      operations:
+      - method: GET
+        name: getfxratehistory
+        description: Murex Get FX rate history
+        call: market-data-fx-rates.getfxratehistory
+        with:
+          currencyPair: rest.currencyPair
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: market-data-fx-rates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Market Data API — FX Rates. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-get-fx-rates
+      description: Murex Get FX rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: market-data-fx-rates.getfxrates
+      with:
+        currencyPairs: tools.currencyPairs
+        rateType: tools.rateType
+        tenor: tools.tenor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-fx-rate-history
+      description: Murex Get FX rate history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: market-data-fx-rates.getfxratehistory
+      with:
+        currencyPair: tools.currencyPair
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.

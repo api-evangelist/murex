@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Post-Trade API — Collateral
+  description: 'Murex MX.3 Post-Trade API — Collateral. 2 operations. Lead operation: Murex List collateral agreements. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Collateral
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: post-trade-collateral
+    baseUri: https://api.murex.com/v1/posttrade
+    description: Murex MX.3 Post-Trade API — Collateral business capability. Self-contained, no shared references.
+    resources:
+    - name: collateral-agreements
+      path: /collateral/agreements
+      operations:
+      - name: listcollateralagreements
+        method: GET
+        description: Murex List collateral agreements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: counterpartyId
+          in: query
+          type: string
+          description: Filter by counterparty
+        - name: status
+          in: query
+          type: string
+          description: Filter by agreement status
+    - name: collateral-margin-calls
+      path: /collateral/margin-calls
+      operations:
+      - name: listmargincalls
+        method: GET
+        description: Murex List margin calls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agreementId
+          in: query
+          type: string
+          description: Filter by collateral agreement
+        - name: status
+          in: query
+          type: string
+          description: Filter by margin call status
+        - name: asOfDate
+          in: query
+          type: string
+          description: Margin call date
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: post-trade-collateral-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Post-Trade API — Collateral. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/collateral/agreements
+      name: collateral-agreements
+      description: REST surface for collateral-agreements.
+      operations:
+      - method: GET
+        name: listcollateralagreements
+        description: Murex List collateral agreements
+        call: post-trade-collateral.listcollateralagreements
+        with:
+          counterpartyId: rest.counterpartyId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/collateral/margin-calls
+      name: collateral-margin-calls
+      description: REST surface for collateral-margin-calls.
+      operations:
+      - method: GET
+        name: listmargincalls
+        description: Murex List margin calls
+        call: post-trade-collateral.listmargincalls
+        with:
+          agreementId: rest.agreementId
+          status: rest.status
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: post-trade-collateral-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Post-Trade API — Collateral. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-list-collateral-agreements
+      description: Murex List collateral agreements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-collateral.listcollateralagreements
+      with:
+        counterpartyId: tools.counterpartyId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-list-margin-calls
+      description: Murex List margin calls
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-collateral.listmargincalls
+      with:
+        agreementId: tools.agreementId
+        status: tools.status
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.

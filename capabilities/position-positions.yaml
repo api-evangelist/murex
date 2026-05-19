@@ -1,0 +1,180 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Position API — Positions
+  description: 'Murex MX.3 Position API — Positions. 3 operations. Lead operation: Murex List positions. Self-contained Naftiko
+    capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Positions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: position-positions
+    baseUri: https://api.murex.com/v1/position
+    description: Murex MX.3 Position API — Positions business capability. Self-contained, no shared references.
+    resources:
+    - name: positions
+      path: /positions
+      operations:
+      - name: listpositions
+        method: GET
+        description: Murex List positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: assetClass
+          in: query
+          type: string
+          description: Filter by asset class
+        - name: instrumentId
+          in: query
+          type: string
+          description: Filter by instrument identifier
+        - name: asOfDate
+          in: query
+          type: string
+          description: Position date
+    - name: positions-summary
+      path: /positions/summary
+      operations:
+      - name: getpositionsummary
+        method: GET
+        description: Murex Get position summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupBy
+          in: query
+          type: string
+          description: Grouping dimension for aggregation
+        - name: asOfDate
+          in: query
+          type: string
+          description: Position date
+    - name: positions-positionId
+      path: /positions/{positionId}
+      operations:
+      - name: getposition
+        method: GET
+        description: Murex Get a position
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: positionId
+          in: path
+          type: string
+          description: Position unique identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: position-positions-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Position API — Positions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/positions
+      name: positions
+      description: REST surface for positions.
+      operations:
+      - method: GET
+        name: listpositions
+        description: Murex List positions
+        call: position-positions.listpositions
+        with:
+          assetClass: rest.assetClass
+          instrumentId: rest.instrumentId
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/positions/summary
+      name: positions-summary
+      description: REST surface for positions-summary.
+      operations:
+      - method: GET
+        name: getpositionsummary
+        description: Murex Get position summary
+        call: position-positions.getpositionsummary
+        with:
+          groupBy: rest.groupBy
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/positions/{positionid}
+      name: positions-positionid
+      description: REST surface for positions-positionId.
+      operations:
+      - method: GET
+        name: getposition
+        description: Murex Get a position
+        call: position-positions.getposition
+        with:
+          positionId: rest.positionId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: position-positions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Position API — Positions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-list-positions
+      description: Murex List positions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: position-positions.listpositions
+      with:
+        assetClass: tools.assetClass
+        instrumentId: tools.instrumentId
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-position-summary
+      description: Murex Get position summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: position-positions.getpositionsummary
+      with:
+        groupBy: tools.groupBy
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-position
+      description: Murex Get a position
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: position-positions.getposition
+      with:
+        positionId: tools.positionId
+      outputParameters:
+      - type: object
+        mapping: $.

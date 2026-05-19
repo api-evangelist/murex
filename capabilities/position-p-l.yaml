@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Position API — P&L
+  description: 'Murex MX.3 Position API — P&L. 2 operations. Lead operation: Murex Get P&L report. Self-contained Naftiko
+    capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - P&L
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: position-p-l
+    baseUri: https://api.murex.com/v1/position
+    description: Murex MX.3 Position API — P&L business capability. Self-contained, no shared references.
+    resources:
+    - name: pnl
+      path: /pnl
+      operations:
+      - name: getpnl
+        method: GET
+        description: Murex Get P&L report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fromDate
+          in: query
+          type: string
+          description: Start date for P&L period
+        - name: toDate
+          in: query
+          type: string
+          description: End date for P&L period
+        - name: currency
+          in: query
+          type: string
+          description: Reporting currency
+    - name: pnl-explain
+      path: /pnl/explain
+      operations:
+      - name: getpnlexplain
+        method: GET
+        description: Murex Get P&L explanation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: date
+          in: query
+          type: string
+          description: P&L explanation date
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: position-p-l-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Position API — P&L. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/pnl
+      name: pnl
+      description: REST surface for pnl.
+      operations:
+      - method: GET
+        name: getpnl
+        description: Murex Get P&L report
+        call: position-p-l.getpnl
+        with:
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+          currency: rest.currency
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pnl/explain
+      name: pnl-explain
+      description: REST surface for pnl-explain.
+      operations:
+      - method: GET
+        name: getpnlexplain
+        description: Murex Get P&L explanation
+        call: position-p-l.getpnlexplain
+        with:
+          date: rest.date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: position-p-l-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Position API — P&L. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: murex-get-p-l-report
+      description: Murex Get P&L report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: position-p-l.getpnl
+      with:
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+        currency: tools.currency
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-p-l-explanation
+      description: Murex Get P&L explanation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: position-p-l.getpnlexplain
+      with:
+        date: tools.date
+      outputParameters:
+      - type: object
+        mapping: $.

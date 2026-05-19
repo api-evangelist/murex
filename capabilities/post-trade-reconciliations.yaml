@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Post-Trade API — Reconciliations
+  description: 'Murex MX.3 Post-Trade API — Reconciliations. 2 operations. Lead operation: Murex List reconciliations. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Reconciliations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: post-trade-reconciliations
+    baseUri: https://api.murex.com/v1/posttrade
+    description: Murex MX.3 Post-Trade API — Reconciliations business capability. Self-contained, no shared references.
+    resources:
+    - name: reconciliations
+      path: /reconciliations
+      operations:
+      - name: listreconciliations
+        method: GET
+        description: Murex List reconciliations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Reconciliation type
+        - name: status
+          in: query
+          type: string
+          description: Filter by reconciliation status
+        - name: asOfDate
+          in: query
+          type: string
+          description: Reconciliation date
+    - name: reconciliations-reconciliationId
+      path: /reconciliations/{reconciliationId}
+      operations:
+      - name: getreconciliation
+        method: GET
+        description: Murex Get a reconciliation item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: reconciliationId
+          in: path
+          type: string
+          description: Reconciliation item identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: post-trade-reconciliations-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Post-Trade API — Reconciliations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/reconciliations
+      name: reconciliations
+      description: REST surface for reconciliations.
+      operations:
+      - method: GET
+        name: listreconciliations
+        description: Murex List reconciliations
+        call: post-trade-reconciliations.listreconciliations
+        with:
+          type: rest.type
+          status: rest.status
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reconciliations/{reconciliationid}
+      name: reconciliations-reconciliationid
+      description: REST surface for reconciliations-reconciliationId.
+      operations:
+      - method: GET
+        name: getreconciliation
+        description: Murex Get a reconciliation item
+        call: post-trade-reconciliations.getreconciliation
+        with:
+          reconciliationId: rest.reconciliationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: post-trade-reconciliations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Post-Trade API — Reconciliations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: murex-list-reconciliations
+      description: Murex List reconciliations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-reconciliations.listreconciliations
+      with:
+        type: tools.type
+        status: tools.status
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-reconciliation-item
+      description: Murex Get a reconciliation item
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-reconciliations.getreconciliation
+      with:
+        reconciliationId: tools.reconciliationId
+      outputParameters:
+      - type: object
+        mapping: $.

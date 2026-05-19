@@ -1,0 +1,128 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Risk API — Stress Testing
+  description: 'Murex MX.3 Risk API — Stress Testing. 2 operations. Lead operation: Murex List stress test scenarios. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Stress Testing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: risk-stress-testing
+    baseUri: https://api.murex.com/v1/risk
+    description: Murex MX.3 Risk API — Stress Testing business capability. Self-contained, no shared references.
+    resources:
+    - name: stress-tests
+      path: /stress-tests
+      operations:
+      - name: liststresstests
+        method: GET
+        description: Murex List stress test scenarios
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Filter by scenario type
+    - name: stress-tests-scenarioId-run
+      path: /stress-tests/{scenarioId}/run
+      operations:
+      - name: runstresstest
+        method: POST
+        description: Murex Run a stress test
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: scenarioId
+          in: path
+          type: string
+          description: Stress test scenario identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: risk-stress-testing-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Risk API — Stress Testing. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/stress-tests
+      name: stress-tests
+      description: REST surface for stress-tests.
+      operations:
+      - method: GET
+        name: liststresstests
+        description: Murex List stress test scenarios
+        call: risk-stress-testing.liststresstests
+        with:
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stress-tests/{scenarioid}/run
+      name: stress-tests-scenarioid-run
+      description: REST surface for stress-tests-scenarioId-run.
+      operations:
+      - method: POST
+        name: runstresstest
+        description: Murex Run a stress test
+        call: risk-stress-testing.runstresstest
+        with:
+          scenarioId: rest.scenarioId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: risk-stress-testing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Risk API — Stress Testing. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-list-stress-test-scenarios
+      description: Murex List stress test scenarios
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: risk-stress-testing.liststresstests
+      with:
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-run-stress-test
+      description: Murex Run a stress test
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: risk-stress-testing.runstresstest
+      with:
+        scenarioId: tools.scenarioId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

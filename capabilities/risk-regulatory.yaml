@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Risk API — Regulatory
+  description: 'Murex MX.3 Risk API — Regulatory. 1 operations. Lead operation: Murex Get regulatory capital metrics. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Regulatory
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: risk-regulatory
+    baseUri: https://api.murex.com/v1/risk
+    description: Murex MX.3 Risk API — Regulatory business capability. Self-contained, no shared references.
+    resources:
+    - name: regulatory-capital
+      path: /regulatory/capital
+      operations:
+      - name: getregulatorycapital
+        method: GET
+        description: Murex Get regulatory capital metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: framework
+          in: query
+          type: string
+          description: Regulatory framework
+        - name: asOfDate
+          in: query
+          type: string
+          description: Calculation date
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: risk-regulatory-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Risk API — Regulatory. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/regulatory/capital
+      name: regulatory-capital
+      description: REST surface for regulatory-capital.
+      operations:
+      - method: GET
+        name: getregulatorycapital
+        description: Murex Get regulatory capital metrics
+        call: risk-regulatory.getregulatorycapital
+        with:
+          framework: rest.framework
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: risk-regulatory-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Risk API — Regulatory. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-get-regulatory-capital-metrics
+      description: Murex Get regulatory capital metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: risk-regulatory.getregulatorycapital
+      with:
+        framework: tools.framework
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.

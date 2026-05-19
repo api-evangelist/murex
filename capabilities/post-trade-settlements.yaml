@@ -1,0 +1,175 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Post-Trade API — Settlements
+  description: 'Murex MX.3 Post-Trade API — Settlements. 3 operations. Lead operation: Murex List settlements. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Settlements
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: post-trade-settlements
+    baseUri: https://api.murex.com/v1/posttrade
+    description: Murex MX.3 Post-Trade API — Settlements business capability. Self-contained, no shared references.
+    resources:
+    - name: settlements
+      path: /settlements
+      operations:
+      - name: listsettlements
+        method: GET
+        description: Murex List settlements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by settlement status
+        - name: settlementDate
+          in: query
+          type: string
+          description: Filter by settlement date
+        - name: currency
+          in: query
+          type: string
+          description: Filter by settlement currency
+    - name: settlements-settlementId
+      path: /settlements/{settlementId}
+      operations:
+      - name: getsettlement
+        method: GET
+        description: Murex Get a settlement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: settlementId
+          in: path
+          type: string
+          description: Settlement unique identifier
+          required: true
+    - name: settlements-settlementId-instruct
+      path: /settlements/{settlementId}/instruct
+      operations:
+      - name: instructsettlement
+        method: POST
+        description: Murex Instruct a settlement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: settlementId
+          in: path
+          type: string
+          description: Settlement identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: post-trade-settlements-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Post-Trade API — Settlements. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/settlements
+      name: settlements
+      description: REST surface for settlements.
+      operations:
+      - method: GET
+        name: listsettlements
+        description: Murex List settlements
+        call: post-trade-settlements.listsettlements
+        with:
+          status: rest.status
+          settlementDate: rest.settlementDate
+          currency: rest.currency
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settlements/{settlementid}
+      name: settlements-settlementid
+      description: REST surface for settlements-settlementId.
+      operations:
+      - method: GET
+        name: getsettlement
+        description: Murex Get a settlement
+        call: post-trade-settlements.getsettlement
+        with:
+          settlementId: rest.settlementId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settlements/{settlementid}/instruct
+      name: settlements-settlementid-instruct
+      description: REST surface for settlements-settlementId-instruct.
+      operations:
+      - method: POST
+        name: instructsettlement
+        description: Murex Instruct a settlement
+        call: post-trade-settlements.instructsettlement
+        with:
+          settlementId: rest.settlementId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: post-trade-settlements-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Post-Trade API — Settlements. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-list-settlements
+      description: Murex List settlements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-settlements.listsettlements
+      with:
+        status: tools.status
+        settlementDate: tools.settlementDate
+        currency: tools.currency
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-settlement
+      description: Murex Get a settlement
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: post-trade-settlements.getsettlement
+      with:
+        settlementId: tools.settlementId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-instruct-settlement
+      description: Murex Instruct a settlement
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: post-trade-settlements.instructsettlement
+      with:
+        settlementId: tools.settlementId
+      outputParameters:
+      - type: object
+        mapping: $.

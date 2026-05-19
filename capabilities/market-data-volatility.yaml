@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Murex MX.3 Market Data API — Volatility
+  description: 'Murex MX.3 Market Data API — Volatility. 2 operations. Lead operation: Murex List volatility surfaces. Self-contained
+    Naftiko capability covering one Murex business surface.'
+  tags:
+  - Murex
+  - Volatility
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MUREX_API_KEY: MUREX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: market-data-volatility
+    baseUri: https://api.murex.com/v1/marketdata
+    description: Murex MX.3 Market Data API — Volatility business capability. Self-contained, no shared references.
+    resources:
+    - name: volatility-surfaces
+      path: /volatility/surfaces
+      operations:
+      - name: listvolatilitysurfaces
+        method: GET
+        description: Murex List volatility surfaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: underlying
+          in: query
+          type: string
+          description: Filter by underlying instrument or index
+        - name: assetClass
+          in: query
+          type: string
+          description: Filter by asset class
+    - name: volatility-surfaces-surfaceId
+      path: /volatility/surfaces/{surfaceId}
+      operations:
+      - name: getvolatilitysurface
+        method: GET
+        description: Murex Get volatility surface data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: surfaceId
+          in: path
+          type: string
+          description: Volatility surface identifier
+          required: true
+        - name: asOfDate
+          in: query
+          type: string
+          description: Surface valuation date
+    authentication:
+      type: bearer
+      token: '{{env.MUREX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: market-data-volatility-rest
+    port: 8080
+    description: REST adapter for Murex MX.3 Market Data API — Volatility. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/volatility/surfaces
+      name: volatility-surfaces
+      description: REST surface for volatility-surfaces.
+      operations:
+      - method: GET
+        name: listvolatilitysurfaces
+        description: Murex List volatility surfaces
+        call: market-data-volatility.listvolatilitysurfaces
+        with:
+          underlying: rest.underlying
+          assetClass: rest.assetClass
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/volatility/surfaces/{surfaceid}
+      name: volatility-surfaces-surfaceid
+      description: REST surface for volatility-surfaces-surfaceId.
+      operations:
+      - method: GET
+        name: getvolatilitysurface
+        description: Murex Get volatility surface data
+        call: market-data-volatility.getvolatilitysurface
+        with:
+          surfaceId: rest.surfaceId
+          asOfDate: rest.asOfDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: market-data-volatility-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Murex MX.3 Market Data API — Volatility. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: murex-list-volatility-surfaces
+      description: Murex List volatility surfaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: market-data-volatility.listvolatilitysurfaces
+      with:
+        underlying: tools.underlying
+        assetClass: tools.assetClass
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: murex-get-volatility-surface-data
+      description: Murex Get volatility surface data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: market-data-volatility.getvolatilitysurface
+      with:
+        surfaceId: tools.surfaceId
+        asOfDate: tools.asOfDate
+      outputParameters:
+      - type: object
+        mapping: $.
