@@ -9,108 +9,110 @@ created: '2024-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 tags:
-- Capital Markets
-- Enterprise Software
-- Financial Services
-- Fintech
-- Risk Management
-- Trading
-apis:
-- name: Murex MX.3 Platform
-  description: Comprehensive capital markets platform providing trading, risk management, and post-trade operations across
-    all asset classes.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-  humanURL: https://www.murex.com/en/solutions/mx3-platform
-  tags:
   - Capital Markets
+  - Enterprise Software
+  - Financial Services
+  - Fintech
   - Risk Management
   - Trading
-  properties:
-  - type: Documentation
-    url: https://www.murex.com/en/solutions/mx3-platform
-  - type: NaftikoCapability
-    url: capabilities/market-data-curves.yaml
-  - type: NaftikoCapability
-    url: capabilities/market-data-fx-rates.yaml
-  - type: NaftikoCapability
-    url: capabilities/market-data-quotes.yaml
-  - type: NaftikoCapability
-    url: capabilities/market-data-reference-data.yaml
-  - type: NaftikoCapability
-    url: capabilities/market-data-volatility.yaml
-  - type: NaftikoCapability
-    url: capabilities/position-accounting.yaml
-  - type: NaftikoCapability
-    url: capabilities/position-cash-flows.yaml
-  - type: NaftikoCapability
-    url: capabilities/position-p-l.yaml
-  - type: NaftikoCapability
-    url: capabilities/position-positions.yaml
-  - type: NaftikoCapability
-    url: capabilities/post-trade-collateral.yaml
-  - type: NaftikoCapability
-    url: capabilities/post-trade-confirmations.yaml
-  - type: NaftikoCapability
-    url: capabilities/post-trade-reconciliations.yaml
-  - type: NaftikoCapability
-    url: capabilities/post-trade-regulatory-reporting.yaml
-  - type: NaftikoCapability
-    url: capabilities/post-trade-settlements.yaml
-  - type: NaftikoCapability
-    url: capabilities/risk-limits.yaml
-  - type: NaftikoCapability
-    url: capabilities/risk-regulatory.yaml
-  - type: NaftikoCapability
-    url: capabilities/risk-sensitivities.yaml
-  - type: NaftikoCapability
-    url: capabilities/risk-stress-testing.yaml
-  - type: NaftikoCapability
-    url: capabilities/risk-var.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-instruments.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-orders.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-portfolios.yaml
-  - type: NaftikoCapability
-    url: capabilities/trading-trades.yaml
+apis:
+  - name: Murex MX.3 Platform
+    description: Comprehensive capital markets platform providing trading, risk management, and post-trade operations across
+      all asset classes.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.murex.com/en/solutions/mx3-platform
+    tags:
+    - Capital Markets
+    - Risk Management
+    - Trading
+    properties:
+    - type: Documentation
+      url: https://www.murex.com/en/solutions/mx3-platform
+    - type: NaftikoCapability
+      url: capabilities/market-data-curves.yaml
+    - type: NaftikoCapability
+      url: capabilities/market-data-fx-rates.yaml
+    - type: NaftikoCapability
+      url: capabilities/market-data-quotes.yaml
+    - type: NaftikoCapability
+      url: capabilities/market-data-reference-data.yaml
+    - type: NaftikoCapability
+      url: capabilities/market-data-volatility.yaml
+    - type: NaftikoCapability
+      url: capabilities/position-accounting.yaml
+    - type: NaftikoCapability
+      url: capabilities/position-cash-flows.yaml
+    - type: NaftikoCapability
+      url: capabilities/position-p-l.yaml
+    - type: NaftikoCapability
+      url: capabilities/position-positions.yaml
+    - type: NaftikoCapability
+      url: capabilities/post-trade-collateral.yaml
+    - type: NaftikoCapability
+      url: capabilities/post-trade-confirmations.yaml
+    - type: NaftikoCapability
+      url: capabilities/post-trade-reconciliations.yaml
+    - type: NaftikoCapability
+      url: capabilities/post-trade-regulatory-reporting.yaml
+    - type: NaftikoCapability
+      url: capabilities/post-trade-settlements.yaml
+    - type: NaftikoCapability
+      url: capabilities/risk-limits.yaml
+    - type: NaftikoCapability
+      url: capabilities/risk-regulatory.yaml
+    - type: NaftikoCapability
+      url: capabilities/risk-sensitivities.yaml
+    - type: NaftikoCapability
+      url: capabilities/risk-stress-testing.yaml
+    - type: NaftikoCapability
+      url: capabilities/risk-var.yaml
+    - type: NaftikoCapability
+      url: capabilities/trading-instruments.yaml
+    - type: NaftikoCapability
+      url: capabilities/trading-orders.yaml
+    - type: NaftikoCapability
+      url: capabilities/trading-portfolios.yaml
+    - type: NaftikoCapability
+      url: capabilities/trading-trades.yaml
 common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/murex
-- type: Website
-  url: https://www.murex.com
-- type: Support
-  url: https://www.murex.com/en/support
-- type: TermsOfService
-  url: https://www.murex.com/en/legal/terms
-- type: PrivacyPolicy
-  url: https://www.murex.com/en/legal/privacy
-- type: Integrations
-  url: https://www.murex.com/en/partners
+  - type: GitHubOrganization
+    url: https://github.com/murex
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/murex
+  - type: Website
+    url: https://www.murex.com
+  - type: Support
+    url: https://www.murex.com/en/support
+  - type: TermsOfService
+    url: https://www.murex.com/en/legal/terms
+  - type: PrivacyPolicy
+    url: https://www.murex.com/en/legal/privacy
+  - type: Integrations
+    url: https://www.murex.com/en/partners
 integrations:
-- name: Murex
-- name: Awards Murex 2024
-- name: Filters
-- name: map-pin
-- name: Accenture
-- name: CAPCO
-- name: DXC Luxoft
-- name: Synechron
-- name: Aurion Pro
-- name: Capgemini
-- name: d-fine-logo
-- name: Elenjical
-- name: exprivia
-- name: Fenixys
-- name: Finsurge
-- name: First Derivative
-- name: Indigo
-- name: LTIMindtree
-- name: Management Solutions
-- name: NTT DATA
-- name: Publicis Sapient
-- name: Sequel
-- name: Viseo
+  - name: Murex
+  - name: Awards Murex 2024
+  - name: Filters
+  - name: map-pin
+  - name: Accenture
+  - name: CAPCO
+  - name: DXC Luxoft
+  - name: Synechron
+  - name: Aurion Pro
+  - name: Capgemini
+  - name: d-fine-logo
+  - name: Elenjical
+  - name: exprivia
+  - name: Fenixys
+  - name: Finsurge
+  - name: First Derivative
+  - name: Indigo
+  - name: LTIMindtree
+  - name: Management Solutions
+  - name: NTT DATA
+  - name: Publicis Sapient
+  - name: Sequel
+  - name: Viseo
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
