@@ -1,0 +1,359 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Trading API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/orders",
+            "params": [
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Filter by portfolio or book name"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order status"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for order search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for order search"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of orders with optional filtering by status, asset class, portfolio, and date range."
+        },
+        {
+          "info": {
+            "name": "Murex Create an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/trading/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a new order for execution across any supported asset class."
+        },
+        {
+          "info": {
+            "name": "Murex Get an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Order unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific order by ID."
+        },
+        {
+          "info": {
+            "name": "Murex Update an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.murex.com/v1/trading/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Order unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an existing order. Only orders in Pending or Submitted status can be modified."
+        },
+        {
+          "info": {
+            "name": "Murex Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/trading/orders/:orderId/cancel",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Order unique identifier"
+              }
+            ]
+          },
+          "docs": "Cancel a pending or submitted order."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Trades",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/trades",
+            "params": [
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Filter by portfolio or book name"
+              },
+              {
+                "name": "counterpartyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by counterparty identifier"
+              },
+              {
+                "name": "tradeDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by trade date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve trade blotter entries with optional filtering by asset class, portfolio, counterparty, and date range."
+        },
+        {
+          "info": {
+            "name": "Murex Get a trade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/trades/:tradeId",
+            "params": [
+              {
+                "name": "tradeId",
+                "value": "",
+                "type": "path",
+                "description": "Trade unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific trade by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Instruments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List instruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/instruments",
+            "params": [
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query for instrument name or identifier"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instrument currency"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Search and retrieve financial instrument reference data."
+        },
+        {
+          "info": {
+            "name": "Murex Get an instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/instruments/:instrumentId",
+            "params": [
+              {
+                "name": "instrumentId",
+                "value": "",
+                "type": "path",
+                "description": "Instrument unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific financial instrument."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Portfolios",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List portfolios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/portfolios",
+            "params": [
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by trading desk identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve available trading portfolios and books."
+        },
+        {
+          "info": {
+            "name": "Murex Get a portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/trading/portfolios/:portfolioId",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "path",
+                "description": "Portfolio unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific trading portfolio."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

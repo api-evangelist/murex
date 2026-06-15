@@ -1,7 +1,8 @@
 aid: murex
 name: Murex
-description: Murex is a global fintech leader in trading, treasury, risk management and post-trade operations software. Their
-  MX.3 platform provides comprehensive solutions for capital markets across asset classes.
+description: >-
+  Murex is a global fintech leader in trading, treasury, risk management and post-trade operations software. Their MX.3
+  platform provides comprehensive solutions for capital markets across asset classes.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://www.murex.com
@@ -17,63 +18,18 @@ tags:
   - Trading
 apis:
   - name: Murex MX.3 Platform
-    description: Comprehensive capital markets platform providing trading, risk management, and post-trade operations across
-      all asset classes.
+    description: >-
+      Comprehensive capital markets platform providing trading, risk management, and post-trade operations across all
+      asset classes.
     image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://www.murex.com/en/solutions/mx3-platform
     tags:
-    - Capital Markets
-    - Risk Management
-    - Trading
+      - Capital Markets
+      - Risk Management
+      - Trading
     properties:
-    - type: Documentation
-      url: https://www.murex.com/en/solutions/mx3-platform
-    - type: NaftikoCapability
-      url: capabilities/market-data-curves.yaml
-    - type: NaftikoCapability
-      url: capabilities/market-data-fx-rates.yaml
-    - type: NaftikoCapability
-      url: capabilities/market-data-quotes.yaml
-    - type: NaftikoCapability
-      url: capabilities/market-data-reference-data.yaml
-    - type: NaftikoCapability
-      url: capabilities/market-data-volatility.yaml
-    - type: NaftikoCapability
-      url: capabilities/position-accounting.yaml
-    - type: NaftikoCapability
-      url: capabilities/position-cash-flows.yaml
-    - type: NaftikoCapability
-      url: capabilities/position-p-l.yaml
-    - type: NaftikoCapability
-      url: capabilities/position-positions.yaml
-    - type: NaftikoCapability
-      url: capabilities/post-trade-collateral.yaml
-    - type: NaftikoCapability
-      url: capabilities/post-trade-confirmations.yaml
-    - type: NaftikoCapability
-      url: capabilities/post-trade-reconciliations.yaml
-    - type: NaftikoCapability
-      url: capabilities/post-trade-regulatory-reporting.yaml
-    - type: NaftikoCapability
-      url: capabilities/post-trade-settlements.yaml
-    - type: NaftikoCapability
-      url: capabilities/risk-limits.yaml
-    - type: NaftikoCapability
-      url: capabilities/risk-regulatory.yaml
-    - type: NaftikoCapability
-      url: capabilities/risk-sensitivities.yaml
-    - type: NaftikoCapability
-      url: capabilities/risk-stress-testing.yaml
-    - type: NaftikoCapability
-      url: capabilities/risk-var.yaml
-    - type: NaftikoCapability
-      url: capabilities/trading-instruments.yaml
-    - type: NaftikoCapability
-      url: capabilities/trading-orders.yaml
-    - type: NaftikoCapability
-      url: capabilities/trading-portfolios.yaml
-    - type: NaftikoCapability
-      url: capabilities/trading-trades.yaml
+      - type: Documentation
+        url: https://www.murex.com/en/solutions/mx3-platform
 common:
   - type: GitHubOrganization
     url: https://github.com/murex

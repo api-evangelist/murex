@@ -1,0 +1,345 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Risk API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VaR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get VaR calculations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/var",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "VaR calculation methodology"
+              },
+              {
+                "name": "confidenceLevel",
+                "value": "",
+                "type": "query",
+                "description": "Confidence level as a percentage"
+              },
+              {
+                "name": "holdingPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Holding period in days"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve Value at Risk calculations for specified portfolios, desks, or entity levels."
+        },
+        {
+          "info": {
+            "name": "Murex Get VaR history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/var/history",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for history"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for history"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "VaR calculation methodology"
+              }
+            ]
+          },
+          "docs": "Retrieve historical VaR values over a date range for trend analysis and backtesting."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sensitivities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get risk sensitivities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/sensitivities",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "greeks",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of Greeks to compute"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve Greek calculations and risk sensitivities for portfolios including delta, gamma, vega, theta, and rho."
+        },
+        {
+          "info": {
+            "name": "Murex Get PV01 sensitivities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/sensitivities/pv01",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by currency"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve PV01 (price value of a basis point) sensitivities by currency and tenor bucket."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stress Testing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List stress test scenarios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/stress-tests",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by scenario type"
+              }
+            ]
+          },
+          "docs": "Retrieve available stress test scenarios and their configurations."
+        },
+        {
+          "info": {
+            "name": "Murex Run a stress test",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/risk/stress-tests/:scenarioId/run",
+            "params": [
+              {
+                "name": "scenarioId",
+                "value": "",
+                "type": "path",
+                "description": "Stress test scenario identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a stress test scenario against specified portfolios and return the impact analysis."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Limits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List risk limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/limits",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by limit status"
+              }
+            ]
+          },
+          "docs": "Retrieve configured risk limits and their current utilization."
+        },
+        {
+          "info": {
+            "name": "Murex Get a risk limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/limits/:limitId",
+            "params": [
+              {
+                "name": "limitId",
+                "value": "",
+                "type": "path",
+                "description": "Risk limit identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific risk limit."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Regulatory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get regulatory capital metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/risk/regulatory/capital",
+            "params": [
+              {
+                "name": "framework",
+                "value": "",
+                "type": "query",
+                "description": "Regulatory framework"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve regulatory capital calculations including RWA, CVA, and capital ratios for Basel III/IV compliance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

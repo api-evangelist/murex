@@ -1,0 +1,1817 @@
+{
+  "item": [
+    {
+      "id": "a081ebe0-e0ce-48b5-92d6-5136d0210c52",
+      "name": "Curves",
+      "description": {
+        "content": "Yield curves and forward curves",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ab8a2c4-a48b-4133-b06b-4abd05fea288",
+          "name": "Murex List available curves",
+          "request": {
+            "name": "Murex List available curves",
+            "description": {
+              "content": "Retrieve a list of available yield curves and forward curves.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "curves"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "curveType",
+                  "value": "<string>",
+                  "description": "Filter by curve type"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5715c2f9-ae2e-4c56-9104-afe5b9cac5db",
+              "name": "List of available curves",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "curveType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"curveId\": \"string\",\n      \"name\": \"string\",\n      \"currency\": \"string\",\n      \"curveType\": \"Basis\",\n      \"dayCountConvention\": \"string\",\n      \"interpolationMethod\": \"string\"\n    },\n    {\n      \"curveId\": \"string\",\n      \"name\": \"string\",\n      \"currency\": \"string\",\n      \"curveType\": \"Yield\",\n      \"dayCountConvention\": \"string\",\n      \"interpolationMethod\": \"string\"\n    }\n  ],\n  \"totalCount\": 359\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "534040f8-b60b-4983-9c84-550b6dbfe9dd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "curveType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e755b5bb-901a-4e38-a65e-2830aa9dd8a8",
+          "name": "Murex Get curve data",
+          "request": {
+            "name": "Murex Get curve data",
+            "description": {
+              "content": "Retrieve curve data points including tenors and rates for a specific curve.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "curves",
+                ":curveId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Curve valuation date"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "curveId",
+                  "description": "(Required) Curve unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c543187-6393-41f1-bd87-b41240a9aa5d",
+              "name": "Curve data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "curves",
+                    ":curveId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "curveId",
+                      "description": "(Required) Curve unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"curveId\": \"string\",\n  \"name\": \"string\",\n  \"asOfDate\": \"1954-09-04\",\n  \"currency\": \"string\",\n  \"curveType\": \"string\",\n  \"points\": [\n    {\n      \"tenor\": \"string\",\n      \"date\": \"1979-02-16\",\n      \"rate\": 7555.248554657551,\n      \"discountFactor\": 6476.978731989432\n    },\n    {\n      \"tenor\": \"string\",\n      \"date\": \"2015-10-27\",\n      \"rate\": 4260.536060708254,\n      \"discountFactor\": 3886.943602925531\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11a68ed6-d51a-4937-834f-f01298df8b13",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "curves",
+                    ":curveId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "curveId",
+                      "description": "(Required) Curve unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39c4b3c7-b75c-455e-ad6d-f2850624a4c6",
+              "name": "Curve not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "curves",
+                    ":curveId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "curveId",
+                      "description": "(Required) Curve unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1294d901-11cd-4650-bd77-35bc9b44ce1a",
+      "name": "FX Rates",
+      "description": {
+        "content": "Foreign exchange rates and crosses",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "26c1d19f-7835-4655-8c33-e91648411969",
+          "name": "Murex Get FX rates",
+          "request": {
+            "name": "Murex Get FX rates",
+            "description": {
+              "content": "Retrieve foreign exchange spot and forward rates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fx",
+                "rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyPairs",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated currency pairs (e.g., EURUSD,GBPUSD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "rateType",
+                  "value": "Spot",
+                  "description": "Rate type"
+                },
+                {
+                  "disabled": false,
+                  "key": "tenor",
+                  "value": "<string>",
+                  "description": "Forward tenor (required when rateType is Forward)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e80341a-c1e5-475e-b5a5-d41f5cfb4172",
+              "name": "FX rates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPairs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rateType",
+                      "value": "Spot"
+                    },
+                    {
+                      "key": "tenor",
+                      "value": "1M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"currencyPair\": \"string\",\n      \"baseCurrency\": \"string\",\n      \"quoteCurrency\": \"string\",\n      \"bid\": 1970.7274077309055,\n      \"ask\": 8322.670652123938,\n      \"mid\": 9407.980184061857,\n      \"rateType\": \"Spot\",\n      \"tenor\": \"string\",\n      \"timestamp\": \"1979-06-28T22:48:25.839Z\"\n    },\n    {\n      \"currencyPair\": \"string\",\n      \"baseCurrency\": \"string\",\n      \"quoteCurrency\": \"string\",\n      \"bid\": 2844.370643871134,\n      \"ask\": 3913.6505251594435,\n      \"mid\": 5509.018939286646,\n      \"rateType\": \"Spot\",\n      \"tenor\": \"string\",\n      \"timestamp\": \"1977-03-10T10:01:26.617Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdcae08e-3c9a-47b1-951d-9423edc9d50e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPairs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rateType",
+                      "value": "Spot"
+                    },
+                    {
+                      "key": "tenor",
+                      "value": "1M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16558fd1-2ea6-4dfa-85a3-4812fb15afd0",
+          "name": "Murex Get FX rate history",
+          "request": {
+            "name": "Murex Get FX rate history",
+            "description": {
+              "content": "Retrieve historical FX rates for a currency pair over a date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fx",
+                "rates",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyPair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair (e.g., EURUSD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6a3db80-bfc8-43bd-99bf-5518930a0bc9",
+              "name": "Historical FX rates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currencyPair\": \"string\",\n  \"items\": [\n    {\n      \"date\": \"1973-12-31\",\n      \"rate\": 4999.090948827071\n    },\n    {\n      \"date\": \"1970-10-28\",\n      \"rate\": 557.543982462051\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afc27d6e-8164-4b2c-8be0-7b05142ba910",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0712398b-134a-44c8-a46c-3685a29fdabc",
+      "name": "Quotes",
+      "description": {
+        "content": "Real-time and historical price quotes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2059560-51f4-4d69-b31e-83c84878f996",
+          "name": "Murex Get market quotes",
+          "request": {
+            "name": "Murex Get market quotes",
+            "description": {
+              "content": "Retrieve real-time or delayed market quotes for specified instruments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrumentIds",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of instrument identifiers"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of quote fields to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ac0be6f-f7dc-4d9a-b2cd-abe0a4b8c909",
+              "name": "Market quotes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "bid,ask,mid,last,volume"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"bid\": 743.2688163717072,\n      \"ask\": 5805.528528410277,\n      \"mid\": 7714.17998565745,\n      \"last\": 7026.798706932177,\n      \"volume\": 5923.982206719669,\n      \"high\": 8524.527739874555,\n      \"low\": 2703.704266781527,\n      \"open\": 9190.115345317488,\n      \"close\": 1097.4169966122504,\n      \"currency\": \"string\",\n      \"timestamp\": \"1997-05-12T14:24:07.655Z\"\n    },\n    {\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"bid\": 5448.113165600676,\n      \"ask\": 2404.134596923815,\n      \"mid\": 9932.812996817112,\n      \"last\": 4644.701876988268,\n      \"volume\": 6515.877313390643,\n      \"high\": 5124.725326443297,\n      \"low\": 1164.736737034555,\n      \"open\": 7770.851349937372,\n      \"close\": 2952.1002917049022,\n      \"currency\": \"string\",\n      \"timestamp\": \"1991-01-22T06:54:49.242Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aa53892-722c-417c-8701-49d858c27d88",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "bid,ask,mid,last,volume"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b860b2c-29eb-43ef-88d2-1c108a347df5",
+          "name": "Murex Get historical quotes",
+          "request": {
+            "name": "Murex Get historical quotes",
+            "description": {
+              "content": "Retrieve historical price data for a specified instrument and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrumentId",
+                  "value": "<string>",
+                  "description": "(Required) Instrument identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "Daily",
+                  "description": "Data frequency"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70ca0d3d-0566-4a22-b305-ed3ed099cd64",
+              "name": "Historical quote data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "Daily"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instrumentId\": \"string\",\n  \"items\": [\n    {\n      \"date\": \"1972-08-03\",\n      \"open\": 3870.1054027766745,\n      \"high\": 1336.653603518917,\n      \"low\": 4849.945806511171,\n      \"close\": 2915.4603092534894,\n      \"volume\": 9218.66724503204\n    },\n    {\n      \"date\": \"1967-10-19\",\n      \"open\": 1812.4962440612858,\n      \"high\": 107.60271196284864,\n      \"low\": 4190.384128874797,\n      \"close\": 4115.049706999462,\n      \"volume\": 9225.441746260773\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7db9a93c-e643-41ce-8f81-dea8041af2df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "Daily"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "125d8f80-8b1c-4001-8b4a-4d49c71fae28",
+      "name": "Reference Data",
+      "description": {
+        "content": "Market reference and static data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4bc71a62-d9e1-4c49-b1ae-4fb314b4cea0",
+          "name": "Murex List market calendars",
+          "request": {
+            "name": "Murex List market calendars",
+            "description": {
+              "content": "Retrieve available market and business day calendars.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reference",
+                "calendars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Filter by country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50ef713e-fc0d-45d8-b071-6eedfe8e0104",
+              "name": "List of calendars",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reference",
+                    "calendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"calendarId\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"description\": \"string\",\n      \"holidays\": [\n        {\n          \"date\": \"2025-09-25\",\n          \"name\": \"string\"\n        },\n        {\n          \"date\": \"1967-08-14\",\n          \"name\": \"string\"\n        }\n      ]\n    },\n    {\n      \"calendarId\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"description\": \"string\",\n      \"holidays\": [\n        {\n          \"date\": \"1968-10-09\",\n          \"name\": \"string\"\n        },\n        {\n          \"date\": \"1961-05-09\",\n          \"name\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": 5958\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1fa7de8-026d-4e00-9772-38c98d5b11f9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reference",
+                    "calendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a837cf5-3160-4ad7-80e1-7088085117c5",
+          "name": "Murex List currencies",
+          "request": {
+            "name": "Murex List currencies",
+            "description": {
+              "content": "Retrieve supported currencies and their configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reference",
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de3b6ecd-c529-43a3-9477-da76d9eb8740",
+              "name": "List of currencies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reference",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"decimalPlaces\": 8136,\n      \"dayCountConvention\": \"string\",\n      \"spotLag\": 5470,\n      \"calendar\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"decimalPlaces\": 7370,\n      \"dayCountConvention\": \"string\",\n      \"spotLag\": 3054,\n      \"calendar\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5ac48c3-73cd-4fdf-8c76-d959f2e73834",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reference",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d493d373-0fac-4fb7-b2d2-08e0a5159e23",
+      "name": "Volatility",
+      "description": {
+        "content": "Volatility surfaces and skew data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d9310e96-fece-41c4-b538-b266a125a097",
+          "name": "Murex List volatility surfaces",
+          "request": {
+            "name": "Murex List volatility surfaces",
+            "description": {
+              "content": "Retrieve available volatility surfaces for options pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "volatility",
+                "surfaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "underlying",
+                  "value": "<string>",
+                  "description": "Filter by underlying instrument or index"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efd0a36c-0495-4e7a-98bc-822e64949912",
+              "name": "List of volatility surfaces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "volatility",
+                    "surfaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "underlying",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"surfaceId\": \"string\",\n      \"name\": \"string\",\n      \"underlying\": \"string\",\n      \"assetClass\": \"string\",\n      \"quoteType\": \"LogNormal\"\n    },\n    {\n      \"surfaceId\": \"string\",\n      \"name\": \"string\",\n      \"underlying\": \"string\",\n      \"assetClass\": \"string\",\n      \"quoteType\": \"ShiftedLogNormal\"\n    }\n  ],\n  \"totalCount\": 8496\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8edc0968-b468-49a5-9367-d56e049cf2d2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "volatility",
+                    "surfaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "underlying",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "671294e3-c9d1-4997-b560-ef7e632ece9d",
+          "name": "Murex Get volatility surface data",
+          "request": {
+            "name": "Murex Get volatility surface data",
+            "description": {
+              "content": "Retrieve volatility surface data with strike and tenor dimensions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "volatility",
+                "surfaces",
+                ":surfaceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Surface valuation date"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "surfaceId",
+                  "description": "(Required) Volatility surface identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d09d051-1031-440b-b242-aa6f9f92fb51",
+              "name": "Volatility surface data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "volatility",
+                    "surfaces",
+                    ":surfaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "surfaceId",
+                      "description": "(Required) Volatility surface identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"surfaceId\": \"string\",\n  \"name\": \"string\",\n  \"asOfDate\": \"1992-07-19\",\n  \"underlying\": \"string\",\n  \"points\": [\n    {\n      \"tenor\": \"string\",\n      \"strike\": 2747.9684640610435,\n      \"strikeType\": \"Delta\",\n      \"volatility\": 8845.602641648877\n    },\n    {\n      \"tenor\": \"string\",\n      \"strike\": 7671.474133959503,\n      \"strikeType\": \"Moneyness\",\n      \"volatility\": 3980.411736679754\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebf4f07b-e9e0-4f79-af04-3789f9270caf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "volatility",
+                    "surfaces",
+                    ":surfaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "surfaceId",
+                      "description": "(Required) Volatility surface identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6d96600-60fa-4faa-9e61-24b01daee8e0",
+              "name": "Surface not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "volatility",
+                    "surfaces",
+                    ":surfaceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "surfaceId",
+                      "description": "(Required) Volatility surface identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4950af81-4033-47de-981c-46ef7b2086ef",
+    "name": "Murex MX.3 Market Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

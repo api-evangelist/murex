@@ -1,0 +1,344 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get market quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/quotes",
+            "params": [
+              {
+                "name": "instrumentIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of instrument identifiers"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of quote fields to return"
+              }
+            ]
+          },
+          "docs": "Retrieve real-time or delayed market quotes for specified instruments."
+        },
+        {
+          "info": {
+            "name": "Murex Get historical quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/quotes/history",
+            "params": [
+              {
+                "name": "instrumentId",
+                "value": "",
+                "type": "query",
+                "description": "Instrument identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency"
+              }
+            ]
+          },
+          "docs": "Retrieve historical price data for a specified instrument and date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Curves",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List available curves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/curves",
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by currency"
+              },
+              {
+                "name": "curveType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by curve type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of available yield curves and forward curves."
+        },
+        {
+          "info": {
+            "name": "Murex Get curve data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/curves/:curveId",
+            "params": [
+              {
+                "name": "curveId",
+                "value": "",
+                "type": "path",
+                "description": "Curve unique identifier"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Curve valuation date"
+              }
+            ]
+          },
+          "docs": "Retrieve curve data points including tenors and rates for a specific curve."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Volatility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List volatility surfaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/volatility/surfaces",
+            "params": [
+              {
+                "name": "underlying",
+                "value": "",
+                "type": "query",
+                "description": "Filter by underlying instrument or index"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve available volatility surfaces for options pricing."
+        },
+        {
+          "info": {
+            "name": "Murex Get volatility surface data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/volatility/surfaces/:surfaceId",
+            "params": [
+              {
+                "name": "surfaceId",
+                "value": "",
+                "type": "path",
+                "description": "Volatility surface identifier"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Surface valuation date"
+              }
+            ]
+          },
+          "docs": "Retrieve volatility surface data with strike and tenor dimensions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FX Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get FX rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/fx/rates",
+            "params": [
+              {
+                "name": "currencyPairs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated currency pairs (e.g., EURUSD,GBPUSD)"
+              },
+              {
+                "name": "rateType",
+                "value": "",
+                "type": "query",
+                "description": "Rate type"
+              },
+              {
+                "name": "tenor",
+                "value": "",
+                "type": "query",
+                "description": "Forward tenor (required when rateType is Forward)"
+              }
+            ]
+          },
+          "docs": "Retrieve foreign exchange spot and forward rates."
+        },
+        {
+          "info": {
+            "name": "Murex Get FX rate history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/fx/rates/history",
+            "params": [
+              {
+                "name": "currencyPair",
+                "value": "",
+                "type": "query",
+                "description": "Currency pair (e.g., EURUSD)"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve historical FX rates for a currency pair over a date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List market calendars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/reference/calendars",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve available market and business day calendars."
+        },
+        {
+          "info": {
+            "name": "Murex List currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/reference/currencies"
+          },
+          "docs": "Retrieve supported currencies and their configurations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

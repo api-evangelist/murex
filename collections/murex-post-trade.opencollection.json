@@ -1,0 +1,434 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Post-Trade API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Confirmations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List confirmations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/confirmations",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by confirmation status"
+              },
+              {
+                "name": "counterpartyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by counterparty"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve trade confirmations with optional filtering by status, counterparty, and date range."
+        },
+        {
+          "info": {
+            "name": "Murex Get a confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/confirmations/:confirmationId",
+            "params": [
+              {
+                "name": "confirmationId",
+                "value": "",
+                "type": "path",
+                "description": "Confirmation unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific trade confirmation."
+        },
+        {
+          "info": {
+            "name": "Murex Match a confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/posttrade/confirmations/:confirmationId/match",
+            "params": [
+              {
+                "name": "confirmationId",
+                "value": "",
+                "type": "path",
+                "description": "Confirmation identifier"
+              }
+            ]
+          },
+          "docs": "Mark a confirmation as matched after counterparty agreement."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Settlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/settlements",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by settlement status"
+              },
+              {
+                "name": "settlementDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by settlement date"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by settlement currency"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve settlement instructions and their processing status."
+        },
+        {
+          "info": {
+            "name": "Murex Get a settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/settlements/:settlementId",
+            "params": [
+              {
+                "name": "settlementId",
+                "value": "",
+                "type": "path",
+                "description": "Settlement unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific settlement instruction."
+        },
+        {
+          "info": {
+            "name": "Murex Instruct a settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/posttrade/settlements/:settlementId/instruct",
+            "params": [
+              {
+                "name": "settlementId",
+                "value": "",
+                "type": "path",
+                "description": "Settlement identifier"
+              }
+            ]
+          },
+          "docs": "Send settlement instructions to the payment or securities settlement system."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reconciliations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List reconciliations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/reconciliations",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Reconciliation type"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by reconciliation status"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Reconciliation date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve reconciliation results for positions, cash balances, and trade matching."
+        },
+        {
+          "info": {
+            "name": "Murex Get a reconciliation item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/reconciliations/:reconciliationId",
+            "params": [
+              {
+                "name": "reconciliationId",
+                "value": "",
+                "type": "path",
+                "description": "Reconciliation item identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific reconciliation item."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Regulatory Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List regulatory reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/regulatory/reports",
+            "params": [
+              {
+                "name": "regime",
+                "value": "",
+                "type": "query",
+                "description": "Regulatory reporting regime"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Report submission status"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve regulatory trade reports for EMIR, MiFID II, Dodd-Frank, and other reporting regimes."
+        },
+        {
+          "info": {
+            "name": "Murex Get a regulatory report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/regulatory/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Regulatory report identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific regulatory report submission."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Collateral",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List collateral agreements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/collateral/agreements",
+            "params": [
+              {
+                "name": "counterpartyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by counterparty"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by agreement status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve CSA and collateral agreements with margin call status."
+        },
+        {
+          "info": {
+            "name": "Murex List margin calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/posttrade/collateral/margin-calls",
+            "params": [
+              {
+                "name": "agreementId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by collateral agreement"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by margin call status"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Margin call date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve margin call calculations and their settlement status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

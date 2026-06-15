@@ -1,0 +1,2510 @@
+{
+  "item": [
+    {
+      "id": "89d37af9-3417-4cde-a0de-9ec51f69696b",
+      "name": "Collateral",
+      "description": {
+        "content": "Collateral management and margin operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "46f4b6a1-f66d-4a09-bfb8-623a3903a3c5",
+          "name": "Murex List collateral agreements",
+          "request": {
+            "name": "Murex List collateral agreements",
+            "description": {
+              "content": "Retrieve CSA and collateral agreements with margin call status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collateral",
+                "agreements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "counterpartyId",
+                  "value": "<string>",
+                  "description": "Filter by counterparty"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by agreement status"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d42c7420-1c70-4f21-a993-73f59f371df1",
+              "name": "List of collateral agreements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"agreementId\": \"string\",\n      \"agreementType\": \"CSA\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"status\": \"Terminated\",\n      \"baseCurrency\": \"string\",\n      \"threshold\": 5061.280343815305,\n      \"minimumTransferAmount\": 378.1143963264844,\n      \"independentAmount\": 5185.24069240254,\n      \"currentExposure\": 8658.492752685466,\n      \"collateralHeld\": 8135.243825436429,\n      \"collateralPosted\": 2355.43709759929\n    },\n    {\n      \"agreementId\": \"string\",\n      \"agreementType\": \"GMRA\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"status\": \"Terminated\",\n      \"baseCurrency\": \"string\",\n      \"threshold\": 2217.701493617146,\n      \"minimumTransferAmount\": 2507.5648392539706,\n      \"independentAmount\": 6581.757434174913,\n      \"currentExposure\": 1641.7191034592004,\n      \"collateralHeld\": 5814.503541298538,\n      \"collateralPosted\": 1806.638064074031\n    }\n  ],\n  \"totalCount\": 5533\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b40ab628-e37e-4371-b01a-24f5ba3f7bd1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6cb8e52-55eb-4400-83da-05b741e45dce",
+          "name": "Murex List margin calls",
+          "request": {
+            "name": "Murex List margin calls",
+            "description": {
+              "content": "Retrieve margin call calculations and their settlement status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collateral",
+                "margin-calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agreementId",
+                  "value": "<string>",
+                  "description": "Filter by collateral agreement"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by margin call status"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Margin call date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78a096c3-649a-4140-b3e6-b441f734dc06",
+              "name": "List of margin calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "margin-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agreementId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"marginCallId\": \"string\",\n      \"agreementId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"direction\": \"Return\",\n      \"callAmount\": 5112.942890329331,\n      \"currency\": \"string\",\n      \"exposure\": 7204.478944094758,\n      \"status\": \"Disputed\",\n      \"callDate\": \"2021-07-31\",\n      \"settlementDate\": \"2019-10-28\",\n      \"issuedAt\": \"1956-12-16T19:15:48.776Z\"\n    },\n    {\n      \"marginCallId\": \"string\",\n      \"agreementId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"direction\": \"Return\",\n      \"callAmount\": 2401.3864190632894,\n      \"currency\": \"string\",\n      \"exposure\": 952.7681206589845,\n      \"status\": \"Issued\",\n      \"callDate\": \"1986-09-30\",\n      \"settlementDate\": \"2003-10-23\",\n      \"issuedAt\": \"1980-07-13T20:07:34.675Z\"\n    }\n  ],\n  \"totalCount\": 8757\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5deefb66-7768-4fda-b780-d62dcac91751",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "margin-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agreementId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7e5598d5-d09e-4b64-a906-5e8bcd0f4869",
+      "name": "Confirmations",
+      "description": {
+        "content": "Trade confirmation generation and matching",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0cc3c6e-dc5e-41c4-8394-15431621074d",
+          "name": "Murex List confirmations",
+          "request": {
+            "name": "Murex List confirmations",
+            "description": {
+              "content": "Retrieve trade confirmations with optional filtering by status, counterparty, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "confirmations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by confirmation status"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterpartyId",
+                  "value": "<string>",
+                  "description": "Filter by counterparty"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef30ded0-1f18-48bb-88b8-d696bd4dce46",
+              "name": "List of confirmations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"confirmationId\": \"string\",\n      \"tradeId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"status\": \"Pending\",\n      \"confirmationType\": \"Platform\",\n      \"platform\": \"string\",\n      \"tradeDate\": \"2010-09-04\",\n      \"sentAt\": \"1961-06-15T19:29:04.356Z\",\n      \"matchedAt\": \"2011-07-22T23:38:42.792Z\",\n      \"createdAt\": \"1988-03-27T05:28:40.958Z\"\n    },\n    {\n      \"confirmationId\": \"string\",\n      \"tradeId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"status\": \"Cancelled\",\n      \"confirmationType\": \"Paper\",\n      \"platform\": \"string\",\n      \"tradeDate\": \"2010-04-14\",\n      \"sentAt\": \"1979-09-21T18:50:57.460Z\",\n      \"matchedAt\": \"1996-10-29T03:30:06.329Z\",\n      \"createdAt\": \"1953-04-17T16:33:41.215Z\"\n    }\n  ],\n  \"totalCount\": 4503\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f9a7e3d-115e-4e75-8884-acb622f6e560",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c504aaf1-74cc-4a75-a3cf-7304a61f7c18",
+          "name": "Murex Get a confirmation",
+          "request": {
+            "name": "Murex Get a confirmation",
+            "description": {
+              "content": "Retrieve details of a specific trade confirmation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "confirmations",
+                ":confirmationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "confirmationId",
+                  "description": "(Required) Confirmation unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "128b0ae8-0f18-4439-b0d8-61871525022b",
+              "name": "Confirmation details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"confirmationId\": \"string\",\n  \"tradeId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"counterpartyName\": \"string\",\n  \"status\": \"Sent\",\n  \"confirmationType\": \"Platform\",\n  \"platform\": \"string\",\n  \"tradeDate\": \"1964-09-20\",\n  \"sentAt\": \"1950-02-25T09:57:01.688Z\",\n  \"matchedAt\": \"1999-10-17T01:34:09.369Z\",\n  \"createdAt\": \"1954-01-04T10:34:17.184Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02a94112-c5fe-4669-b911-b1e8eba8145c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3725d868-b26c-4f6b-a663-7c3faf865867",
+              "name": "Confirmation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71a788b6-b8ff-44eb-9ac3-5eef139fdf27",
+          "name": "Murex Match a confirmation",
+          "request": {
+            "name": "Murex Match a confirmation",
+            "description": {
+              "content": "Mark a confirmation as matched after counterparty agreement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "confirmations",
+                ":confirmationId",
+                "match"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "confirmationId",
+                  "description": "(Required) Confirmation identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "888f00ce-182b-421c-b5cd-5ad13d3826c2",
+              "name": "Confirmation matched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"confirmationId\": \"string\",\n  \"tradeId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"counterpartyName\": \"string\",\n  \"status\": \"Sent\",\n  \"confirmationType\": \"Platform\",\n  \"platform\": \"string\",\n  \"tradeDate\": \"1964-09-20\",\n  \"sentAt\": \"1950-02-25T09:57:01.688Z\",\n  \"matchedAt\": \"1999-10-17T01:34:09.369Z\",\n  \"createdAt\": \"1954-01-04T10:34:17.184Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ec41ecb-02e9-454e-8121-2a6afaa718a1",
+              "name": "Confirmation cannot be matched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51b77e57-23f8-4c76-81f6-7b768793b6da",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21816c42-87fc-4611-b9e3-2080d65c0f90",
+              "name": "Confirmation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "confirmations",
+                    ":confirmationId",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "confirmationId",
+                      "description": "(Required) Confirmation identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0c9865a0-f66e-4005-ac91-4e53571c6bb5",
+      "name": "Reconciliations",
+      "description": {
+        "content": "Position and cash reconciliation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66fe9b7c-da70-4da9-b458-2eebd17cf1ef",
+          "name": "Murex List reconciliations",
+          "request": {
+            "name": "Murex List reconciliations",
+            "description": {
+              "content": "Retrieve reconciliation results for positions, cash balances, and trade matching.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconciliations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Reconciliation type"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by reconciliation status"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Reconciliation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac353765-68b2-4f9a-b0bc-dfbcab01cec1",
+              "name": "List of reconciliation items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"reconciliationId\": \"string\",\n      \"type\": \"Trade\",\n      \"status\": \"Unmatched\",\n      \"internalValue\": 9095.010868266492,\n      \"externalValue\": 9122.242500913871,\n      \"difference\": 5798.24280516829,\n      \"currency\": \"string\",\n      \"source\": \"string\",\n      \"asOfDate\": \"2021-10-18\",\n      \"instrumentId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"comment\": \"string\"\n    },\n    {\n      \"reconciliationId\": \"string\",\n      \"type\": \"Position\",\n      \"status\": \"Investigating\",\n      \"internalValue\": 826.2823464683821,\n      \"externalValue\": 4538.35280391821,\n      \"difference\": 9265.222565123851,\n      \"currency\": \"string\",\n      \"source\": \"string\",\n      \"asOfDate\": \"1962-03-02\",\n      \"instrumentId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"comment\": \"string\"\n    }\n  ],\n  \"totalCount\": 8649,\n  \"matchedCount\": 6059,\n  \"unmatchedCount\": 4404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25189793-c17f-406a-ab6d-5089cd5ed07c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3835f821-120a-4691-a28a-cf7d1ff14bfb",
+          "name": "Murex Get a reconciliation item",
+          "request": {
+            "name": "Murex Get a reconciliation item",
+            "description": {
+              "content": "Retrieve details of a specific reconciliation item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconciliations",
+                ":reconciliationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reconciliationId",
+                  "description": "(Required) Reconciliation item identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f22765cb-9b37-4b10-bda0-e7c04043759c",
+              "name": "Reconciliation item details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations",
+                    ":reconciliationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reconciliationId",
+                      "description": "(Required) Reconciliation item identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reconciliationId\": \"string\",\n  \"type\": \"Trade\",\n  \"status\": \"Matched\",\n  \"internalValue\": 4059.9797597996558,\n  \"externalValue\": 9392.614209970721,\n  \"difference\": 3007.7550298354718,\n  \"currency\": \"string\",\n  \"source\": \"string\",\n  \"asOfDate\": \"1985-10-26\",\n  \"instrumentId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"comment\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d685be0-d36f-4ad1-ad04-58ffac983f0b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations",
+                    ":reconciliationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reconciliationId",
+                      "description": "(Required) Reconciliation item identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2367889e-50e5-44ce-981d-0bea4ba0257f",
+              "name": "Reconciliation item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations",
+                    ":reconciliationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reconciliationId",
+                      "description": "(Required) Reconciliation item identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dd9c96c7-6323-4e05-97d7-dbb242cc8569",
+      "name": "Regulatory Reporting",
+      "description": {
+        "content": "Regulatory trade and transaction reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ac15df9-0600-4b7b-b862-afdb51052efa",
+          "name": "Murex List regulatory reports",
+          "request": {
+            "name": "Murex List regulatory reports",
+            "description": {
+              "content": "Retrieve regulatory trade reports for EMIR, MiFID II, Dodd-Frank, and other reporting regimes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "regulatory",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "regime",
+                  "value": "<string>",
+                  "description": "Regulatory reporting regime"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Report submission status"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b4bbc4c-530e-4da8-9216-8690b0a68af4",
+              "name": "List of regulatory reports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "regime",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"reportId\": \"string\",\n      \"tradeId\": \"string\",\n      \"regime\": \"SFTR\",\n      \"reportType\": \"Valuation\",\n      \"status\": \"Amended\",\n      \"uti\": \"string\",\n      \"lei\": \"string\",\n      \"tradeRepository\": \"string\",\n      \"submittedAt\": \"1956-10-19T14:58:39.571Z\",\n      \"responseAt\": \"1969-02-19T01:31:08.639Z\",\n      \"rejectionReason\": \"string\"\n    },\n    {\n      \"reportId\": \"string\",\n      \"tradeId\": \"string\",\n      \"regime\": \"SFTR\",\n      \"reportType\": \"New\",\n      \"status\": \"Submitted\",\n      \"uti\": \"string\",\n      \"lei\": \"string\",\n      \"tradeRepository\": \"string\",\n      \"submittedAt\": \"2025-08-04T05:45:20.964Z\",\n      \"responseAt\": \"1981-06-15T17:04:09.039Z\",\n      \"rejectionReason\": \"string\"\n    }\n  ],\n  \"totalCount\": 6304\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48484ef3-5476-41bd-acb2-6e9ae76bafcb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "regime",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "395a3c33-de7e-43f4-beda-4ed65aadb676",
+          "name": "Murex Get a regulatory report",
+          "request": {
+            "name": "Murex Get a regulatory report",
+            "description": {
+              "content": "Retrieve details of a specific regulatory report submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "regulatory",
+                "reports",
+                ":reportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reportId",
+                  "description": "(Required) Regulatory report identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffcfdcbd-ed66-4062-ad3a-59528497e08a",
+              "name": "Regulatory report details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) Regulatory report identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reportId\": \"string\",\n  \"tradeId\": \"string\",\n  \"regime\": \"MAS\",\n  \"reportType\": \"Valuation\",\n  \"status\": \"Pending\",\n  \"uti\": \"string\",\n  \"lei\": \"string\",\n  \"tradeRepository\": \"string\",\n  \"submittedAt\": \"1959-03-02T23:05:29.844Z\",\n  \"responseAt\": \"1972-09-10T16:56:54.831Z\",\n  \"rejectionReason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b04b538-e2e8-46bf-8fe3-6db921f7d25a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) Regulatory report identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee01781c-3e91-4cfb-aed2-d5c9711c6802",
+              "name": "Report not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) Regulatory report identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6095570b-beeb-4960-900c-644ab349925c",
+      "name": "Settlements",
+      "description": {
+        "content": "Settlement instruction management and processing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68711225-310c-424e-b169-0d15d699fd01",
+          "name": "Murex List settlements",
+          "request": {
+            "name": "Murex List settlements",
+            "description": {
+              "content": "Retrieve settlement instructions and their processing status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by settlement status"
+                },
+                {
+                  "disabled": false,
+                  "key": "settlementDate",
+                  "value": "<date>",
+                  "description": "Filter by settlement date"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by settlement currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae7c6527-4f00-41c5-bc67-f18fcef9dce5",
+              "name": "List of settlements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "settlementDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"settlementId\": \"string\",\n      \"tradeId\": \"string\",\n      \"status\": \"Settled\",\n      \"settlementDate\": \"2019-12-26\",\n      \"amount\": 9868.802462852169,\n      \"currency\": \"string\",\n      \"direction\": \"Pay\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"nostroAccount\": \"string\",\n      \"correspondentBank\": \"string\",\n      \"paymentMethod\": \"TARGET2\",\n      \"messageType\": \"string\",\n      \"instructedAt\": \"2020-06-13T17:12:20.950Z\",\n      \"settledAt\": \"1972-04-02T12:11:01.874Z\"\n    },\n    {\n      \"settlementId\": \"string\",\n      \"tradeId\": \"string\",\n      \"status\": \"Instructed\",\n      \"settlementDate\": \"2023-10-12\",\n      \"amount\": 8495.548859324848,\n      \"currency\": \"string\",\n      \"direction\": \"Pay\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"nostroAccount\": \"string\",\n      \"correspondentBank\": \"string\",\n      \"paymentMethod\": \"RTGS\",\n      \"messageType\": \"string\",\n      \"instructedAt\": \"1970-01-30T14:29:35.064Z\",\n      \"settledAt\": \"1967-03-06T23:52:22.027Z\"\n    }\n  ],\n  \"totalCount\": 5692\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d66a2e00-1973-4024-8f72-1db801b69c42",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "settlementDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9f16c87-fed8-4c79-8eca-a7ec6c13e7f6",
+          "name": "Murex Get a settlement",
+          "request": {
+            "name": "Murex Get a settlement",
+            "description": {
+              "content": "Retrieve details of a specific settlement instruction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlementId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlementId",
+                  "description": "(Required) Settlement unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45a2411f-5bdc-49ed-af77-80b50163045a",
+              "name": "Settlement details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlementId\": \"string\",\n  \"tradeId\": \"string\",\n  \"status\": \"Settled\",\n  \"settlementDate\": \"1973-08-06\",\n  \"amount\": 7181.495248993883,\n  \"currency\": \"string\",\n  \"direction\": \"Receive\",\n  \"counterpartyId\": \"string\",\n  \"counterpartyName\": \"string\",\n  \"nostroAccount\": \"string\",\n  \"correspondentBank\": \"string\",\n  \"paymentMethod\": \"RTGS\",\n  \"messageType\": \"string\",\n  \"instructedAt\": \"2020-03-29T00:23:38.851Z\",\n  \"settledAt\": \"2016-11-14T19:33:15.816Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fba665c2-7534-42d7-9444-846a415aecc7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f655bf3-79d2-455b-b5fa-8aaa0d4b5b57",
+              "name": "Settlement not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ad0cc7b-8642-4fef-8fc2-86ff9ef43161",
+          "name": "Murex Instruct a settlement",
+          "request": {
+            "name": "Murex Instruct a settlement",
+            "description": {
+              "content": "Send settlement instructions to the payment or securities settlement system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlementId",
+                "instruct"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlementId",
+                  "description": "(Required) Settlement identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ce04b5c-706d-4849-b118-c0e9c9c63767",
+              "name": "Settlement instructed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "instruct"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlementId\": \"string\",\n  \"tradeId\": \"string\",\n  \"status\": \"Settled\",\n  \"settlementDate\": \"1973-08-06\",\n  \"amount\": 7181.495248993883,\n  \"currency\": \"string\",\n  \"direction\": \"Receive\",\n  \"counterpartyId\": \"string\",\n  \"counterpartyName\": \"string\",\n  \"nostroAccount\": \"string\",\n  \"correspondentBank\": \"string\",\n  \"paymentMethod\": \"RTGS\",\n  \"messageType\": \"string\",\n  \"instructedAt\": \"2020-03-29T00:23:38.851Z\",\n  \"settledAt\": \"2016-11-14T19:33:15.816Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "568b19f6-f705-4e31-b733-7c3c9c6eadc7",
+              "name": "Settlement cannot be instructed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "instruct"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60b3f5ad-e707-4df9-998c-ce62a1446634",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "instruct"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f44a8fba-cfad-4eac-8f82-560ec4daf524",
+              "name": "Settlement not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "instruct"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/posttrade",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f71cb910-27dc-4b9c-a821-69fd0708ea5c",
+    "name": "Murex MX.3 Post-Trade API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Post-trade processing API for confirmations, settlements, reconciliations, and regulatory reporting workflows on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

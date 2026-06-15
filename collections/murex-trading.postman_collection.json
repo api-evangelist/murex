@@ -1,0 +1,2339 @@
+{
+  "item": [
+    {
+      "id": "73d4d623-bdcb-46f2-9d17-c900ea608ee8",
+      "name": "Instruments",
+      "description": {
+        "content": "Financial instrument reference data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ffb677a5-3225-4a78-b5c0-98cb4a60ee05",
+          "name": "Murex List instruments",
+          "request": {
+            "name": "Murex List instruments",
+            "description": {
+              "content": "Search and retrieve financial instrument reference data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instruments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search query for instrument name or identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by instrument currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e5d6eb5-7e8a-4e0c-a5a2-385f58e00d50",
+              "name": "List of instruments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"instrumentId\": \"string\",\n      \"name\": \"string\",\n      \"assetClass\": \"string\",\n      \"instrumentType\": \"string\",\n      \"currency\": \"string\",\n      \"secondaryCurrency\": \"string\",\n      \"issuer\": \"string\",\n      \"maturityDate\": \"1947-04-06\",\n      \"isin\": \"string\",\n      \"ticker\": \"string\"\n    },\n    {\n      \"instrumentId\": \"string\",\n      \"name\": \"string\",\n      \"assetClass\": \"string\",\n      \"instrumentType\": \"string\",\n      \"currency\": \"string\",\n      \"secondaryCurrency\": \"string\",\n      \"issuer\": \"string\",\n      \"maturityDate\": \"1996-07-10\",\n      \"isin\": \"string\",\n      \"ticker\": \"string\"\n    }\n  ],\n  \"totalCount\": 3311\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb2555ea-e2d4-4b2b-b2fd-13733554491b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instruments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79f954db-30f5-4897-994e-1009b9efa022",
+          "name": "Murex Get an instrument",
+          "request": {
+            "name": "Murex Get an instrument",
+            "description": {
+              "content": "Retrieve details of a specific financial instrument.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instruments",
+                ":instrumentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instrumentId",
+                  "description": "(Required) Instrument unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f121a187-bfd2-436b-bef3-0671469bf11f",
+              "name": "Instrument details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instruments",
+                    ":instrumentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instrumentId",
+                      "description": "(Required) Instrument unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instrumentId\": \"string\",\n  \"name\": \"string\",\n  \"assetClass\": \"string\",\n  \"instrumentType\": \"string\",\n  \"currency\": \"string\",\n  \"secondaryCurrency\": \"string\",\n  \"issuer\": \"string\",\n  \"maturityDate\": \"1977-07-19\",\n  \"isin\": \"string\",\n  \"ticker\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ef2beb4-739f-4e10-8ace-8d1e3efe6548",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instruments",
+                    ":instrumentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instrumentId",
+                      "description": "(Required) Instrument unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ce20367-c87f-4654-9a91-07cb856e32dc",
+              "name": "Instrument not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instruments",
+                    ":instrumentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instrumentId",
+                      "description": "(Required) Instrument unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b0319211-ccae-4ab4-bffc-b726cb30e105",
+      "name": "Orders",
+      "description": {
+        "content": "Order creation, modification, and lifecycle management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "700b9aa9-2698-467d-a77d-b4ff32e53b75",
+          "name": "Murex List orders",
+          "request": {
+            "name": "Murex List orders",
+            "description": {
+              "content": "Retrieve a list of orders with optional filtering by status, asset class, portfolio, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Filter by portfolio or book name"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by order status"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date for order search"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date for order search"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77e11372-549b-4c7e-98b0-824659a9eb83",
+              "name": "List of orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"orderId\": \"string\",\n      \"status\": \"PartiallyFilled\",\n      \"side\": \"Buy\",\n      \"assetClass\": \"string\",\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"quantity\": 1330.6898065053729,\n      \"price\": 2296.880797355022,\n      \"currency\": \"string\",\n      \"portfolioId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"orderType\": \"Limit\",\n      \"timeInForce\": \"IOC\",\n      \"filledQuantity\": 395.04196732105254,\n      \"averagePrice\": 2689.332845328267,\n      \"createdAt\": \"1956-10-10T12:34:41.230Z\",\n      \"updatedAt\": \"2007-04-24T16:02:42.740Z\"\n    },\n    {\n      \"orderId\": \"string\",\n      \"status\": \"Cancelled\",\n      \"side\": \"Sell\",\n      \"assetClass\": \"string\",\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"quantity\": 8857.368006482937,\n      \"price\": 1763.4990408498518,\n      \"currency\": \"string\",\n      \"portfolioId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"orderType\": \"Market\",\n      \"timeInForce\": \"FOK\",\n      \"filledQuantity\": 8785.140423716923,\n      \"averagePrice\": 1436.0694473899816,\n      \"createdAt\": \"2021-03-25T03:01:59.207Z\",\n      \"updatedAt\": \"1998-12-24T08:46:22.757Z\"\n    }\n  ],\n  \"totalCount\": 506\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "167cd0b1-3625-4ea8-b12b-14a6a5c9c095",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bddfab14-0eca-4095-9b16-012562353437",
+          "name": "Murex Create an order",
+          "request": {
+            "name": "Murex Create an order",
+            "description": {
+              "content": "Submit a new order for execution across any supported asset class.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"side\": \"<string>\",\n  \"instrumentId\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"portfolioId\": \"<string>\",\n  \"orderType\": \"<string>\",\n  \"price\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"counterpartyId\": \"<string>\",\n  \"timeInForce\": \"DAY\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c884c87-e832-4a8a-b2d3-8881e4435bed",
+              "name": "Order created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"side\": \"<string>\",\n  \"instrumentId\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"portfolioId\": \"<string>\",\n  \"orderType\": \"<string>\",\n  \"price\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"counterpartyId\": \"<string>\",\n  \"timeInForce\": \"DAY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"string\",\n  \"status\": \"Filled\",\n  \"side\": \"Buy\",\n  \"assetClass\": \"string\",\n  \"instrumentId\": \"string\",\n  \"instrumentName\": \"string\",\n  \"quantity\": 4760.29431342797,\n  \"price\": 8592.083810567106,\n  \"currency\": \"string\",\n  \"portfolioId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"orderType\": \"Market\",\n  \"timeInForce\": \"IOC\",\n  \"filledQuantity\": 3799.495359823962,\n  \"averagePrice\": 4309.918874223741,\n  \"createdAt\": \"2014-09-12T14:52:38.679Z\",\n  \"updatedAt\": \"1988-08-20T03:40:07.939Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e0a7162-4d07-4ff9-ba8f-289e70a166b3",
+              "name": "Invalid order request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"side\": \"<string>\",\n  \"instrumentId\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"portfolioId\": \"<string>\",\n  \"orderType\": \"<string>\",\n  \"price\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"counterpartyId\": \"<string>\",\n  \"timeInForce\": \"DAY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "af69a08a-04e2-4ee8-9d37-840f786b6c3e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"side\": \"<string>\",\n  \"instrumentId\": \"<string>\",\n  \"quantity\": \"<number>\",\n  \"portfolioId\": \"<string>\",\n  \"orderType\": \"<string>\",\n  \"price\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"counterpartyId\": \"<string>\",\n  \"timeInForce\": \"DAY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4510c2d0-4b88-4081-87d2-70ab6cc4e398",
+          "name": "Murex Get an order",
+          "request": {
+            "name": "Murex Get an order",
+            "description": {
+              "content": "Retrieve details of a specific order by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Order unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "595191e8-f040-4a34-a279-ecddfd321ab6",
+              "name": "Order details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"string\",\n  \"status\": \"Filled\",\n  \"side\": \"Buy\",\n  \"assetClass\": \"string\",\n  \"instrumentId\": \"string\",\n  \"instrumentName\": \"string\",\n  \"quantity\": 4760.29431342797,\n  \"price\": 8592.083810567106,\n  \"currency\": \"string\",\n  \"portfolioId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"orderType\": \"Market\",\n  \"timeInForce\": \"IOC\",\n  \"filledQuantity\": 3799.495359823962,\n  \"averagePrice\": 4309.918874223741,\n  \"createdAt\": \"2014-09-12T14:52:38.679Z\",\n  \"updatedAt\": \"1988-08-20T03:40:07.939Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5589ddf7-dea3-4399-adfd-ee1e6fd18687",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4aff32d4-91f4-4573-9087-578eb87a13cc",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50628a17-b0ad-4bcb-aa69-8fcd5aa50bec",
+          "name": "Murex Update an order",
+          "request": {
+            "name": "Murex Update an order",
+            "description": {
+              "content": "Modify an existing order. Only orders in Pending or Submitted status can be modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Order unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"timeInForce\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21f7c239-661c-4445-8bdb-b28e11659113",
+              "name": "Order updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"timeInForce\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"string\",\n  \"status\": \"Filled\",\n  \"side\": \"Buy\",\n  \"assetClass\": \"string\",\n  \"instrumentId\": \"string\",\n  \"instrumentName\": \"string\",\n  \"quantity\": 4760.29431342797,\n  \"price\": 8592.083810567106,\n  \"currency\": \"string\",\n  \"portfolioId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"orderType\": \"Market\",\n  \"timeInForce\": \"IOC\",\n  \"filledQuantity\": 3799.495359823962,\n  \"averagePrice\": 4309.918874223741,\n  \"createdAt\": \"2014-09-12T14:52:38.679Z\",\n  \"updatedAt\": \"1988-08-20T03:40:07.939Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bdffb92-7a56-4560-a4f6-97bbc1f1e992",
+              "name": "Invalid update request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"timeInForce\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "80eb3fe6-9db2-4ec8-a589-4818dd48180a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"timeInForce\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc1029f0-fda7-4b6f-a793-041449055bb7",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<number>\",\n  \"price\": \"<number>\",\n  \"timeInForce\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "831b1597-cac1-4707-8a3d-372185564d84",
+          "name": "Murex Cancel an order",
+          "request": {
+            "name": "Murex Cancel an order",
+            "description": {
+              "content": "Cancel a pending or submitted order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Order unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fcff3f0-313c-45dc-ba91-85b788a51d87",
+              "name": "Order cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"string\",\n  \"status\": \"Filled\",\n  \"side\": \"Buy\",\n  \"assetClass\": \"string\",\n  \"instrumentId\": \"string\",\n  \"instrumentName\": \"string\",\n  \"quantity\": 4760.29431342797,\n  \"price\": 8592.083810567106,\n  \"currency\": \"string\",\n  \"portfolioId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"orderType\": \"Market\",\n  \"timeInForce\": \"IOC\",\n  \"filledQuantity\": 3799.495359823962,\n  \"averagePrice\": 4309.918874223741,\n  \"createdAt\": \"2014-09-12T14:52:38.679Z\",\n  \"updatedAt\": \"1988-08-20T03:40:07.939Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58a65d49-438f-4b42-8bfb-0fd4b97ec15b",
+              "name": "Order cannot be cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba1478af-ba2f-4d54-b27c-0d60030772ac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8520c34-c746-46d2-bf5c-ec827b63cafb",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Order unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8fb6fbfa-c30f-44eb-a8c4-4c8a137f5eef",
+      "name": "Portfolios",
+      "description": {
+        "content": "Trading portfolio and book management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d14a8bad-075a-461b-9d69-5150a0b0984f",
+          "name": "Murex List portfolios",
+          "request": {
+            "name": "Murex List portfolios",
+            "description": {
+              "content": "Retrieve available trading portfolios and books.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolios"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Filter by trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92a27a3c-4f48-43fb-921c-0d28e5519c9b",
+              "name": "List of portfolios",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"portfolioId\": \"string\",\n      \"name\": \"string\",\n      \"deskId\": \"string\",\n      \"deskName\": \"string\",\n      \"currency\": \"string\",\n      \"entity\": \"string\",\n      \"status\": \"Active\"\n    },\n    {\n      \"portfolioId\": \"string\",\n      \"name\": \"string\",\n      \"deskId\": \"string\",\n      \"deskName\": \"string\",\n      \"currency\": \"string\",\n      \"entity\": \"string\",\n      \"status\": \"Inactive\"\n    }\n  ],\n  \"totalCount\": 799\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b54e826-9418-4d3a-9335-68693bdd7069",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01c454e6-5730-4862-9944-e08978637b8e",
+          "name": "Murex Get a portfolio",
+          "request": {
+            "name": "Murex Get a portfolio",
+            "description": {
+              "content": "Retrieve details of a specific trading portfolio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "portfolios",
+                ":portfolioId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "portfolioId",
+                  "description": "(Required) Portfolio unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59763d9d-932f-4d51-826b-54fd98fa13ce",
+              "name": "Portfolio details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"name\": \"string\",\n  \"deskId\": \"string\",\n  \"deskName\": \"string\",\n  \"currency\": \"string\",\n  \"entity\": \"string\",\n  \"status\": \"Active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb0b4a7e-10cf-4b3a-ab1b-060639d7e1e0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbc8bd9c-3ee0-482d-b423-43f689b27040",
+              "name": "Portfolio not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "portfolios",
+                    ":portfolioId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "portfolioId",
+                      "description": "(Required) Portfolio unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "68965779-6acd-4a7f-a2ab-cfab35db7819",
+      "name": "Trades",
+      "description": {
+        "content": "Trade execution and trade blotter operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0edf526b-bfdc-4652-b89f-2aaf40b232d5",
+          "name": "Murex List trades",
+          "request": {
+            "name": "Murex List trades",
+            "description": {
+              "content": "Retrieve trade blotter entries with optional filtering by asset class, portfolio, counterparty, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Filter by portfolio or book name"
+                },
+                {
+                  "disabled": false,
+                  "key": "counterpartyId",
+                  "value": "<string>",
+                  "description": "Filter by counterparty identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "tradeDate",
+                  "value": "<date>",
+                  "description": "Filter by trade date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01308612-b3fe-40bb-8c47-6857804b4231",
+              "name": "List of trades",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradeDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"tradeId\": \"string\",\n      \"orderId\": \"string\",\n      \"status\": \"Matured\",\n      \"side\": \"Buy\",\n      \"assetClass\": \"string\",\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"quantity\": 3168.1575414990216,\n      \"price\": 4881.2530699685085,\n      \"currency\": \"string\",\n      \"portfolioId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"tradeDate\": \"2022-01-29\",\n      \"valueDate\": \"1983-04-16\",\n      \"maturityDate\": \"1987-03-28\",\n      \"createdAt\": \"2001-03-22T06:42:06.473Z\"\n    },\n    {\n      \"tradeId\": \"string\",\n      \"orderId\": \"string\",\n      \"status\": \"Terminated\",\n      \"side\": \"Sell\",\n      \"assetClass\": \"string\",\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"quantity\": 1952.6290519808288,\n      \"price\": 4238.715232049352,\n      \"currency\": \"string\",\n      \"portfolioId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"tradeDate\": \"1951-05-14\",\n      \"valueDate\": \"2022-07-18\",\n      \"maturityDate\": \"2000-11-06\",\n      \"createdAt\": \"2009-11-09T17:43:47.056Z\"\n    }\n  ],\n  \"totalCount\": 4653\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec24ddb9-db79-497c-8dc2-dba73f32000c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradeDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cddc13c9-11fd-4a80-90a2-faa63b55f8f1",
+          "name": "Murex Get a trade",
+          "request": {
+            "name": "Murex Get a trade",
+            "description": {
+              "content": "Retrieve details of a specific trade by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades",
+                ":tradeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tradeId",
+                  "description": "(Required) Trade unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa504f26-b445-4eec-97dd-bcf098c64f78",
+              "name": "Trade details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades",
+                    ":tradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tradeId",
+                      "description": "(Required) Trade unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tradeId\": \"string\",\n  \"orderId\": \"string\",\n  \"status\": \"Matured\",\n  \"side\": \"Buy\",\n  \"assetClass\": \"string\",\n  \"instrumentId\": \"string\",\n  \"instrumentName\": \"string\",\n  \"quantity\": 8887.97022800591,\n  \"price\": 6646.814618098905,\n  \"currency\": \"string\",\n  \"portfolioId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"counterpartyName\": \"string\",\n  \"tradeDate\": \"2008-12-12\",\n  \"valueDate\": \"1971-05-20\",\n  \"maturityDate\": \"1962-07-15\",\n  \"createdAt\": \"2007-04-30T10:29:10.820Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4121afed-a45b-4e6e-b60f-6e46c20e9d8c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades",
+                    ":tradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tradeId",
+                      "description": "(Required) Trade unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c15cb1e-f1fb-4435-ad1d-50ff044487bb",
+              "name": "Trade not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades",
+                    ":tradeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tradeId",
+                      "description": "(Required) Trade unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/trading",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ca36f7d-1f72-4f54-99bf-bede4e305cda",
+    "name": "Murex MX.3 Trading API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for executing trades, managing orders, and accessing real-time market data across multiple asset classes including derivatives, fixed income, equities, and FX on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

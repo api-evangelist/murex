@@ -1,0 +1,331 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Position API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/positions",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "instrumentId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instrument identifier"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Position date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve portfolio positions with optional filtering by portfolio, asset class, instrument, and date."
+        },
+        {
+          "info": {
+            "name": "Murex Get a position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/positions/:positionId",
+            "params": [
+              {
+                "name": "positionId",
+                "value": "",
+                "type": "path",
+                "description": "Position unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific position."
+        },
+        {
+          "info": {
+            "name": "Murex Get position summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/positions/summary",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query",
+                "description": "Grouping dimension for aggregation"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Position date"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated position summary by portfolio, desk, asset class, or currency."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "P&L",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get P&L report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/pnl",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for P&L period"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for P&L period"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Reporting currency"
+              }
+            ]
+          },
+          "docs": "Retrieve profit and loss calculations including realized, unrealized, and total P&L with attribution by risk factor."
+        },
+        {
+          "info": {
+            "name": "Murex Get P&L explanation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/pnl/explain",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "P&L explanation date"
+              }
+            ]
+          },
+          "docs": "Retrieve P&L attribution and explanation decomposed by risk factors including market moves, theta, new deals, and amendments."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cash Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List cash flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/cashflows",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for cash flow period"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for cash flow period"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by currency"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Cash flow type filter"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve projected and historical cash flows across portfolios."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List accounting entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/position/accounting/entries",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by accounting event type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve accounting journal entries generated from trade and position events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

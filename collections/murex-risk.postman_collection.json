@@ -1,0 +1,1787 @@
+{
+  "item": [
+    {
+      "id": "ef4697a0-adfe-48a4-a75d-839f2853ea1a",
+      "name": "Limits",
+      "description": {
+        "content": "Risk limit monitoring and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85b2b856-042d-4ea4-810e-9e4ff627798d",
+          "name": "Murex List risk limits",
+          "request": {
+            "name": "Murex List risk limits",
+            "description": {
+              "content": "Retrieve configured risk limits and their current utilization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by limit status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93e518b9-334a-4d5c-8468-83fa885c8871",
+              "name": "List of risk limits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"limitId\": \"string\",\n      \"name\": \"string\",\n      \"limitType\": \"Sensitivity\",\n      \"portfolioId\": \"string\",\n      \"deskId\": \"string\",\n      \"limitValue\": 9147.177953312701,\n      \"currentUtilization\": 5992.9699251635975,\n      \"utilizationPercent\": 1509.4411165253641,\n      \"currency\": \"string\",\n      \"status\": \"Breached\",\n      \"warningThreshold\": 4567.831377191575,\n      \"updatedAt\": \"2006-09-13T15:25:45.365Z\"\n    },\n    {\n      \"limitId\": \"string\",\n      \"name\": \"string\",\n      \"limitType\": \"Notional\",\n      \"portfolioId\": \"string\",\n      \"deskId\": \"string\",\n      \"limitValue\": 2149.698783002287,\n      \"currentUtilization\": 5077.910321277469,\n      \"utilizationPercent\": 4936.959263194668,\n      \"currency\": \"string\",\n      \"status\": \"Breached\",\n      \"warningThreshold\": 6726.449574636162,\n      \"updatedAt\": \"2009-09-01T03:34:08.015Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "400c2cfd-90af-4bca-97db-656c569d7291",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c881a377-8054-41f7-a6ef-2a36d8b45f5b",
+          "name": "Murex Get a risk limit",
+          "request": {
+            "name": "Murex Get a risk limit",
+            "description": {
+              "content": "Retrieve details of a specific risk limit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "limits",
+                ":limitId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "limitId",
+                  "description": "(Required) Risk limit identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a27330a-c8ae-4c66-bbf6-277c647125cc",
+              "name": "Risk limit details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits",
+                    ":limitId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "limitId",
+                      "description": "(Required) Risk limit identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limitId\": \"string\",\n  \"name\": \"string\",\n  \"limitType\": \"VaR\",\n  \"portfolioId\": \"string\",\n  \"deskId\": \"string\",\n  \"limitValue\": 8336.719602498844,\n  \"currentUtilization\": 9215.055791880346,\n  \"utilizationPercent\": 8796.510646372704,\n  \"currency\": \"string\",\n  \"status\": \"Breached\",\n  \"warningThreshold\": 1142.9313104150397,\n  \"updatedAt\": \"2017-09-07T22:17:46.150Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c909e32c-7685-49ae-b426-bf7a740d14bf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits",
+                    ":limitId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "limitId",
+                      "description": "(Required) Risk limit identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e79e21e5-0616-4163-b7b7-e8ce77c9aad4",
+              "name": "Risk limit not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits",
+                    ":limitId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "limitId",
+                      "description": "(Required) Risk limit identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f9db5f75-df77-4b58-a38a-b59595302911",
+      "name": "Regulatory",
+      "description": {
+        "content": "Regulatory capital and compliance metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "34c6669f-9412-4f3c-b340-da884c2a15d0",
+          "name": "Murex Get regulatory capital metrics",
+          "request": {
+            "name": "Murex Get regulatory capital metrics",
+            "description": {
+              "content": "Retrieve regulatory capital calculations including RWA, CVA, and capital ratios for Basel III/IV compliance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "regulatory",
+                "capital"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "framework",
+                  "value": "<string>",
+                  "description": "Regulatory framework"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56dbeb3a-34da-465c-a5a4-5c44d7f8e72f",
+              "name": "Regulatory capital metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "capital"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "framework",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"framework\": \"string\",\n  \"asOfDate\": \"1989-10-27\",\n  \"riskWeightedAssets\": 3709.730390005974,\n  \"creditRWA\": 1890.5222413302058,\n  \"marketRWA\": 7118.799872349615,\n  \"operationalRWA\": 8370.594478386118,\n  \"cvaCharge\": 2392.7081610185496,\n  \"tier1Capital\": 7527.478410810172,\n  \"totalCapital\": 307.52037257603115,\n  \"capitalRatio\": 7497.610383759068,\n  \"currency\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6b4dc30-b6c3-4828-aada-d0359d05c952",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "capital"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "framework",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5fc3847d-1f06-4d8b-9bff-745b36db2090",
+      "name": "Sensitivities",
+      "description": {
+        "content": "Greek and sensitivity calculations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ff938c6-22cf-4819-8e93-424d967e0e32",
+          "name": "Murex Get risk sensitivities",
+          "request": {
+            "name": "Murex Get risk sensitivities",
+            "description": {
+              "content": "Retrieve Greek calculations and risk sensitivities for portfolios including delta, gamma, vega, theta, and rho.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sensitivities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "greeks",
+                  "value": "<string>",
+                  "description": "Comma-separated list of Greeks to compute"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c852a735-3692-48a4-8109-4a6fb76c81e9",
+              "name": "Sensitivity calculations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "greeks",
+                      "value": "delta,gamma,vega,theta,rho"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"asOfDate\": \"2008-12-28\",\n  \"greeks\": {\n    \"delta\": 4805.504545516259,\n    \"gamma\": 8272.292471842195,\n    \"vega\": 666.8465876867169,\n    \"theta\": 3537.5777174356936,\n    \"rho\": 7466.05977878403\n  },\n  \"byAssetClass\": [\n    {\n      \"assetClass\": \"string\",\n      \"delta\": 5706.992378292227,\n      \"gamma\": 9654.414356955098,\n      \"vega\": 9967.441707626062\n    },\n    {\n      \"assetClass\": \"string\",\n      \"delta\": 6205.256539707441,\n      \"gamma\": 7124.433864025599,\n      \"vega\": 7425.90446839635\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d055cbe-407b-49d3-a169-8772cd7e80e2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "greeks",
+                      "value": "delta,gamma,vega,theta,rho"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "177d8d08-227f-42f3-a619-3607ea530499",
+          "name": "Murex Get PV01 sensitivities",
+          "request": {
+            "name": "Murex Get PV01 sensitivities",
+            "description": {
+              "content": "Retrieve PV01 (price value of a basis point) sensitivities by currency and tenor bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sensitivities",
+                "pv01"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9222348-4d4b-491d-9b45-6c5638c91cb1",
+              "name": "PV01 sensitivity results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities",
+                    "pv01"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"asOfDate\": \"1979-10-06\",\n  \"totalPV01\": 6038.692457507179,\n  \"byCurrency\": [\n    {\n      \"currency\": \"string\",\n      \"totalPV01\": 9195.95858271562,\n      \"tenorBuckets\": [\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 3677.8430310093513\n        },\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 741.497383883395\n        }\n      ]\n    },\n    {\n      \"currency\": \"string\",\n      \"totalPV01\": 4462.8876170930935,\n      \"tenorBuckets\": [\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 3893.1958272347733\n        },\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 6143.975425299406\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "697306d1-aba8-499d-a742-a037d06fb5cb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities",
+                    "pv01"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4a586dbb-53f5-4d8c-a532-9c3cb80df8d7",
+      "name": "Stress Testing",
+      "description": {
+        "content": "Stress testing and scenario analysis",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4b6c24d-2b17-41dd-b2dd-b597f1900b21",
+          "name": "Murex List stress test scenarios",
+          "request": {
+            "name": "Murex List stress test scenarios",
+            "description": {
+              "content": "Retrieve available stress test scenarios and their configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stress-tests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by scenario type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "994edb16-5775-4e26-a700-deb27b047304",
+              "name": "List of stress test scenarios",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"scenarioId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"Hypothetical\",\n      \"shocks\": [\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Absolute\",\n          \"shockValue\": 1424.8566974592848\n        },\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Relative\",\n          \"shockValue\": 320.18010413310316\n        }\n      ]\n    },\n    {\n      \"scenarioId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"Regulatory\",\n      \"shocks\": [\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Relative\",\n          \"shockValue\": 9563.658951484107\n        },\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Relative\",\n          \"shockValue\": 9222.270733081263\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaf835b2-ca23-4388-9a17-f01757d3b427",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfe96282-9858-482b-ad66-a41ef1b77188",
+          "name": "Murex Run a stress test",
+          "request": {
+            "name": "Murex Run a stress test",
+            "description": {
+              "content": "Execute a stress test scenario against specified portfolios and return the impact analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stress-tests",
+                ":scenarioId",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scenarioId",
+                  "description": "(Required) Stress test scenario identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7f47f6f7-5482-4608-992d-1aac1e32681c",
+              "name": "Stress test results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests",
+                    ":scenarioId",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) Stress test scenario identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scenarioId\": \"string\",\n  \"scenarioName\": \"string\",\n  \"asOfDate\": \"2010-08-11\",\n  \"totalImpact\": 155.71440399043013,\n  \"currency\": \"string\",\n  \"byPortfolio\": [\n    {\n      \"portfolioId\": \"string\",\n      \"impact\": 2355.5049210264033\n    },\n    {\n      \"portfolioId\": \"string\",\n      \"impact\": 7422.3665104055835\n    }\n  ],\n  \"byRiskFactor\": [\n    {\n      \"riskFactor\": \"string\",\n      \"impact\": 5609.153825536911\n    },\n    {\n      \"riskFactor\": \"string\",\n      \"impact\": 163.02446072322562\n    }\n  ],\n  \"calculatedAt\": \"2012-07-24T13:45:05.824Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c436d051-c2fa-46a7-83e2-9383a65229d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests",
+                    ":scenarioId",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) Stress test scenario identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da97bd6b-504d-4688-aadd-1822a2d78932",
+              "name": "Scenario not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests",
+                    ":scenarioId",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) Stress test scenario identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6d567b3d-21ba-443f-ae59-bafe11f0bab9",
+      "name": "VaR",
+      "description": {
+        "content": "Value at Risk calculations and reports",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d1c13bf-fc43-4092-980e-72012beb1183",
+          "name": "Murex Get VaR calculations",
+          "request": {
+            "name": "Murex Get VaR calculations",
+            "description": {
+              "content": "Retrieve Value at Risk calculations for specified portfolios, desks, or entity levels.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "var"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "VaR calculation methodology"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidenceLevel",
+                  "value": "99",
+                  "description": "Confidence level as a percentage"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingPeriod",
+                  "value": "1",
+                  "description": "Holding period in days"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3d25818-aba8-4f9d-9104-13776e43b58b",
+              "name": "VaR calculation results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidenceLevel",
+                      "value": "99"
+                    },
+                    {
+                      "key": "holdingPeriod",
+                      "value": "1"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"asOfDate\": \"1992-05-03\",\n  \"method\": \"string\",\n  \"confidenceLevel\": 3351.191956114168,\n  \"holdingPeriod\": 4365,\n  \"varAmount\": 1663.133478235471,\n  \"currency\": \"string\",\n  \"componentVaR\": [\n    {\n      \"category\": \"string\",\n      \"varAmount\": 9849.161599105677\n    },\n    {\n      \"category\": \"string\",\n      \"varAmount\": 5804.527283125498\n    }\n  ],\n  \"calculatedAt\": \"1981-05-13T13:20:38.657Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6552f8fd-9354-4c74-a659-bdb691955370",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidenceLevel",
+                      "value": "99"
+                    },
+                    {
+                      "key": "holdingPeriod",
+                      "value": "1"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f3de34b-d0b8-45fb-be26-d90b75c38f38",
+              "name": "Portfolio or desk not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidenceLevel",
+                      "value": "99"
+                    },
+                    {
+                      "key": "holdingPeriod",
+                      "value": "1"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f6cfaeb-6bb3-458a-9157-161a66a7654c",
+          "name": "Murex Get VaR history",
+          "request": {
+            "name": "Murex Get VaR history",
+            "description": {
+              "content": "Retrieve historical VaR values over a date range for trend analysis and backtesting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "var",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Start date for history"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) End date for history"
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "VaR calculation methodology"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a48464b-42e9-47d8-9488-864353751981",
+              "name": "Historical VaR values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"date\": \"1983-04-26\",\n      \"varAmount\": 570.6887106695035,\n      \"pnl\": 1024.9646769580156,\n      \"breach\": true\n    },\n    {\n      \"date\": \"2014-03-24\",\n      \"varAmount\": 782.5900403478636,\n      \"pnl\": 6456.403371991028,\n      \"breach\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3401b804-cb4b-4c18-9af4-ed1cd70ec772",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/risk",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd61319b-e37a-4cf8-be16-42a0f65efae0",
+    "name": "Murex MX.3 Risk API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Comprehensive risk management API providing real-time risk calculations, Value at Risk (VaR), stress testing, sensitivity analysis, and regulatory compliance metrics on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

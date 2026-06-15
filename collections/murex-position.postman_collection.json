@@ -1,0 +1,1429 @@
+{
+  "item": [
+    {
+      "id": "470eeb3a-3c1c-4ee7-9be8-4aecdfc6ecb8",
+      "name": "Accounting",
+      "description": {
+        "content": "Accounting entries and journal operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "af8b4b2a-a395-432b-b85f-fb03d71b8701",
+          "name": "Murex List accounting entries",
+          "request": {
+            "name": "Murex List accounting entries",
+            "description": {
+              "content": "Retrieve accounting journal entries generated from trade and position events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounting",
+                "entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventType",
+                  "value": "<string>",
+                  "description": "Filter by accounting event type"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23abf9c1-7767-48e8-b902-1eb790b907f2",
+              "name": "List of accounting entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"entryId\": \"string\",\n      \"tradeId\": \"string\",\n      \"portfolioId\": \"string\",\n      \"eventType\": \"TradeEntry\",\n      \"debitAccount\": \"string\",\n      \"creditAccount\": \"string\",\n      \"amount\": 4968.459975637217,\n      \"currency\": \"string\",\n      \"postingDate\": \"1988-07-02\",\n      \"valueDate\": \"1964-05-15\",\n      \"description\": \"string\"\n    },\n    {\n      \"entryId\": \"string\",\n      \"tradeId\": \"string\",\n      \"portfolioId\": \"string\",\n      \"eventType\": \"TradeEntry\",\n      \"debitAccount\": \"string\",\n      \"creditAccount\": \"string\",\n      \"amount\": 4280.783329238852,\n      \"currency\": \"string\",\n      \"postingDate\": \"2019-06-29\",\n      \"valueDate\": \"2011-05-13\",\n      \"description\": \"string\"\n    }\n  ],\n  \"totalCount\": 1782\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a42f26d-8d50-4eaf-a05f-121453d522b1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounting",
+                    "entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2fe5b64c-1af3-4b0f-9012-036bfaabf926",
+      "name": "Cash Flows",
+      "description": {
+        "content": "Cash flow projections and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "410ddff1-0e36-4ce8-8880-067bee3d0861",
+          "name": "Murex List cash flows",
+          "request": {
+            "name": "Murex List cash flows",
+            "description": {
+              "content": "Retrieve projected and historical cash flows across portfolios.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cashflows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date for cash flow period"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date for cash flow period"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Cash flow type filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adce7071-00ec-4f78-9fd8-d833f121a05a",
+              "name": "List of cash flows",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cashflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"cashFlowId\": \"string\",\n      \"tradeId\": \"string\",\n      \"portfolioId\": \"string\",\n      \"type\": \"Dividend\",\n      \"amount\": 633.5810688813636,\n      \"currency\": \"string\",\n      \"paymentDate\": \"1984-01-17\",\n      \"status\": \"Projected\",\n      \"direction\": \"Receive\"\n    },\n    {\n      \"cashFlowId\": \"string\",\n      \"tradeId\": \"string\",\n      \"portfolioId\": \"string\",\n      \"type\": \"Dividend\",\n      \"amount\": 2155.1330720132632,\n      \"currency\": \"string\",\n      \"paymentDate\": \"1990-02-13\",\n      \"status\": \"Projected\",\n      \"direction\": \"Receive\"\n    }\n  ],\n  \"totalCount\": 460\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac1d51fe-1153-4a40-b52b-b66aa5e4b9e6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cashflows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3bd0a80d-832d-485b-9614-1f0e6bd1e82e",
+      "name": "P&L",
+      "description": {
+        "content": "Profit and loss calculations and reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f5d8faa-3238-47cc-ac86-b93d85ac1609",
+          "name": "Murex Get P&L report",
+          "request": {
+            "name": "Murex Get P&L report",
+            "description": {
+              "content": "Retrieve profit and loss calculations including realized, unrealized, and total P&L with attribution by risk factor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pnl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date for P&L period"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date for P&L period"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Reporting currency"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7cb7a74f-71b8-4278-9186-1d90ec765f4b",
+              "name": "P&L report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pnl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"fromDate\": \"1955-12-15\",\n  \"toDate\": \"1950-05-29\",\n  \"currency\": \"string\",\n  \"realizedPnL\": 3814.422338390807,\n  \"unrealizedPnL\": 2303.014809003152,\n  \"totalPnL\": 8831.522700205385,\n  \"byAssetClass\": [\n    {\n      \"assetClass\": \"string\",\n      \"realizedPnL\": 9478.756556934652,\n      \"unrealizedPnL\": 5517.738465413801,\n      \"totalPnL\": 615.31964265374\n    },\n    {\n      \"assetClass\": \"string\",\n      \"realizedPnL\": 9638.487896900728,\n      \"unrealizedPnL\": 1696.0862330628622,\n      \"totalPnL\": 9232.923509020357\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac166104-f4af-4f77-9b4f-02f751811185",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pnl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdb6bc31-3f92-449e-a7b6-62f30168b564",
+          "name": "Murex Get P&L explanation",
+          "request": {
+            "name": "Murex Get P&L explanation",
+            "description": {
+              "content": "Retrieve P&L attribution and explanation decomposed by risk factors including market moves, theta, new deals, and amendments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pnl",
+                "explain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) P&L explanation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d636bfc1-d604-44fb-b74f-2c0220f7a652",
+              "name": "P&L explanation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pnl",
+                    "explain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"date\": \"1951-06-25\",\n  \"totalPnL\": 5835.115287452261,\n  \"currency\": \"string\",\n  \"attribution\": {\n    \"marketMoves\": 6668.214158720484,\n    \"theta\": 4500.130883435175,\n    \"newDeals\": 3977.387269916456,\n    \"amendments\": 2553.8938509690565,\n    \"cashflows\": 2816.914387017838,\n    \"fxTranslation\": 6820.88035784841,\n    \"unexplained\": 6682.292116661567\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86075a7b-d112-4550-a56b-d3c4d846b75f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pnl",
+                    "explain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ab1c7ea8-1e40-4052-8738-9d472be0b96d",
+      "name": "Positions",
+      "description": {
+        "content": "Portfolio position retrieval and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e395895d-2cd2-4058-8a65-3c885992f1ed",
+          "name": "Murex List positions",
+          "request": {
+            "name": "Murex List positions",
+            "description": {
+              "content": "Retrieve portfolio positions with optional filtering by portfolio, asset class, instrument, and date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "instrumentId",
+                  "value": "<string>",
+                  "description": "Filter by instrument identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Position date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8540bde5-00fb-4ee2-a66a-03691bd9e7f9",
+              "name": "List of positions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrumentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"positionId\": \"string\",\n      \"portfolioId\": \"string\",\n      \"portfolioName\": \"string\",\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"assetClass\": \"string\",\n      \"quantity\": 6594.92970898032,\n      \"marketValue\": 3809.28882426099,\n      \"averageCost\": 9784.719377469064,\n      \"unrealizedPnL\": 1760.828740954402,\n      \"realizedPnL\": 431.5849701822094,\n      \"currency\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"tradeDate\": \"1974-10-29\",\n      \"valueDate\": \"1967-05-30\",\n      \"maturityDate\": \"2004-08-21\",\n      \"asOfDate\": \"1993-03-29\"\n    },\n    {\n      \"positionId\": \"string\",\n      \"portfolioId\": \"string\",\n      \"portfolioName\": \"string\",\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"assetClass\": \"string\",\n      \"quantity\": 7752.8000152241875,\n      \"marketValue\": 9585.277409031705,\n      \"averageCost\": 4422.069203701352,\n      \"unrealizedPnL\": 4514.604386213737,\n      \"realizedPnL\": 6456.16975066983,\n      \"currency\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"tradeDate\": \"2010-01-14\",\n      \"valueDate\": \"1971-01-25\",\n      \"maturityDate\": \"2016-08-29\",\n      \"asOfDate\": \"2021-08-11\"\n    }\n  ],\n  \"totalCount\": 2690\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b29ab6c-f01a-4751-9b72-2576e3a7c985",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instrumentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7036ba6-825e-4235-a19d-f83cf8238107",
+          "name": "Murex Get a position",
+          "request": {
+            "name": "Murex Get a position",
+            "description": {
+              "content": "Retrieve details of a specific position.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions",
+                ":positionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "positionId",
+                  "description": "(Required) Position unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67896fdf-f09c-45ac-ab6a-4a048571595d",
+              "name": "Position details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":positionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "positionId",
+                      "description": "(Required) Position unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"positionId\": \"string\",\n  \"portfolioId\": \"string\",\n  \"portfolioName\": \"string\",\n  \"instrumentId\": \"string\",\n  \"instrumentName\": \"string\",\n  \"assetClass\": \"string\",\n  \"quantity\": 6727.485751406017,\n  \"marketValue\": 6264.635575657569,\n  \"averageCost\": 9131.91034384027,\n  \"unrealizedPnL\": 6598.827348063935,\n  \"realizedPnL\": 7515.782383863844,\n  \"currency\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"counterpartyName\": \"string\",\n  \"tradeDate\": \"1954-05-04\",\n  \"valueDate\": \"1981-03-25\",\n  \"maturityDate\": \"1983-07-22\",\n  \"asOfDate\": \"1975-12-09\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8d4b2c6-24f0-430f-bd61-6901c93b528e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":positionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "positionId",
+                      "description": "(Required) Position unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bbcbf40b-233b-439c-9dc1-445bbb4038fc",
+              "name": "Position not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":positionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "positionId",
+                      "description": "(Required) Position unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6841baca-519a-4364-9afb-ba48b3eb5690",
+          "name": "Murex Get position summary",
+          "request": {
+            "name": "Murex Get position summary",
+            "description": {
+              "content": "Retrieve aggregated position summary by portfolio, desk, asset class, or currency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupBy",
+                  "value": "<string>",
+                  "description": "Grouping dimension for aggregation"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Position date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f10ab1ef-0038-46db-9ed4-3a38c5f4e596",
+              "name": "Aggregated position summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asOfDate\": \"1953-02-08\",\n  \"totalMarketValue\": 8304.024332716288,\n  \"totalUnrealizedPnL\": 2651.8026303367337,\n  \"currency\": \"string\",\n  \"groups\": [\n    {\n      \"groupKey\": \"string\",\n      \"marketValue\": 6824.442847653321,\n      \"unrealizedPnL\": 1919.9473602569362,\n      \"positionCount\": 7581\n    },\n    {\n      \"groupKey\": \"string\",\n      \"marketValue\": 3310.890252422801,\n      \"unrealizedPnL\": 8823.865367874623,\n      \"positionCount\": 4\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5260d40b-c6d8-4e98-b9b9-7bc255c6445a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/position",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d4bd7ff7-03a2-4b28-95a9-117f156bd740",
+    "name": "Murex MX.3 Position API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for accessing portfolio positions, P&L calculations, and position management across all asset classes and trading desks on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}
