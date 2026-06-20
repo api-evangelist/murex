@@ -4,7 +4,7 @@ description: >-
   Murex is a global fintech leader in trading, treasury, risk management and post-trade operations software. Their MX.3
   platform provides comprehensive solutions for capital markets across asset classes.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://www.murex.com
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -21,7 +21,7 @@ apis:
     description: >-
       Comprehensive capital markets platform providing trading, risk management, and post-trade operations across all
       asset classes.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.murex.com/en/solutions/mx3-platform
     tags:
       - Capital Markets
