@@ -31,6 +31,10 @@ apis:
       - type: Documentation
         url: https://www.murex.com/en/solutions/mx3-platform
 common:
+  - type: DomainSecurity
+    url: security/murex-domain-security.yml
+  - type: Authentication
+    url: authentication/murex-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/murex
   - type: LinkedIn
@@ -45,6 +49,8 @@ common:
     url: https://www.murex.com/en/legal/privacy
   - type: Integrations
     url: https://www.murex.com/en/partners
+  - url: https://www.murex.com/en/news
+    type: Blog
 integrations:
   - name: Murex
   - name: Awards Murex 2024

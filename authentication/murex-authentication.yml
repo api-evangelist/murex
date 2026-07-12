@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/murex-market-data-openapi.yml, openapi/murex-position-openapi.yml, openapi/murex-post-trade-openapi.yml,
+  openapi/murex-risk-openapi.yml, openapi/murex-trading-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 bearer token for MX.3 API access
+  sources:
+  - openapi/murex-market-data-openapi.yml
+  - openapi/murex-position-openapi.yml
+  - openapi/murex-post-trade-openapi.yml
+  - openapi/murex-risk-openapi.yml
+  - openapi/murex-trading-openapi.yml
