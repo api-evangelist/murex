@@ -31,6 +31,8 @@ apis:
       - type: Documentation
         url: https://www.murex.com/en/solutions/mx3-platform
 common:
+  - type: AgenticAccess
+    url: agentic-access/murex-agentic-access.yml
   - type: DomainSecurity
     url: security/murex-domain-security.yml
   - type: Authentication
