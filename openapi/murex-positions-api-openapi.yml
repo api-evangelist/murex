@@ -1,0 +1,259 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Positions API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Positions
+  description: Portfolio position retrieval and management
+paths:
+  /positions:
+    get:
+      operationId: listPositions
+      summary: Murex List positions
+      description: Retrieve portfolio positions with optional filtering by portfolio, asset class, instrument, and date.
+      tags:
+      - Positions
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: assetClass
+        in: query
+        description: Filter by asset class
+        schema:
+          type: string
+          enum:
+          - FX
+          - IRD
+          - Equity
+          - Credit
+          - Commodity
+          - FixedIncome
+      - name: instrumentId
+        in: query
+        description: Filter by instrument identifier
+        schema:
+          type: string
+      - name: asOfDate
+        in: query
+        description: Position date
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of positions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Position'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /positions/{positionId}:
+    get:
+      operationId: getPosition
+      summary: Murex Get a position
+      description: Retrieve details of a specific position.
+      tags:
+      - Positions
+      parameters:
+      - name: positionId
+        in: path
+        required: true
+        description: Position unique identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Position details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Position not found
+  /positions/summary:
+    get:
+      operationId: getPositionSummary
+      summary: Murex Get position summary
+      description: Retrieve aggregated position summary by portfolio, desk, asset class, or currency.
+      tags:
+      - Positions
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: groupBy
+        in: query
+        description: Grouping dimension for aggregation
+        schema:
+          type: string
+          enum:
+          - assetClass
+          - currency
+          - portfolio
+          - desk
+          - counterparty
+      - name: asOfDate
+        in: query
+        description: Position date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Aggregated position summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PositionSummary'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Position:
+      type: object
+      properties:
+        positionId:
+          type: string
+          description: Unique position identifier
+        portfolioId:
+          type: string
+          description: Portfolio or book identifier
+        portfolioName:
+          type: string
+          description: Portfolio display name
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        assetClass:
+          type: string
+          description: Asset class
+        quantity:
+          type: number
+          description: Position quantity or notional
+        marketValue:
+          type: number
+          description: Current market value
+        averageCost:
+          type: number
+          description: Average cost basis
+        unrealizedPnL:
+          type: number
+          description: Unrealized profit or loss
+        realizedPnL:
+          type: number
+          description: Realized profit or loss
+        currency:
+          type: string
+          description: Position currency (ISO 4217)
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        counterpartyName:
+          type: string
+          description: Counterparty display name
+        tradeDate:
+          type: string
+          format: date
+          description: Original trade date
+        valueDate:
+          type: string
+          format: date
+          description: Value or settlement date
+        maturityDate:
+          type: string
+          format: date
+          description: Maturity date
+        asOfDate:
+          type: string
+          format: date
+          description: Position as-of date
+    PositionSummary:
+      type: object
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        totalMarketValue:
+          type: number
+          description: Total market value
+        totalUnrealizedPnL:
+          type: number
+          description: Total unrealized P&L
+        currency:
+          type: string
+          description: Reporting currency
+        groups:
+          type: array
+          items:
+            type: object
+            properties:
+              groupKey:
+                type: string
+                description: Grouping key value
+              marketValue:
+                type: number
+              unrealizedPnL:
+                type: number
+              positionCount:
+                type: integer
+  parameters:
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

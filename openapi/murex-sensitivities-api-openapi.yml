@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Sensitivities API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Sensitivities
+  description: Greek and sensitivity calculations
+paths:
+  /sensitivities:
+    get:
+      operationId: getSensitivities
+      summary: Murex Get risk sensitivities
+      description: Retrieve Greek calculations and risk sensitivities for portfolios including delta, gamma, vega, theta, and rho.
+      tags:
+      - Sensitivities
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: assetClass
+        in: query
+        description: Filter by asset class
+        schema:
+          type: string
+          enum:
+          - FX
+          - IRD
+          - Equity
+          - Credit
+          - Commodity
+          - FixedIncome
+      - name: greeks
+        in: query
+        description: Comma-separated list of Greeks to compute
+        schema:
+          type: string
+          example: delta,gamma,vega,theta,rho
+      - name: asOfDate
+        in: query
+        description: Calculation date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Sensitivity calculations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensitivityResult'
+        '401':
+          description: Unauthorized
+  /sensitivities/pv01:
+    get:
+      operationId: getPV01
+      summary: Murex Get PV01 sensitivities
+      description: Retrieve PV01 (price value of a basis point) sensitivities by currency and tenor bucket.
+      tags:
+      - Sensitivities
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: currency
+        in: query
+        description: Filter by currency
+        schema:
+          type: string
+      - name: asOfDate
+        in: query
+        description: Calculation date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: PV01 sensitivity results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PV01Result'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    PV01Result:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalPV01:
+          type: number
+          description: Total PV01 across all tenors
+        byCurrency:
+          type: array
+          items:
+            type: object
+            properties:
+              currency:
+                type: string
+              totalPV01:
+                type: number
+              tenorBuckets:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tenor:
+                      type: string
+                      description: Tenor bucket (e.g., 1M, 3M, 1Y, 5Y, 10Y)
+                    pv01:
+                      type: number
+    SensitivityResult:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        greeks:
+          type: object
+          properties:
+            delta:
+              type: number
+              description: First-order price sensitivity
+            gamma:
+              type: number
+              description: Second-order price sensitivity
+            vega:
+              type: number
+              description: Sensitivity to volatility
+            theta:
+              type: number
+              description: Time decay
+            rho:
+              type: number
+              description: Sensitivity to interest rates
+        byAssetClass:
+          type: array
+          items:
+            type: object
+            properties:
+              assetClass:
+                type: string
+              delta:
+                type: number
+              gamma:
+                type: number
+              vega:
+                type: number
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

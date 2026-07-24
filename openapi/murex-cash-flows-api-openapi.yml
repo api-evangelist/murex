@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Cash Flows API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Cash Flows
+  description: Cash flow projections and management
+paths:
+  /cashflows:
+    get:
+      operationId: listCashFlows
+      summary: Murex List cash flows
+      description: Retrieve projected and historical cash flows across portfolios.
+      tags:
+      - Cash Flows
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - name: fromDate
+        in: query
+        description: Start date for cash flow period
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        description: End date for cash flow period
+        schema:
+          type: string
+          format: date
+      - name: currency
+        in: query
+        description: Filter by currency
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Cash flow type filter
+        schema:
+          type: string
+          enum:
+          - Projected
+          - Settled
+          - All
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of cash flows
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CashFlow'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    CashFlow:
+      type: object
+      properties:
+        cashFlowId:
+          type: string
+          description: Cash flow identifier
+        tradeId:
+          type: string
+          description: Associated trade identifier
+        portfolioId:
+          type: string
+          description: Portfolio identifier
+        type:
+          type: string
+          enum:
+          - Coupon
+          - Principal
+          - Premium
+          - Fee
+          - Dividend
+          - FXSettlement
+          - Margin
+          description: Cash flow type
+        amount:
+          type: number
+          description: Cash flow amount
+        currency:
+          type: string
+          description: Cash flow currency (ISO 4217)
+        paymentDate:
+          type: string
+          format: date
+          description: Payment or settlement date
+        status:
+          type: string
+          enum:
+          - Projected
+          - Confirmed
+          - Settled
+          - Failed
+          description: Cash flow status
+        direction:
+          type: string
+          enum:
+          - Pay
+          - Receive
+          description: Cash flow direction
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

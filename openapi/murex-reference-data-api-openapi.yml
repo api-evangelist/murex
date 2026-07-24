@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Reference Data API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Reference Data
+  description: Market reference and static data
+paths:
+  /reference/calendars:
+    get:
+      operationId: listCalendars
+      summary: Murex List market calendars
+      description: Retrieve available market and business day calendars.
+      tags:
+      - Reference Data
+      parameters:
+      - name: country
+        in: query
+        description: Filter by country code
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of calendars
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Calendar'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /reference/currencies:
+    get:
+      operationId: listCurrencies
+      summary: Murex List currencies
+      description: Retrieve supported currencies and their configurations.
+      tags:
+      - Reference Data
+      responses:
+        '200':
+          description: List of currencies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Currency'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO 4217 currency code
+        name:
+          type: string
+          description: Currency name
+        decimalPlaces:
+          type: integer
+          description: Number of decimal places
+        dayCountConvention:
+          type: string
+          description: Default day count convention
+        spotLag:
+          type: integer
+          description: Spot settlement lag in business days
+        calendar:
+          type: string
+          description: Associated business day calendar
+    Calendar:
+      type: object
+      properties:
+        calendarId:
+          type: string
+          description: Calendar identifier
+        name:
+          type: string
+          description: Calendar name
+        country:
+          type: string
+          description: Country code
+        description:
+          type: string
+          description: Calendar description
+        holidays:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              name:
+                type: string
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

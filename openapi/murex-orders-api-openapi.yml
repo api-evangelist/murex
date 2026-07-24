@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Orders API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Orders
+  description: Order creation, modification, and lifecycle management
+paths:
+  /orders:
+    get:
+      operationId: listOrders
+      summary: Murex List orders
+      description: Retrieve a list of orders with optional filtering by status, asset class, portfolio, and date range.
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/assetClass'
+      - $ref: '#/components/parameters/portfolio'
+      - name: status
+        in: query
+        description: Filter by order status
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Submitted
+          - PartiallyFilled
+          - Filled
+          - Cancelled
+          - Rejected
+      - name: fromDate
+        in: query
+        description: Start date for order search
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        description: End date for order search
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  totalCount:
+                    type: integer
+                    description: Total number of matching orders
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createOrder
+      summary: Murex Create an order
+      description: Submit a new order for execution across any supported asset class.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid order request
+        '401':
+          description: Unauthorized
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Murex Get an order
+      description: Retrieve details of a specific order by ID.
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/orderId'
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+    put:
+      operationId: updateOrder
+      summary: Murex Update an order
+      description: Modify an existing order. Only orders in Pending or Submitted status can be modified.
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/orderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid update request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+  /orders/{orderId}/cancel:
+    post:
+      operationId: cancelOrder
+      summary: Murex Cancel an order
+      description: Cancel a pending or submitted order.
+      tags:
+      - Orders
+      parameters:
+      - $ref: '#/components/parameters/orderId'
+      responses:
+        '200':
+          description: Order cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Order cannot be cancelled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Order not found
+components:
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+      - side
+      - instrumentId
+      - quantity
+      - portfolioId
+      - orderType
+      properties:
+        side:
+          type: string
+          enum:
+          - Buy
+          - Sell
+        instrumentId:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        currency:
+          type: string
+        portfolioId:
+          type: string
+        counterpartyId:
+          type: string
+        orderType:
+          type: string
+          enum:
+          - Market
+          - Limit
+          - Stop
+        timeInForce:
+          type: string
+          enum:
+          - GTC
+          - DAY
+          - IOC
+          - FOK
+          default: DAY
+    UpdateOrderRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+        price:
+          type: number
+        timeInForce:
+          type: string
+          enum:
+          - GTC
+          - DAY
+          - IOC
+          - FOK
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier
+        status:
+          type: string
+          enum:
+          - Pending
+          - Submitted
+          - PartiallyFilled
+          - Filled
+          - Cancelled
+          - Rejected
+          description: Current order status
+        side:
+          type: string
+          enum:
+          - Buy
+          - Sell
+          description: Order side
+        assetClass:
+          type: string
+          description: Asset class of the instrument
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        quantity:
+          type: number
+          description: Order quantity or notional amount
+        price:
+          type: number
+          description: Order price or rate
+        currency:
+          type: string
+          description: Order currency (ISO 4217)
+        portfolioId:
+          type: string
+          description: Target portfolio or book
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        orderType:
+          type: string
+          enum:
+          - Market
+          - Limit
+          - Stop
+          description: Order type
+        timeInForce:
+          type: string
+          enum:
+          - GTC
+          - DAY
+          - IOC
+          - FOK
+          description: Time in force instruction
+        filledQuantity:
+          type: number
+          description: Quantity filled so far
+        averagePrice:
+          type: number
+          description: Average fill price
+        createdAt:
+          type: string
+          format: date-time
+          description: Order creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+  parameters:
+    portfolio:
+      name: portfolio
+      in: query
+      description: Filter by portfolio or book name
+      schema:
+        type: string
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      description: Order unique identifier
+      schema:
+        type: string
+    assetClass:
+      name: assetClass
+      in: query
+      description: Filter by asset class
+      schema:
+        type: string
+        enum:
+        - FX
+        - IRD
+        - Equity
+        - Credit
+        - Commodity
+        - FixedIncome
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

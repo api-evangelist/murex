@@ -1,0 +1,176 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting P&L API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: P&L
+  description: Profit and loss calculations and reporting
+paths:
+  /pnl:
+    get:
+      operationId: getPnL
+      summary: Murex Get P&L report
+      description: Retrieve profit and loss calculations including realized, unrealized, and total P&L with attribution by risk factor.
+      tags:
+      - P&L
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: fromDate
+        in: query
+        description: Start date for P&L period
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        description: End date for P&L period
+        schema:
+          type: string
+          format: date
+      - name: currency
+        in: query
+        description: Reporting currency
+        schema:
+          type: string
+      responses:
+        '200':
+          description: P&L report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PnLReport'
+        '401':
+          description: Unauthorized
+  /pnl/explain:
+    get:
+      operationId: getPnLExplain
+      summary: Murex Get P&L explanation
+      description: Retrieve P&L attribution and explanation decomposed by risk factors including market moves, theta, new deals, and amendments.
+      tags:
+      - P&L
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - name: date
+        in: query
+        required: true
+        description: P&L explanation date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: P&L explanation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PnLExplain'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    PnLExplain:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        date:
+          type: string
+          format: date
+        totalPnL:
+          type: number
+          description: Total P&L for the day
+        currency:
+          type: string
+        attribution:
+          type: object
+          properties:
+            marketMoves:
+              type: number
+              description: P&L from market movements
+            theta:
+              type: number
+              description: P&L from time decay
+            newDeals:
+              type: number
+              description: P&L from new deal entries
+            amendments:
+              type: number
+              description: P&L from trade amendments
+            cashflows:
+              type: number
+              description: P&L from settled cash flows
+            fxTranslation:
+              type: number
+              description: P&L from FX translation effects
+            unexplained:
+              type: number
+              description: Unexplained residual P&L
+    PnLReport:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+        currency:
+          type: string
+          description: Reporting currency
+        realizedPnL:
+          type: number
+          description: Total realized P&L
+        unrealizedPnL:
+          type: number
+          description: Total unrealized P&L
+        totalPnL:
+          type: number
+          description: Total P&L (realized + unrealized)
+        byAssetClass:
+          type: array
+          items:
+            type: object
+            properties:
+              assetClass:
+                type: string
+              realizedPnL:
+                type: number
+              unrealizedPnL:
+                type: number
+              totalPnL:
+                type: number
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

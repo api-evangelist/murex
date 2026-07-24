@@ -1,0 +1,174 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Stress Testing API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Stress Testing
+  description: Stress testing and scenario analysis
+paths:
+  /stress-tests:
+    get:
+      operationId: listStressTests
+      summary: Murex List stress test scenarios
+      description: Retrieve available stress test scenarios and their configurations.
+      tags:
+      - Stress Testing
+      parameters:
+      - name: type
+        in: query
+        description: Filter by scenario type
+        schema:
+          type: string
+          enum:
+          - Historical
+          - Hypothetical
+          - Regulatory
+      responses:
+        '200':
+          description: List of stress test scenarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StressTestScenario'
+        '401':
+          description: Unauthorized
+  /stress-tests/{scenarioId}/run:
+    post:
+      operationId: runStressTest
+      summary: Murex Run a stress test
+      description: Execute a stress test scenario against specified portfolios and return the impact analysis.
+      tags:
+      - Stress Testing
+      parameters:
+      - name: scenarioId
+        in: path
+        required: true
+        description: Stress test scenario identifier
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StressTestRequest'
+      responses:
+        '200':
+          description: Stress test results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StressTestResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Scenario not found
+components:
+  schemas:
+    StressTestResult:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+        scenarioName:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalImpact:
+          type: number
+          description: Total P&L impact in base currency
+        currency:
+          type: string
+        byPortfolio:
+          type: array
+          items:
+            type: object
+            properties:
+              portfolioId:
+                type: string
+              impact:
+                type: number
+        byRiskFactor:
+          type: array
+          items:
+            type: object
+            properties:
+              riskFactor:
+                type: string
+              impact:
+                type: number
+        calculatedAt:
+          type: string
+          format: date-time
+    StressTestScenario:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+          description: Unique scenario identifier
+        name:
+          type: string
+          description: Scenario name
+        description:
+          type: string
+          description: Scenario description
+        type:
+          type: string
+          enum:
+          - Historical
+          - Hypothetical
+          - Regulatory
+          description: Scenario type
+        shocks:
+          type: array
+          description: Market factor shocks in the scenario
+          items:
+            type: object
+            properties:
+              riskFactor:
+                type: string
+              shockType:
+                type: string
+                enum:
+                - Absolute
+                - Relative
+              shockValue:
+                type: number
+    StressTestRequest:
+      type: object
+      required:
+      - portfolioIds
+      properties:
+        portfolioIds:
+          type: array
+          items:
+            type: string
+          description: Portfolios to stress test
+        asOfDate:
+          type: string
+          format: date
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

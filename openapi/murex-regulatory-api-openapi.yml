@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Regulatory API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Regulatory
+  description: Regulatory capital and compliance metrics
+paths:
+  /regulatory/capital:
+    get:
+      operationId: getRegulatoryCapital
+      summary: Murex Get regulatory capital metrics
+      description: Retrieve regulatory capital calculations including RWA, CVA, and capital ratios for Basel III/IV compliance.
+      tags:
+      - Regulatory
+      parameters:
+      - name: framework
+        in: query
+        description: Regulatory framework
+        schema:
+          type: string
+          enum:
+          - BaselIII
+          - BaselIV
+          - FRTB
+      - name: asOfDate
+        in: query
+        description: Calculation date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Regulatory capital metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegulatoryCapital'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    RegulatoryCapital:
+      type: object
+      properties:
+        framework:
+          type: string
+          description: Regulatory framework
+        asOfDate:
+          type: string
+          format: date
+        riskWeightedAssets:
+          type: number
+          description: Total risk-weighted assets
+        creditRWA:
+          type: number
+          description: Credit risk-weighted assets
+        marketRWA:
+          type: number
+          description: Market risk-weighted assets
+        operationalRWA:
+          type: number
+          description: Operational risk-weighted assets
+        cvaCharge:
+          type: number
+          description: Credit Valuation Adjustment capital charge
+        tier1Capital:
+          type: number
+          description: Tier 1 capital
+        totalCapital:
+          type: number
+          description: Total capital
+        capitalRatio:
+          type: number
+          description: Capital adequacy ratio
+        currency:
+          type: string
+          description: Reporting currency
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

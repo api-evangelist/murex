@@ -1,0 +1,197 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Trades API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Trades
+  description: Trade execution and trade blotter operations
+paths:
+  /trades:
+    get:
+      operationId: listTrades
+      summary: Murex List trades
+      description: Retrieve trade blotter entries with optional filtering by asset class, portfolio, counterparty, and date range.
+      tags:
+      - Trades
+      parameters:
+      - $ref: '#/components/parameters/assetClass'
+      - $ref: '#/components/parameters/portfolio'
+      - name: counterpartyId
+        in: query
+        description: Filter by counterparty identifier
+        schema:
+          type: string
+      - name: tradeDate
+        in: query
+        description: Filter by trade date
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: List of trades
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trade'
+                  totalCount:
+                    type: integer
+        '401':
+          description: Unauthorized
+  /trades/{tradeId}:
+    get:
+      operationId: getTrade
+      summary: Murex Get a trade
+      description: Retrieve details of a specific trade by ID.
+      tags:
+      - Trades
+      parameters:
+      - $ref: '#/components/parameters/tradeId'
+      responses:
+        '200':
+          description: Trade details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trade'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Trade not found
+components:
+  parameters:
+    portfolio:
+      name: portfolio
+      in: query
+      description: Filter by portfolio or book name
+      schema:
+        type: string
+    tradeId:
+      name: tradeId
+      in: path
+      required: true
+      description: Trade unique identifier
+      schema:
+        type: string
+    assetClass:
+      name: assetClass
+      in: query
+      description: Filter by asset class
+      schema:
+        type: string
+        enum:
+        - FX
+        - IRD
+        - Equity
+        - Credit
+        - Commodity
+        - FixedIncome
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+  schemas:
+    Trade:
+      type: object
+      properties:
+        tradeId:
+          type: string
+          description: Unique trade identifier
+        orderId:
+          type: string
+          description: Associated order identifier
+        status:
+          type: string
+          enum:
+          - Active
+          - Amended
+          - Cancelled
+          - Matured
+          - Terminated
+          description: Trade lifecycle status
+        side:
+          type: string
+          enum:
+          - Buy
+          - Sell
+          description: Trade side
+        assetClass:
+          type: string
+          description: Asset class of the traded instrument
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        quantity:
+          type: number
+          description: Trade quantity or notional amount
+        price:
+          type: number
+          description: Execution price or rate
+        currency:
+          type: string
+          description: Trade currency (ISO 4217)
+        portfolioId:
+          type: string
+          description: Portfolio or book
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        counterpartyName:
+          type: string
+          description: Counterparty display name
+        tradeDate:
+          type: string
+          format: date
+          description: Trade execution date
+        valueDate:
+          type: string
+          format: date
+          description: Settlement or value date
+        maturityDate:
+          type: string
+          format: date
+          description: Maturity date for term instruments
+        createdAt:
+          type: string
+          format: date-time
+          description: Trade creation timestamp
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

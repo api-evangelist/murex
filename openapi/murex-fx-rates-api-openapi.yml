@@ -1,0 +1,154 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting FX Rates API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: FX Rates
+  description: Foreign exchange rates and crosses
+paths:
+  /fx/rates:
+    get:
+      operationId: getFxRates
+      summary: Murex Get FX rates
+      description: Retrieve foreign exchange spot and forward rates.
+      tags:
+      - FX Rates
+      parameters:
+      - name: currencyPairs
+        in: query
+        required: true
+        description: Comma-separated currency pairs (e.g., EURUSD,GBPUSD)
+        schema:
+          type: string
+      - name: rateType
+        in: query
+        description: Rate type
+        schema:
+          type: string
+          enum:
+          - Spot
+          - Forward
+          default: Spot
+      - name: tenor
+        in: query
+        description: Forward tenor (required when rateType is Forward)
+        schema:
+          type: string
+          example: 1M
+      responses:
+        '200':
+          description: FX rates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FxRate'
+        '401':
+          description: Unauthorized
+  /fx/rates/history:
+    get:
+      operationId: getFxRateHistory
+      summary: Murex Get FX rate history
+      description: Retrieve historical FX rates for a currency pair over a date range.
+      tags:
+      - FX Rates
+      parameters:
+      - name: currencyPair
+        in: query
+        required: true
+        description: Currency pair (e.g., EURUSD)
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Historical FX rates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  currencyPair:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        rate:
+                          type: number
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    FxRate:
+      type: object
+      properties:
+        currencyPair:
+          type: string
+          description: Currency pair (e.g., EURUSD)
+        baseCurrency:
+          type: string
+          description: Base currency
+        quoteCurrency:
+          type: string
+          description: Quote currency
+        bid:
+          type: number
+          description: Bid rate
+        ask:
+          type: number
+          description: Ask rate
+        mid:
+          type: number
+          description: Mid rate
+        rateType:
+          type: string
+          enum:
+          - Spot
+          - Forward
+          description: Rate type
+        tenor:
+          type: string
+          description: Forward tenor if applicable
+        timestamp:
+          type: string
+          format: date-time
+          description: Rate timestamp
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

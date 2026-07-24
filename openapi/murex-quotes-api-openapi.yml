@@ -1,0 +1,176 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting Quotes API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: Quotes
+  description: Real-time and historical price quotes
+paths:
+  /quotes:
+    get:
+      operationId: getQuotes
+      summary: Murex Get market quotes
+      description: Retrieve real-time or delayed market quotes for specified instruments.
+      tags:
+      - Quotes
+      parameters:
+      - name: instrumentIds
+        in: query
+        required: true
+        description: Comma-separated list of instrument identifiers
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: Comma-separated list of quote fields to return
+        schema:
+          type: string
+          example: bid,ask,mid,last,volume
+      responses:
+        '200':
+          description: Market quotes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quote'
+        '401':
+          description: Unauthorized
+  /quotes/history:
+    get:
+      operationId: getQuoteHistory
+      summary: Murex Get historical quotes
+      description: Retrieve historical price data for a specified instrument and date range.
+      tags:
+      - Quotes
+      parameters:
+      - name: instrumentId
+        in: query
+        required: true
+        description: Instrument identifier
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: true
+        description: Start date
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        description: End date
+        schema:
+          type: string
+          format: date
+      - name: frequency
+        in: query
+        description: Data frequency
+        schema:
+          type: string
+          enum:
+          - Daily
+          - Weekly
+          - Monthly
+          default: Daily
+      responses:
+        '200':
+          description: Historical quote data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instrumentId:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HistoricalQuote'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    HistoricalQuote:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        open:
+          type: number
+        high:
+          type: number
+        low:
+          type: number
+        close:
+          type: number
+        volume:
+          type: number
+    Quote:
+      type: object
+      properties:
+        instrumentId:
+          type: string
+          description: Instrument identifier
+        instrumentName:
+          type: string
+          description: Instrument display name
+        bid:
+          type: number
+          description: Bid price
+        ask:
+          type: number
+          description: Ask price
+        mid:
+          type: number
+          description: Mid price
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        high:
+          type: number
+          description: Day high
+        low:
+          type: number
+          description: Day low
+        open:
+          type: number
+          description: Day open
+        close:
+          type: number
+          description: Previous close
+        currency:
+          type: string
+          description: Quote currency
+        timestamp:
+          type: string
+          format: date-time
+          description: Quote timestamp
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api

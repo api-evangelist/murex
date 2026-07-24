@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: Murex MX.3 Market Data Accounting VaR API
+  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  version: '1.0'
+  contact:
+    name: Murex Support
+    url: https://www.murex.com/en/support
+  termsOfService: https://www.murex.com/en/legal/terms
+servers:
+- url: https://api.murex.com/v1/marketdata
+  description: Murex MX.3 Market Data API
+security:
+- bearerAuth: []
+tags:
+- name: VaR
+  description: Value at Risk calculations and reports
+paths:
+  /var:
+    get:
+      operationId: getVaR
+      summary: Murex Get VaR calculations
+      description: Retrieve Value at Risk calculations for specified portfolios, desks, or entity levels.
+      tags:
+      - VaR
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: method
+        in: query
+        description: VaR calculation methodology
+        schema:
+          type: string
+          enum:
+          - Historical
+          - MonteCarlo
+          - Parametric
+      - name: confidenceLevel
+        in: query
+        description: Confidence level as a percentage
+        schema:
+          type: number
+          default: 99
+      - name: holdingPeriod
+        in: query
+        description: Holding period in days
+        schema:
+          type: integer
+          default: 1
+      - name: asOfDate
+        in: query
+        description: Calculation date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: VaR calculation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VaRResult'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Portfolio or desk not found
+  /var/history:
+    get:
+      operationId: getVaRHistory
+      summary: Murex Get VaR history
+      description: Retrieve historical VaR values over a date range for trend analysis and backtesting.
+      tags:
+      - VaR
+      parameters:
+      - $ref: '#/components/parameters/portfolioId'
+      - $ref: '#/components/parameters/deskId'
+      - name: fromDate
+        in: query
+        required: true
+        description: Start date for history
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        required: true
+        description: End date for history
+        schema:
+          type: string
+          format: date
+      - name: method
+        in: query
+        description: VaR calculation methodology
+        schema:
+          type: string
+          enum:
+          - Historical
+          - MonteCarlo
+          - Parametric
+      responses:
+        '200':
+          description: Historical VaR values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VaRHistoryEntry'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    VaRHistoryEntry:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        varAmount:
+          type: number
+        pnl:
+          type: number
+          description: Actual P&L for the day
+        breach:
+          type: boolean
+          description: Whether VaR was breached
+    VaRResult:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+          description: Portfolio identifier
+        asOfDate:
+          type: string
+          format: date
+          description: Calculation date
+        method:
+          type: string
+          description: VaR methodology used
+        confidenceLevel:
+          type: number
+          description: Confidence level percentage
+        holdingPeriod:
+          type: integer
+          description: Holding period in days
+        varAmount:
+          type: number
+          description: VaR amount in base currency
+        currency:
+          type: string
+          description: Base currency for the VaR calculation
+        componentVaR:
+          type: array
+          description: VaR decomposition by risk factor or asset class
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              varAmount:
+                type: number
+        calculatedAt:
+          type: string
+          format: date-time
+          description: Calculation timestamp
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for MX.3 API access
+externalDocs:
+  description: Murex MX.3 Market Data API Documentation
+  url: https://docs.murex.com/mx3/marketdata-api
