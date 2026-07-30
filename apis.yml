@@ -4,7 +4,20 @@ description: >-
   Murex is a global fintech leader in trading, treasury, risk management and post-trade operations software. Their MX.3
   platform provides comprehensive solutions for capital markets across asset classes.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/murex.png
 url: https://www.murex.com
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -17,19 +30,226 @@ tags:
   - Risk Management
   - Trading
 apis:
-  - name: Murex MX.3 Platform
-    description: >-
-      Comprehensive capital markets platform providing trading, risk management, and post-trade operations across all
-      asset classes.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.murex.com/en/solutions/mx3-platform
-    tags:
-      - Capital Markets
-      - Risk Management
-      - Trading
-    properties:
-      - type: Documentation
-        url: https://www.murex.com/en/solutions/mx3-platform
+- name: Murex MX.3 Platform
+  description: >-
+    Comprehensive capital markets platform providing trading, risk management, and post-trade operations
+    across all asset classes.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Capital Markets
+  - Risk Management
+  - Trading
+  properties:
+  - type: Documentation
+    url: https://www.murex.com/en/solutions/mx3-platform
+- aid: murex:murex-accounting-api
+  name: Murex Accounting API
+  description: Accounting entries and journal operations
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Accounting
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-accounting-api-openapi.yml
+- aid: murex:murex-cash-flows-api
+  name: Murex Cash Flows API
+  description: Cash flow projections and management
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Cash Flows
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-cash-flows-api-openapi.yml
+- aid: murex:murex-collateral-api
+  name: Murex Collateral API
+  description: Collateral management and margin operations
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Collateral
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-collateral-api-openapi.yml
+- aid: murex:murex-confirmations-api
+  name: Murex Confirmations API
+  description: Trade confirmation generation and matching
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Confirmations
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-confirmations-api-openapi.yml
+- aid: murex:murex-curves-api
+  name: Murex Curves API
+  description: Yield curves and forward curves
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Curves
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-curves-api-openapi.yml
+- aid: murex:murex-fx-rates-api
+  name: Murex FX Rates API
+  description: Foreign exchange rates and crosses
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - FX Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-fx-rates-api-openapi.yml
+- aid: murex:murex-instruments-api
+  name: Murex Instruments API
+  description: Financial instrument reference data
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Instruments
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-instruments-api-openapi.yml
+- aid: murex:murex-limits-api
+  name: Murex Limits API
+  description: Risk limit monitoring and management
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Limits
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-limits-api-openapi.yml
+- aid: murex:murex-orders-api
+  name: Murex Orders API
+  description: Order creation, modification, and lifecycle management
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-orders-api-openapi.yml
+- aid: murex:murex-p-l-api
+  name: Murex P&L API
+  description: Profit and loss calculations and reporting
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - P&L
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-p-l-api-openapi.yml
+- aid: murex:murex-portfolios-api
+  name: Murex Portfolios API
+  description: Trading portfolio and book management
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Portfolios
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-portfolios-api-openapi.yml
+- aid: murex:murex-positions-api
+  name: Murex Positions API
+  description: Portfolio position retrieval and management
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-positions-api-openapi.yml
+- aid: murex:murex-quotes-api
+  name: Murex Quotes API
+  description: Real-time and historical price quotes
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-quotes-api-openapi.yml
+- aid: murex:murex-reconciliations-api
+  name: Murex Reconciliations API
+  description: Position and cash reconciliation operations
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Reconciliations
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-reconciliations-api-openapi.yml
+- aid: murex:murex-reference-data-api
+  name: Murex Reference Data API
+  description: Market reference and static data
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-reference-data-api-openapi.yml
+- aid: murex:murex-regulatory-api
+  name: Murex Regulatory API
+  description: Regulatory capital and compliance metrics
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Regulatory
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-regulatory-api-openapi.yml
+- aid: murex:murex-regulatory-reporting-api
+  name: Murex Regulatory Reporting API
+  description: Regulatory trade and transaction reporting
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Regulatory Reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-regulatory-reporting-api-openapi.yml
+- aid: murex:murex-sensitivities-api
+  name: Murex Sensitivities API
+  description: Greek and sensitivity calculations
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Sensitivities
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-sensitivities-api-openapi.yml
+- aid: murex:murex-settlements-api
+  name: Murex Settlements API
+  description: Settlement instruction management and processing
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Settlements
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-settlements-api-openapi.yml
+- aid: murex:murex-stress-testing-api
+  name: Murex Stress Testing API
+  description: Stress testing and scenario analysis
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Stress Testing
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-stress-testing-api-openapi.yml
+- aid: murex:murex-trades-api
+  name: Murex Trades API
+  description: Trade execution and trade blotter operations
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Trades
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-trades-api-openapi.yml
+- aid: murex:murex-var-api
+  name: Murex VaR API
+  description: Value at Risk calculations and reports
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - VaR
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-var-api-openapi.yml
+- aid: murex:murex-volatility-api
+  name: Murex Volatility API
+  description: Volatility surfaces and skew data
+  humanURL: https://www.murex.com/en/solutions/mx3-platform
+  tags:
+  - Volatility
+  properties:
+  - type: OpenAPI
+    url: openapi/murex-volatility-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/murex-agentic-access.yml
