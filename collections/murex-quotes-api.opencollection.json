@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Quotes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get market quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/quotes",
+            "params": [
+              {
+                "name": "instrumentIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of instrument identifiers"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of quote fields to return"
+              }
+            ]
+          },
+          "docs": "Retrieve real-time or delayed market quotes for specified instruments."
+        },
+        {
+          "info": {
+            "name": "Murex Get historical quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/quotes/history",
+            "params": [
+              {
+                "name": "instrumentId",
+                "value": "",
+                "type": "query",
+                "description": "Instrument identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency"
+              }
+            ]
+          },
+          "docs": "Retrieve historical price data for a specified instrument and date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

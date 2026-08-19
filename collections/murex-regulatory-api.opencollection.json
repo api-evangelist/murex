@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Regulatory API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regulatory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get regulatory capital metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/regulatory/capital",
+            "params": [
+              {
+                "name": "framework",
+                "value": "",
+                "type": "query",
+                "description": "Regulatory framework"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve regulatory capital calculations including RWA, CVA, and capital ratios for Basel III/IV compliance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

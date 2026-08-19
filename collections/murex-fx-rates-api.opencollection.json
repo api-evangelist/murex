@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting FX Rates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FX Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get FX rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/fx/rates",
+            "params": [
+              {
+                "name": "currencyPairs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated currency pairs (e.g., EURUSD,GBPUSD)"
+              },
+              {
+                "name": "rateType",
+                "value": "",
+                "type": "query",
+                "description": "Rate type"
+              },
+              {
+                "name": "tenor",
+                "value": "",
+                "type": "query",
+                "description": "Forward tenor (required when rateType is Forward)"
+              }
+            ]
+          },
+          "docs": "Retrieve foreign exchange spot and forward rates."
+        },
+        {
+          "info": {
+            "name": "Murex Get FX rate history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/fx/rates/history",
+            "params": [
+              {
+                "name": "currencyPair",
+                "value": "",
+                "type": "query",
+                "description": "Currency pair (e.g., EURUSD)"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve historical FX rates for a currency pair over a date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

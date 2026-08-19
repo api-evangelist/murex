@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting P&L API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "P&L",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get P&L report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/pnl",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for P&L period"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for P&L period"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Reporting currency"
+              }
+            ]
+          },
+          "docs": "Retrieve profit and loss calculations including realized, unrealized, and total P&L with attribution by risk factor."
+        },
+        {
+          "info": {
+            "name": "Murex Get P&L explanation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/pnl/explain",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "P&L explanation date"
+              }
+            ]
+          },
+          "docs": "Retrieve P&L attribution and explanation decomposed by risk factors including market moves, theta, new deals, and amendments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

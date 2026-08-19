@@ -1,0 +1,368 @@
+{
+  "item": [
+    {
+      "id": "5c25ed53-aab5-4bae-ac62-9b2673beb8b3",
+      "name": "Quotes",
+      "description": {
+        "content": "Real-time and historical price quotes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "19b81bdf-2a22-4801-ba01-fbb6613a1c0e",
+          "name": "Murex Get market quotes",
+          "request": {
+            "name": "Murex Get market quotes",
+            "description": {
+              "content": "Retrieve real-time or delayed market quotes for specified instruments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrumentIds",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of instrument identifiers"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of quote fields to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "462ab3c3-0ae0-4cbd-a29b-6594b163c272",
+              "name": "Market quotes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "bid,ask,mid,last,volume"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"bid\": 3096.15802122816,\n      \"ask\": 8965.128807175664,\n      \"mid\": 7034.66516343244,\n      \"last\": 529.910081193623,\n      \"volume\": 4946.433619366636,\n      \"high\": 633.9709830447138,\n      \"low\": 7654.0278250730435,\n      \"open\": 3226.5344953402373,\n      \"close\": 9691.58113711615,\n      \"currency\": \"string\",\n      \"timestamp\": \"1983-10-17T11:47:32.317Z\"\n    },\n    {\n      \"instrumentId\": \"string\",\n      \"instrumentName\": \"string\",\n      \"bid\": 5620.690814206063,\n      \"ask\": 2549.98627522905,\n      \"mid\": 2303.657837168651,\n      \"last\": 5924.109992853408,\n      \"volume\": 1955.8537421380895,\n      \"high\": 3151.931062050256,\n      \"low\": 7016.3619332047065,\n      \"open\": 8816.233205527384,\n      \"close\": 2463.672678478086,\n      \"currency\": \"string\",\n      \"timestamp\": \"1989-03-21T23:29:38.720Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6545ae17-c239-4a8e-badc-e1a226d35b04",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "bid,ask,mid,last,volume"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc32a420-4085-45a0-8f47-14cb07b515a8",
+          "name": "Murex Get historical quotes",
+          "request": {
+            "name": "Murex Get historical quotes",
+            "description": {
+              "content": "Retrieve historical price data for a specified instrument and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instrumentId",
+                  "value": "<string>",
+                  "description": "(Required) Instrument identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "Daily",
+                  "description": "Data frequency"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a8797af-6b24-4d00-9d95-ce47850d25d4",
+              "name": "Historical quote data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "Daily"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instrumentId\": \"string\",\n  \"items\": [\n    {\n      \"date\": \"1993-09-21\",\n      \"open\": 2370.067168275479,\n      \"high\": 1960.1922801846838,\n      \"low\": 4772.455424425774,\n      \"close\": 6767.729454286504,\n      \"volume\": 6897.419468158051\n    },\n    {\n      \"date\": \"2009-08-22\",\n      \"open\": 2095.0391920664215,\n      \"high\": 2920.453467697577,\n      \"low\": 7765.763769689861,\n      \"close\": 123.68451266211,\n      \"volume\": 3764.159081561379\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3606f87-1e36-48bd-a9f5-35398abcfef5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instrumentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "Daily"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0dec5768-c855-4da7-afa9-7fbbb9541107",
+    "name": "Murex MX.3 Market Data Accounting Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

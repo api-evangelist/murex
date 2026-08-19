@@ -1,0 +1,423 @@
+{
+  "item": [
+    {
+      "id": "c34389e5-4165-43aa-b407-b26882c1361d",
+      "name": "Reconciliations",
+      "description": {
+        "content": "Position and cash reconciliation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9374619-35bd-4787-b379-07f082298fa5",
+          "name": "Murex List reconciliations",
+          "request": {
+            "name": "Murex List reconciliations",
+            "description": {
+              "content": "Retrieve reconciliation results for positions, cash balances, and trade matching.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconciliations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Reconciliation type"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by reconciliation status"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Reconciliation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b099a84-52eb-485a-a9af-53c498f6463b",
+              "name": "List of reconciliation items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"reconciliationId\": \"string\",\n      \"type\": \"Position\",\n      \"status\": \"Investigating\",\n      \"internalValue\": 5289.919111188577,\n      \"externalValue\": 4416.407746041819,\n      \"difference\": 3141.952493645085,\n      \"currency\": \"string\",\n      \"source\": \"string\",\n      \"asOfDate\": \"2016-04-03\",\n      \"instrumentId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"comment\": \"string\"\n    },\n    {\n      \"reconciliationId\": \"string\",\n      \"type\": \"Trade\",\n      \"status\": \"Unmatched\",\n      \"internalValue\": 2465.384073038277,\n      \"externalValue\": 6722.596226528784,\n      \"difference\": 3612.8693334311833,\n      \"currency\": \"string\",\n      \"source\": \"string\",\n      \"asOfDate\": \"2001-02-25\",\n      \"instrumentId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"comment\": \"string\"\n    }\n  ],\n  \"totalCount\": 2744,\n  \"matchedCount\": 4158,\n  \"unmatchedCount\": 792\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cddccb1f-cda3-4d4f-ae81-22035f51f64c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7d73c90-268a-4176-9f21-12ca27efc44b",
+          "name": "Murex Get a reconciliation item",
+          "request": {
+            "name": "Murex Get a reconciliation item",
+            "description": {
+              "content": "Retrieve details of a specific reconciliation item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reconciliations",
+                ":reconciliationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reconciliationId",
+                  "description": "(Required) Reconciliation item identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "058cdd49-22fc-4d23-a8ff-88954c7a69cc",
+              "name": "Reconciliation item details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations",
+                    ":reconciliationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reconciliationId",
+                      "description": "(Required) Reconciliation item identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reconciliationId\": \"string\",\n  \"type\": \"Position\",\n  \"status\": \"Pending\",\n  \"internalValue\": 3401.3356291460404,\n  \"externalValue\": 3430.3124613739587,\n  \"difference\": 3618.1726515989144,\n  \"currency\": \"string\",\n  \"source\": \"string\",\n  \"asOfDate\": \"1981-03-08\",\n  \"instrumentId\": \"string\",\n  \"counterpartyId\": \"string\",\n  \"comment\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06b84bad-fbab-4665-a269-93e15d9821d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations",
+                    ":reconciliationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reconciliationId",
+                      "description": "(Required) Reconciliation item identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "732271e7-0775-46f1-8675-c729e60e5cdc",
+              "name": "Reconciliation item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reconciliations",
+                    ":reconciliationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reconciliationId",
+                      "description": "(Required) Reconciliation item identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1891ab6f-2bdd-4b63-aa64-3f716806729d",
+    "name": "Murex MX.3 Market Data Accounting Reconciliations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

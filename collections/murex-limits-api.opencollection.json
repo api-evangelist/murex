@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Limits API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Limits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List risk limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/limits",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by limit status"
+              }
+            ]
+          },
+          "docs": "Retrieve configured risk limits and their current utilization."
+        },
+        {
+          "info": {
+            "name": "Murex Get a risk limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/limits/:limitId",
+            "params": [
+              {
+                "name": "limitId",
+                "value": "",
+                "type": "path",
+                "description": "Risk limit identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific risk limit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

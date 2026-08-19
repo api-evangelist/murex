@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Confirmations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Confirmations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List confirmations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/confirmations",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by confirmation status"
+              },
+              {
+                "name": "counterpartyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by counterparty"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve trade confirmations with optional filtering by status, counterparty, and date range."
+        },
+        {
+          "info": {
+            "name": "Murex Get a confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/confirmations/:confirmationId",
+            "params": [
+              {
+                "name": "confirmationId",
+                "value": "",
+                "type": "path",
+                "description": "Confirmation unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific trade confirmation."
+        },
+        {
+          "info": {
+            "name": "Murex Match a confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/marketdata/confirmations/:confirmationId/match",
+            "params": [
+              {
+                "name": "confirmationId",
+                "value": "",
+                "type": "path",
+                "description": "Confirmation identifier"
+              }
+            ]
+          },
+          "docs": "Mark a confirmation as matched after counterparty agreement."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

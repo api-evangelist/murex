@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Trades API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trades",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/trades",
+            "params": [
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Filter by portfolio or book name"
+              },
+              {
+                "name": "counterpartyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by counterparty identifier"
+              },
+              {
+                "name": "tradeDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by trade date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve trade blotter entries with optional filtering by asset class, portfolio, counterparty, and date range."
+        },
+        {
+          "info": {
+            "name": "Murex Get a trade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/trades/:tradeId",
+            "params": [
+              {
+                "name": "tradeId",
+                "value": "",
+                "type": "path",
+                "description": "Trade unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific trade by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

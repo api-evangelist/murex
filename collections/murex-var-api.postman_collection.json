@@ -1,0 +1,502 @@
+{
+  "item": [
+    {
+      "id": "86abb273-1fb1-4c36-9ec9-98c70ef38dbf",
+      "name": "VaR",
+      "description": {
+        "content": "Value at Risk calculations and reports",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "010f891d-d581-4971-9a8e-7b29d1ae0c0e",
+          "name": "Murex Get VaR calculations",
+          "request": {
+            "name": "Murex Get VaR calculations",
+            "description": {
+              "content": "Retrieve Value at Risk calculations for specified portfolios, desks, or entity levels.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "var"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "VaR calculation methodology"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidenceLevel",
+                  "value": "99",
+                  "description": "Confidence level as a percentage"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingPeriod",
+                  "value": "1",
+                  "description": "Holding period in days"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bd77e16-1e44-4a50-97a8-7a6f8b22de21",
+              "name": "VaR calculation results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidenceLevel",
+                      "value": "99"
+                    },
+                    {
+                      "key": "holdingPeriod",
+                      "value": "1"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"asOfDate\": \"1999-07-01\",\n  \"method\": \"string\",\n  \"confidenceLevel\": 1304.7015877447932,\n  \"holdingPeriod\": 6983,\n  \"varAmount\": 5464.058662641277,\n  \"currency\": \"string\",\n  \"componentVaR\": [\n    {\n      \"category\": \"string\",\n      \"varAmount\": 3826.6254342739912\n    },\n    {\n      \"category\": \"string\",\n      \"varAmount\": 3998.6053691229663\n    }\n  ],\n  \"calculatedAt\": \"1948-01-17T03:35:08.133Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e17ac80f-0e9c-49d4-841f-6fe4d869f3ff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidenceLevel",
+                      "value": "99"
+                    },
+                    {
+                      "key": "holdingPeriod",
+                      "value": "1"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43b7249f-7cad-4957-8cda-5e4f4b12747c",
+              "name": "Portfolio or desk not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidenceLevel",
+                      "value": "99"
+                    },
+                    {
+                      "key": "holdingPeriod",
+                      "value": "1"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ee2d073-502a-43eb-b619-8c283c36465c",
+          "name": "Murex Get VaR history",
+          "request": {
+            "name": "Murex Get VaR history",
+            "description": {
+              "content": "Retrieve historical VaR values over a date range for trend analysis and backtesting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "var",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Start date for history"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) End date for history"
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "VaR calculation methodology"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26d4ff0d-09ab-4815-af6e-138b64fdae6a",
+              "name": "Historical VaR values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"date\": \"2009-04-02\",\n      \"varAmount\": 6360.487712920046,\n      \"pnl\": 5467.568511151087,\n      \"breach\": true\n    },\n    {\n      \"date\": \"1993-11-14\",\n      \"varAmount\": 3930.8785470064345,\n      \"pnl\": 6427.842061865544,\n      \"breach\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bda8a26a-63df-4ac1-90be-37be149d7e2b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "var",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3fd27181-a660-4e70-87a4-1bf737db9ad4",
+    "name": "Murex MX.3 Market Data Accounting VaR API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

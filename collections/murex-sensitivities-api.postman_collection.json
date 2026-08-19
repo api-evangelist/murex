@@ -1,0 +1,410 @@
+{
+  "item": [
+    {
+      "id": "2572f458-43d8-43a5-8835-07c46b630560",
+      "name": "Sensitivities",
+      "description": {
+        "content": "Greek and sensitivity calculations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "589f6dda-845f-4670-9743-e2d0f65464ab",
+          "name": "Murex Get risk sensitivities",
+          "request": {
+            "name": "Murex Get risk sensitivities",
+            "description": {
+              "content": "Retrieve Greek calculations and risk sensitivities for portfolios including delta, gamma, vega, theta, and rho.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sensitivities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Filter by asset class"
+                },
+                {
+                  "disabled": false,
+                  "key": "greeks",
+                  "value": "<string>",
+                  "description": "Comma-separated list of Greeks to compute"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b907f824-32d7-44ac-9dc6-90240ad5d1f8",
+              "name": "Sensitivity calculations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "greeks",
+                      "value": "delta,gamma,vega,theta,rho"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"asOfDate\": \"2011-04-02\",\n  \"greeks\": {\n    \"delta\": 3181.563930556942,\n    \"gamma\": 4261.718263373059,\n    \"vega\": 9222.204221911306,\n    \"theta\": 1581.4460801212615,\n    \"rho\": 7558.783348889971\n  },\n  \"byAssetClass\": [\n    {\n      \"assetClass\": \"string\",\n      \"delta\": 3464.9007256374884,\n      \"gamma\": 4112.769986241682,\n      \"vega\": 8544.39614055914\n    },\n    {\n      \"assetClass\": \"string\",\n      \"delta\": 4242.995406698078,\n      \"gamma\": 8653.631627103443,\n      \"vega\": 9470.450167436731\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b5bff0b-a12e-4812-ab82-5841b0242faf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "greeks",
+                      "value": "delta,gamma,vega,theta,rho"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1926d00a-bbf5-45e4-808a-21f53fb089a2",
+          "name": "Murex Get PV01 sensitivities",
+          "request": {
+            "name": "Murex Get PV01 sensitivities",
+            "description": {
+              "content": "Retrieve PV01 (price value of a basis point) sensitivities by currency and tenor bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sensitivities",
+                "pv01"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by currency"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b743ad41-de0e-4a23-899b-3768d53c3559",
+              "name": "PV01 sensitivity results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities",
+                    "pv01"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"portfolioId\": \"string\",\n  \"asOfDate\": \"1950-03-07\",\n  \"totalPV01\": 9163.544347712777,\n  \"byCurrency\": [\n    {\n      \"currency\": \"string\",\n      \"totalPV01\": 8421.04268612398,\n      \"tenorBuckets\": [\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 1669.5726428279977\n        },\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 1443.9761693646424\n        }\n      ]\n    },\n    {\n      \"currency\": \"string\",\n      \"totalPV01\": 5960.88033957504,\n      \"tenorBuckets\": [\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 1703.940151423481\n        },\n        {\n          \"tenor\": \"string\",\n          \"pv01\": 2405.92178793256\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcfdbcfa-49d5-48fe-800f-c378e19592d3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sensitivities",
+                    "pv01"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "37ff0f60-5901-4ecc-a915-77fa2007dd70",
+    "name": "Murex MX.3 Market Data Accounting Sensitivities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

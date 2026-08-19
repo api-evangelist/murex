@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "e308633d-5599-4880-b3a7-140ecc7d0f17",
+      "name": "Limits",
+      "description": {
+        "content": "Risk limit monitoring and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92a8db17-975c-491c-9c2e-d8d9911cbf13",
+          "name": "Murex List risk limits",
+          "request": {
+            "name": "Murex List risk limits",
+            "description": {
+              "content": "Retrieve configured risk limits and their current utilization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolioId",
+                  "value": "<string>",
+                  "description": "Portfolio or book identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "deskId",
+                  "value": "<string>",
+                  "description": "Trading desk identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by limit status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f403bcb-0835-4b42-b1d0-69f607943696",
+              "name": "List of risk limits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"limitId\": \"string\",\n      \"name\": \"string\",\n      \"limitType\": \"Sensitivity\",\n      \"portfolioId\": \"string\",\n      \"deskId\": \"string\",\n      \"limitValue\": 2071.1783250671556,\n      \"currentUtilization\": 37.97099796254755,\n      \"utilizationPercent\": 324.5944417716873,\n      \"currency\": \"string\",\n      \"status\": \"Warning\",\n      \"warningThreshold\": 2123.1149987859744,\n      \"updatedAt\": \"2009-11-10T04:08:45.226Z\"\n    },\n    {\n      \"limitId\": \"string\",\n      \"name\": \"string\",\n      \"limitType\": \"CreditExposure\",\n      \"portfolioId\": \"string\",\n      \"deskId\": \"string\",\n      \"limitValue\": 9686.088236357256,\n      \"currentUtilization\": 2975.7245615569204,\n      \"utilizationPercent\": 6778.503731240792,\n      \"currency\": \"string\",\n      \"status\": \"Breached\",\n      \"warningThreshold\": 6153.110234761545,\n      \"updatedAt\": \"2019-07-14T13:29:27.745Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4b0f775-4976-40ae-9a86-02cacfcb93ee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolioId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deskId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5c63443-3696-4471-b137-a7b6f87052e7",
+          "name": "Murex Get a risk limit",
+          "request": {
+            "name": "Murex Get a risk limit",
+            "description": {
+              "content": "Retrieve details of a specific risk limit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "limits",
+                ":limitId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "limitId",
+                  "description": "(Required) Risk limit identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26985fe2-a9b4-4ccd-8dfc-d24fddd5af0d",
+              "name": "Risk limit details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits",
+                    ":limitId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "limitId",
+                      "description": "(Required) Risk limit identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limitId\": \"string\",\n  \"name\": \"string\",\n  \"limitType\": \"PV01\",\n  \"portfolioId\": \"string\",\n  \"deskId\": \"string\",\n  \"limitValue\": 3552.941764109435,\n  \"currentUtilization\": 996.360595867829,\n  \"utilizationPercent\": 2046.75813598866,\n  \"currency\": \"string\",\n  \"status\": \"Inactive\",\n  \"warningThreshold\": 7056.232181889718,\n  \"updatedAt\": \"1987-05-24T17:33:30.186Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "767af46a-66b7-4fde-b609-49e74ad48f91",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits",
+                    ":limitId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "limitId",
+                      "description": "(Required) Risk limit identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "076adeef-b4e3-47e0-a9b3-30696b7edfc3",
+              "name": "Risk limit not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "limits",
+                    ":limitId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "limitId",
+                      "description": "(Required) Risk limit identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9b11c154-9dee-4062-a69f-3dd7cea127de",
+    "name": "Murex MX.3 Market Data Accounting Limits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

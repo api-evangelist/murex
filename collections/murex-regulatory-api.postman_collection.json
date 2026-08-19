@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "15ba6d51-1526-44d3-8e3d-1a1edcf41883",
+      "name": "Regulatory",
+      "description": {
+        "content": "Regulatory capital and compliance metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "012b85f6-35a6-4571-a41c-5d9ff4d5898e",
+          "name": "Murex Get regulatory capital metrics",
+          "request": {
+            "name": "Murex Get regulatory capital metrics",
+            "description": {
+              "content": "Retrieve regulatory capital calculations including RWA, CVA, and capital ratios for Basel III/IV compliance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "regulatory",
+                "capital"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "framework",
+                  "value": "<string>",
+                  "description": "Regulatory framework"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Calculation date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60e65010-5a23-4158-9a53-f2d2a4e8fa6d",
+              "name": "Regulatory capital metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "capital"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "framework",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"framework\": \"string\",\n  \"asOfDate\": \"2021-12-30\",\n  \"riskWeightedAssets\": 3523.978952281164,\n  \"creditRWA\": 2509.33580144193,\n  \"marketRWA\": 6947.238297186376,\n  \"operationalRWA\": 2711.0029384500845,\n  \"cvaCharge\": 396.9853160470904,\n  \"tier1Capital\": 6108.9351001798805,\n  \"totalCapital\": 8683.014724488434,\n  \"capitalRatio\": 6251.9612832532075,\n  \"currency\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63e68ab6-aa5a-4f01-bdf4-ee1495245b97",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regulatory",
+                    "capital"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "framework",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8a613e57-8062-4e87-9386-f86c22e7edda",
+    "name": "Murex MX.3 Market Data Accounting Regulatory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,374 @@
+{
+  "item": [
+    {
+      "id": "ad5f836e-a5d8-4a63-a742-3781491765dd",
+      "name": "FX Rates",
+      "description": {
+        "content": "Foreign exchange rates and crosses",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2714c16c-ebf3-4bdd-9da8-8733077d77f4",
+          "name": "Murex Get FX rates",
+          "request": {
+            "name": "Murex Get FX rates",
+            "description": {
+              "content": "Retrieve foreign exchange spot and forward rates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fx",
+                "rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyPairs",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated currency pairs (e.g., EURUSD,GBPUSD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "rateType",
+                  "value": "Spot",
+                  "description": "Rate type"
+                },
+                {
+                  "disabled": false,
+                  "key": "tenor",
+                  "value": "<string>",
+                  "description": "Forward tenor (required when rateType is Forward)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4cdd6657-7a35-440c-af6a-699b515df06a",
+              "name": "FX rates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPairs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rateType",
+                      "value": "Spot"
+                    },
+                    {
+                      "key": "tenor",
+                      "value": "1M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"currencyPair\": \"string\",\n      \"baseCurrency\": \"string\",\n      \"quoteCurrency\": \"string\",\n      \"bid\": 9920.056438270032,\n      \"ask\": 3460.3894044933636,\n      \"mid\": 9829.460013705148,\n      \"rateType\": \"Spot\",\n      \"tenor\": \"string\",\n      \"timestamp\": \"2008-12-07T08:07:01.104Z\"\n    },\n    {\n      \"currencyPair\": \"string\",\n      \"baseCurrency\": \"string\",\n      \"quoteCurrency\": \"string\",\n      \"bid\": 5282.862449924054,\n      \"ask\": 3415.537921663864,\n      \"mid\": 3120.6511340102506,\n      \"rateType\": \"Spot\",\n      \"tenor\": \"string\",\n      \"timestamp\": \"2021-12-20T14:42:08.031Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3224e66d-8c7c-4382-947f-3a71e49e10c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPairs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rateType",
+                      "value": "Spot"
+                    },
+                    {
+                      "key": "tenor",
+                      "value": "1M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8952b98-6c6c-438c-944d-c0942d9496cf",
+          "name": "Murex Get FX rate history",
+          "request": {
+            "name": "Murex Get FX rate history",
+            "description": {
+              "content": "Retrieve historical FX rates for a currency pair over a date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fx",
+                "rates",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currencyPair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair (e.g., EURUSD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb9511ab-1bd7-472b-8b3b-a5c3492a4efa",
+              "name": "Historical FX rates",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currencyPair\": \"string\",\n  \"items\": [\n    {\n      \"date\": \"1963-12-16\",\n      \"rate\": 268.8509621518442\n    },\n    {\n      \"date\": \"1983-07-03\",\n      \"rate\": 2718.000033088195\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b95bf33-6b2d-4819-bed4-3d365e301e15",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx",
+                    "rates",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currencyPair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4fddc410-06b0-431e-ba9c-c385a59a7c41",
+    "name": "Murex MX.3 Market Data Accounting FX Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

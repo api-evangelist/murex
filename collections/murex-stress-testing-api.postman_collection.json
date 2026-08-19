@@ -1,0 +1,408 @@
+{
+  "item": [
+    {
+      "id": "21cd9bd8-c680-4ff0-a150-b5d4efe0e61f",
+      "name": "Stress Testing",
+      "description": {
+        "content": "Stress testing and scenario analysis",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "567f0268-3451-4813-9cd6-338c20c767cc",
+          "name": "Murex List stress test scenarios",
+          "request": {
+            "name": "Murex List stress test scenarios",
+            "description": {
+              "content": "Retrieve available stress test scenarios and their configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stress-tests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by scenario type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f6a871c-37a8-4265-86a1-89a33066de70",
+              "name": "List of stress test scenarios",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"scenarioId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"Hypothetical\",\n      \"shocks\": [\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Relative\",\n          \"shockValue\": 9601.436292255423\n        },\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Absolute\",\n          \"shockValue\": 7116.380864115983\n        }\n      ]\n    },\n    {\n      \"scenarioId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"Regulatory\",\n      \"shocks\": [\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Relative\",\n          \"shockValue\": 5120.538877582451\n        },\n        {\n          \"riskFactor\": \"string\",\n          \"shockType\": \"Relative\",\n          \"shockValue\": 607.0744778681558\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e12f4cb9-086a-4540-822c-1252d1c0ab9f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b37a8e5-b301-43d8-9a74-1d4bdaf79638",
+          "name": "Murex Run a stress test",
+          "request": {
+            "name": "Murex Run a stress test",
+            "description": {
+              "content": "Execute a stress test scenario against specified portfolios and return the impact analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stress-tests",
+                ":scenarioId",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scenarioId",
+                  "description": "(Required) Stress test scenario identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6b0cd96-bc5c-4ee6-ba60-987fee830ad1",
+              "name": "Stress test results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests",
+                    ":scenarioId",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) Stress test scenario identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scenarioId\": \"string\",\n  \"scenarioName\": \"string\",\n  \"asOfDate\": \"1987-01-11\",\n  \"totalImpact\": 4567.715698582695,\n  \"currency\": \"string\",\n  \"byPortfolio\": [\n    {\n      \"portfolioId\": \"string\",\n      \"impact\": 8922.452561224742\n    },\n    {\n      \"portfolioId\": \"string\",\n      \"impact\": 9366.32658134395\n    }\n  ],\n  \"byRiskFactor\": [\n    {\n      \"riskFactor\": \"string\",\n      \"impact\": 5015.61219202398\n    },\n    {\n      \"riskFactor\": \"string\",\n      \"impact\": 9601.283939633096\n    }\n  ],\n  \"calculatedAt\": \"2022-10-17T00:53:50.455Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a05f35e8-0e3d-44a5-afcd-88790e49b4a0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests",
+                    ":scenarioId",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) Stress test scenario identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "483c92d9-7114-4a6d-86f4-0f61624db10b",
+              "name": "Scenario not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stress-tests",
+                    ":scenarioId",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scenarioId",
+                      "description": "(Required) Stress test scenario identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"portfolioIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"asOfDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "94051f38-1d01-441a-8b41-9b2d9e4d80bc",
+    "name": "Murex MX.3 Market Data Accounting Stress Testing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

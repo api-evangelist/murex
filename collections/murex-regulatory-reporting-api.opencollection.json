@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Regulatory Reporting API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regulatory Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List regulatory reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/regulatory/reports",
+            "params": [
+              {
+                "name": "regime",
+                "value": "",
+                "type": "query",
+                "description": "Regulatory reporting regime"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Report submission status"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve regulatory trade reports for EMIR, MiFID II, Dodd-Frank, and other reporting regimes."
+        },
+        {
+          "info": {
+            "name": "Murex Get a regulatory report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/regulatory/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Regulatory report identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific regulatory report submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Stress Testing API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stress Testing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex List stress test scenarios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/stress-tests",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by scenario type"
+              }
+            ]
+          },
+          "docs": "Retrieve available stress test scenarios and their configurations."
+        },
+        {
+          "info": {
+            "name": "Murex Run a stress test",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.murex.com/v1/marketdata/stress-tests/:scenarioId/run",
+            "params": [
+              {
+                "name": "scenarioId",
+                "value": "",
+                "type": "path",
+                "description": "Stress test scenario identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a stress test scenario against specified portfolios and return the impact analysis."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

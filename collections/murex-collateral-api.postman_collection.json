@@ -1,0 +1,413 @@
+{
+  "item": [
+    {
+      "id": "f4c7e6ea-e0bb-4725-90aa-a287428867b8",
+      "name": "Collateral",
+      "description": {
+        "content": "Collateral management and margin operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6a582df-fe6b-4828-8317-dea3368b34ef",
+          "name": "Murex List collateral agreements",
+          "request": {
+            "name": "Murex List collateral agreements",
+            "description": {
+              "content": "Retrieve CSA and collateral agreements with margin call status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collateral",
+                "agreements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "counterpartyId",
+                  "value": "<string>",
+                  "description": "Filter by counterparty"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by agreement status"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5b2d165-e0c3-4dca-b8b9-99b1a13f8426",
+              "name": "List of collateral agreements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"agreementId\": \"string\",\n      \"agreementType\": \"GMSLA\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"status\": \"Suspended\",\n      \"baseCurrency\": \"string\",\n      \"threshold\": 5145.843874251931,\n      \"minimumTransferAmount\": 2002.2110367501912,\n      \"independentAmount\": 1140.3027761545281,\n      \"currentExposure\": 4595.80842273848,\n      \"collateralHeld\": 5820.038272801936,\n      \"collateralPosted\": 2493.921823342522\n    },\n    {\n      \"agreementId\": \"string\",\n      \"agreementType\": \"GMSLA\",\n      \"counterpartyId\": \"string\",\n      \"counterpartyName\": \"string\",\n      \"status\": \"Active\",\n      \"baseCurrency\": \"string\",\n      \"threshold\": 5648.243965211756,\n      \"minimumTransferAmount\": 834.404447280912,\n      \"independentAmount\": 9002.224230687354,\n      \"currentExposure\": 6926.508988450275,\n      \"collateralHeld\": 8448.785447067929,\n      \"collateralPosted\": 9530.02463264354\n    }\n  ],\n  \"totalCount\": 6716\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a284e09-e80b-49d9-bf9f-fe8617372568",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "counterpartyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17405d14-e175-40cb-bf2a-bb2d974529f7",
+          "name": "Murex List margin calls",
+          "request": {
+            "name": "Murex List margin calls",
+            "description": {
+              "content": "Retrieve margin call calculations and their settlement status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collateral",
+                "margin-calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agreementId",
+                  "value": "<string>",
+                  "description": "Filter by collateral agreement"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by margin call status"
+                },
+                {
+                  "disabled": false,
+                  "key": "asOfDate",
+                  "value": "<date>",
+                  "description": "Margin call date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a83b2e45-35b2-4e49-92bc-8c4722336b7a",
+              "name": "List of margin calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "margin-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agreementId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"marginCallId\": \"string\",\n      \"agreementId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"direction\": \"Deliver\",\n      \"callAmount\": 6071.539500319045,\n      \"currency\": \"string\",\n      \"exposure\": 9910.816124388712,\n      \"status\": \"Disputed\",\n      \"callDate\": \"2000-04-14\",\n      \"settlementDate\": \"2021-01-24\",\n      \"issuedAt\": \"1975-10-18T17:38:39.648Z\"\n    },\n    {\n      \"marginCallId\": \"string\",\n      \"agreementId\": \"string\",\n      \"counterpartyId\": \"string\",\n      \"direction\": \"Return\",\n      \"callAmount\": 4841.512038069398,\n      \"currency\": \"string\",\n      \"exposure\": 3949.669829454555,\n      \"status\": \"Issued\",\n      \"callDate\": \"1955-09-28\",\n      \"settlementDate\": \"1970-05-25\",\n      \"issuedAt\": \"1954-08-20T08:46:36.727Z\"\n    }\n  ],\n  \"totalCount\": 4999\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b93c67d4-fe42-4354-ae78-54f251e0f9f1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collateral",
+                    "margin-calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agreementId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asOfDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.murex.com/v1/marketdata",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1ecb7eab-d487-4b48-8ad2-d219153cf9fd",
+    "name": "Murex MX.3 Market Data Accounting Collateral API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.\n\nContact Support:\n Name: Murex Support",
+      "type": "text/plain"
+    }
+  }
+}

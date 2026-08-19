@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting Sensitivities API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sensitivities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get risk sensitivities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/sensitivities",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset class"
+              },
+              {
+                "name": "greeks",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of Greeks to compute"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve Greek calculations and risk sensitivities for portfolios including delta, gamma, vega, theta, and rho."
+        },
+        {
+          "info": {
+            "name": "Murex Get PV01 sensitivities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/sensitivities/pv01",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by currency"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve PV01 (price value of a basis point) sensitivities by currency and tenor bucket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

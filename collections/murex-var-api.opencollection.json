@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Murex MX.3 Market Data Accounting VaR API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VaR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Murex Get VaR calculations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/var",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "VaR calculation methodology"
+              },
+              {
+                "name": "confidenceLevel",
+                "value": "",
+                "type": "query",
+                "description": "Confidence level as a percentage"
+              },
+              {
+                "name": "holdingPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Holding period in days"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Calculation date"
+              }
+            ]
+          },
+          "docs": "Retrieve Value at Risk calculations for specified portfolios, desks, or entity levels."
+        },
+        {
+          "info": {
+            "name": "Murex Get VaR history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.murex.com/v1/marketdata/var/history",
+            "params": [
+              {
+                "name": "portfolioId",
+                "value": "",
+                "type": "query",
+                "description": "Portfolio or book identifier"
+              },
+              {
+                "name": "deskId",
+                "value": "",
+                "type": "query",
+                "description": "Trading desk identifier"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for history"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for history"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "VaR calculation methodology"
+              }
+            ]
+          },
+          "docs": "Retrieve historical VaR values over a date range for trend analysis and backtesting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
