@@ -25,6 +25,13 @@ specificationVersion: '0.23'
 tags:
   - Capital Markets
   - Enterprise Software
+  - Financial-Services
+  - Fintech
+  - Risk Management
+  - Trading
+tags_raw:
+  - Capital Markets
+  - Enterprise Software
   - Financial Services
   - Fintech
   - Risk Management
@@ -120,6 +127,8 @@ apis:
   description: Order creation, modification, and lifecycle management
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -138,6 +147,8 @@ apis:
   description: Trading portfolio and book management
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
+  - Portfolio
+  tags_raw:
   - Portfolios
   properties:
   - type: OpenAPI
@@ -210,6 +221,8 @@ apis:
   description: Settlement instruction management and processing
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
+  - Settlement
+  tags_raw:
   - Settlements
   properties:
   - type: OpenAPI
@@ -237,6 +250,8 @@ apis:
   description: Value at Risk calculations and reports
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
+  - VAR
+  tags_raw:
   - VaR
   properties:
   - type: OpenAPI
