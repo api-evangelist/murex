@@ -278,6 +278,9 @@ apis:
   - type: OpenAPI
     url: openapi/murex-volatility-api-openapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/murex-capability-edges.yml
+    name: Murex Business Capability Map
   - type: AgenticAccess
     url: agentic-access/murex-agentic-access.yml
   - type: DomainSecurity
