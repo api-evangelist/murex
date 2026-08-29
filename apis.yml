@@ -4,6 +4,18 @@ description: >-
   Murex is a global fintech leader in trading, treasury, risk management and post-trade operations software. Their MX.3
   platform provides comprehensive solutions for capital markets across asset classes.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
