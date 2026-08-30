@@ -262,7 +262,7 @@ apis:
   description: Value at Risk calculations and reports
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
-  - VAR
+  - VaR
   tags_raw:
   - VaR
   properties:
