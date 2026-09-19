@@ -189,6 +189,8 @@ apis:
   description: Position and cash reconciliation operations
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
+  - Reconciliation
+  tags_raw:
   - Reconciliations
   properties:
   - type: OpenAPI
@@ -254,6 +256,8 @@ apis:
   description: Trade execution and trade blotter operations
   humanURL: https://www.murex.com/en/solutions/mx3-platform
   tags:
+  - Trade
+  tags_raw:
   - Trades
   properties:
   - type: OpenAPI
