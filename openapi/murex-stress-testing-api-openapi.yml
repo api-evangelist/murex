@@ -1,15 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Murex MX.3 Market Data Accounting Stress Testing API
-  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  title: Murex MX.3 Risk Stress Testing API
+  description: Comprehensive risk management API providing real-time risk calculations, Value at Risk (VaR), stress testing, sensitivity analysis, and regulatory compliance metrics on the Murex MX.3 platform.
   version: '1.0'
   contact:
     name: Murex Support
     url: https://www.murex.com/en/support
   termsOfService: https://www.murex.com/en/legal/terms
 servers:
-- url: https://api.murex.com/v1/marketdata
-  description: Murex MX.3 Market Data API
+- url: https://api.murex.com/v1/risk
+  description: Murex MX.3 Risk API
 security:
 - bearerAuth: []
 tags:
@@ -170,5 +170,5 @@ components:
       bearerFormat: JWT
       description: OAuth 2.0 bearer token for MX.3 API access
 externalDocs:
-  description: Murex MX.3 Market Data API Documentation
-  url: https://docs.murex.com/mx3/marketdata-api
+  description: Murex MX.3 Risk API Documentation
+  url: https://docs.murex.com/mx3/risk-api

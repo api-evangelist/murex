@@ -1,15 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Murex MX.3 Market Data Accounting Instruments API
-  description: Real-time and historical market data API providing quotes, yield curves, volatility surfaces, and reference data for pricing and valuation on the Murex MX.3 platform.
+  title: Murex MX.3 Trading Instruments API
+  description: API for executing trades, managing orders, and accessing real-time market data across multiple asset classes including derivatives, fixed income, equities, and FX on the Murex MX.3 platform.
   version: '1.0'
   contact:
     name: Murex Support
     url: https://www.murex.com/en/support
   termsOfService: https://www.murex.com/en/legal/terms
 servers:
-- url: https://api.murex.com/v1/marketdata
-  description: Murex MX.3 Market Data API
+- url: https://api.murex.com/v1/trading
+  description: Murex MX.3 Trading API
 security:
 - bearerAuth: []
 tags:
@@ -122,14 +122,6 @@ components:
       schema:
         type: integer
         default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
     assetClass:
       name: assetClass
       in: query
@@ -143,6 +135,14 @@ components:
         - Credit
         - Commodity
         - FixedIncome
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
   securitySchemes:
     bearerAuth:
       type: http
@@ -150,5 +150,5 @@ components:
       bearerFormat: JWT
       description: OAuth 2.0 bearer token for MX.3 API access
 externalDocs:
-  description: Murex MX.3 Market Data API Documentation
-  url: https://docs.murex.com/mx3/marketdata-api
+  description: Murex MX.3 Trading API Documentation
+  url: https://docs.murex.com/mx3/trading-api
