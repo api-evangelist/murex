@@ -69,7 +69,44 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO 4217 currency code
+        name:
+          type: string
+          description: Currency name
+        decimalPlaces:
+          type: integer
+          description: Number of decimal places
+        dayCountConvention:
+          type: string
+          description: Default day count convention
+        spotLag:
+          type: integer
+          description: Spot settlement lag in business days
+        calendar:
+          type: string
+          description: Associated business day calendar
     Calendar:
       type: object
       properties:
@@ -95,43 +132,6 @@ components:
                 format: date
               name:
                 type: string
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-          description: ISO 4217 currency code
-        name:
-          type: string
-          description: Currency name
-        decimalPlaces:
-          type: integer
-          description: Number of decimal places
-        dayCountConvention:
-          type: string
-          description: Default day count convention
-        spotLag:
-          type: integer
-          description: Spot settlement lag in business days
-        calendar:
-          type: string
-          description: Associated business day calendar
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
   securitySchemes:
     bearerAuth:
       type: http

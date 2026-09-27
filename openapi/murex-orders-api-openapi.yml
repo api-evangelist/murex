@@ -162,21 +162,49 @@ paths:
         '404':
           description: Order not found
 components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    assetClass:
+      name: assetClass
+      in: query
+      description: Filter by asset class
+      schema:
+        type: string
+        enum:
+        - FX
+        - IRD
+        - Equity
+        - Credit
+        - Commodity
+        - FixedIncome
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      description: Order unique identifier
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    portfolio:
+      name: portfolio
+      in: query
+      description: Filter by portfolio or book name
+      schema:
+        type: string
   schemas:
-    UpdateOrderRequest:
-      type: object
-      properties:
-        quantity:
-          type: number
-        price:
-          type: number
-        timeInForce:
-          type: string
-          enum:
-          - GTC
-          - DAY
-          - IOC
-          - FOK
     CreateOrderRequest:
       type: object
       required:
@@ -292,48 +320,20 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-  parameters:
-    orderId:
-      name: orderId
-      in: path
-      required: true
-      description: Order unique identifier
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
-    portfolio:
-      name: portfolio
-      in: query
-      description: Filter by portfolio or book name
-      schema:
-        type: string
-    assetClass:
-      name: assetClass
-      in: query
-      description: Filter by asset class
-      schema:
-        type: string
-        enum:
-        - FX
-        - IRD
-        - Equity
-        - Credit
-        - Commodity
-        - FixedIncome
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
+    UpdateOrderRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+        price:
+          type: number
+        timeInForce:
+          type: string
+          enum:
+          - GTC
+          - DAY
+          - IOC
+          - FOK
   securitySchemes:
     bearerAuth:
       type: http

@@ -106,13 +106,6 @@ paths:
           description: Unauthorized
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
     limit:
       name: limit
       in: query
@@ -121,6 +114,13 @@ components:
         type: integer
         default: 50
         maximum: 500
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
     CollateralAgreement:
       type: object

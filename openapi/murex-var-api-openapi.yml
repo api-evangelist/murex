@@ -112,19 +112,6 @@ paths:
         '401':
           description: Unauthorized
 components:
-  parameters:
-    portfolioId:
-      name: portfolioId
-      in: query
-      description: Portfolio or book identifier
-      schema:
-        type: string
-    deskId:
-      name: deskId
-      in: query
-      description: Trading desk identifier
-      schema:
-        type: string
   schemas:
     VaRHistoryEntry:
       type: object
@@ -179,6 +166,19 @@ components:
           type: string
           format: date-time
           description: Calculation timestamp
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

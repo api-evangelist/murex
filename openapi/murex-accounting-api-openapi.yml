@@ -68,6 +68,14 @@ paths:
           description: Unauthorized
 components:
   parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
     portfolioId:
       name: portfolioId
       in: query
@@ -81,14 +89,6 @@ components:
       schema:
         type: integer
         default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
   schemas:
     AccountingEntry:
       type: object

@@ -130,14 +130,6 @@ paths:
           description: Unauthorized
 components:
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
     portfolioId:
       name: portfolioId
       in: query
@@ -157,7 +149,44 @@ components:
       description: Trading desk identifier
       schema:
         type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
   schemas:
+    PositionSummary:
+      type: object
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        totalMarketValue:
+          type: number
+          description: Total market value
+        totalUnrealizedPnL:
+          type: number
+          description: Total unrealized P&L
+        currency:
+          type: string
+          description: Reporting currency
+        groups:
+          type: array
+          items:
+            type: object
+            properties:
+              groupKey:
+                type: string
+                description: Grouping key value
+              marketValue:
+                type: number
+              unrealizedPnL:
+                type: number
+              positionCount:
+                type: integer
     Position:
       type: object
       properties:
@@ -219,35 +248,6 @@ components:
           type: string
           format: date
           description: Position as-of date
-    PositionSummary:
-      type: object
-      properties:
-        asOfDate:
-          type: string
-          format: date
-        totalMarketValue:
-          type: number
-          description: Total market value
-        totalUnrealizedPnL:
-          type: number
-          description: Total unrealized P&L
-        currency:
-          type: string
-          description: Reporting currency
-        groups:
-          type: array
-          items:
-            type: object
-            properties:
-              groupKey:
-                type: string
-                description: Grouping key value
-              marketValue:
-                type: number
-              unrealizedPnL:
-                type: number
-              positionCount:
-                type: integer
   securitySchemes:
     bearerAuth:
       type: http

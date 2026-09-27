@@ -38,7 +38,7 @@ specificationVersion: '0.23'
 tags:
   - Capital Markets
   - Enterprise Software
-  - Financial-Services
+  - Financial Services
   - Fintech
   - Risk Management
   - Trading
@@ -49,6 +49,7 @@ tags_raw:
   - Fintech
   - Risk Management
   - Trading
+  - Financial-Services
 apis:
 - name: Murex MX.3 Platform
   description: >-
