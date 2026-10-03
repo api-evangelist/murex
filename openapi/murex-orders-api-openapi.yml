@@ -163,6 +163,21 @@ paths:
           description: Order not found
 components:
   parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      description: Order unique identifier
+      schema:
+        type: string
     offset:
       name: offset
       in: query
@@ -183,21 +198,6 @@ components:
         - Credit
         - Commodity
         - FixedIncome
-    orderId:
-      name: orderId
-      in: path
-      required: true
-      description: Order unique identifier
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
     portfolio:
       name: portfolio
       in: query
@@ -205,46 +205,6 @@ components:
       schema:
         type: string
   schemas:
-    CreateOrderRequest:
-      type: object
-      required:
-      - side
-      - instrumentId
-      - quantity
-      - portfolioId
-      - orderType
-      properties:
-        side:
-          type: string
-          enum:
-          - Buy
-          - Sell
-        instrumentId:
-          type: string
-        quantity:
-          type: number
-        price:
-          type: number
-        currency:
-          type: string
-        portfolioId:
-          type: string
-        counterpartyId:
-          type: string
-        orderType:
-          type: string
-          enum:
-          - Market
-          - Limit
-          - Stop
-        timeInForce:
-          type: string
-          enum:
-          - GTC
-          - DAY
-          - IOC
-          - FOK
-          default: DAY
     Order:
       type: object
       properties:
@@ -320,6 +280,46 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
+    CreateOrderRequest:
+      type: object
+      required:
+      - side
+      - instrumentId
+      - quantity
+      - portfolioId
+      - orderType
+      properties:
+        side:
+          type: string
+          enum:
+          - Buy
+          - Sell
+        instrumentId:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        currency:
+          type: string
+        portfolioId:
+          type: string
+        counterpartyId:
+          type: string
+        orderType:
+          type: string
+          enum:
+          - Market
+          - Limit
+          - Stop
+        timeInForce:
+          type: string
+          enum:
+          - GTC
+          - DAY
+          - IOC
+          - FOK
+          default: DAY
     UpdateOrderRequest:
       type: object
       properties:

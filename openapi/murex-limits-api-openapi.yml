@@ -76,6 +76,19 @@ paths:
         '404':
           description: Risk limit not found
 components:
+  parameters:
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
+    deskId:
+      name: deskId
+      in: query
+      description: Trading desk identifier
+      schema:
+        type: string
   schemas:
     RiskLimit:
       type: object
@@ -128,19 +141,6 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-  parameters:
-    deskId:
-      name: deskId
-      in: query
-      description: Trading desk identifier
-      schema:
-        type: string
-    portfolioId:
-      name: portfolioId
-      in: query
-      description: Portfolio or book identifier
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -79,35 +79,6 @@ paths:
         '404':
           description: Instrument not found
 components:
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
-    assetClass:
-      name: assetClass
-      in: query
-      description: Filter by asset class
-      schema:
-        type: string
-        enum:
-        - FX
-        - IRD
-        - Equity
-        - Credit
-        - Commodity
-        - FixedIncome
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
   schemas:
     Instrument:
       type: object
@@ -143,6 +114,35 @@ components:
         ticker:
           type: string
           description: Market ticker symbol
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    assetClass:
+      name: assetClass
+      in: query
+      description: Filter by asset class
+      schema:
+        type: string
+        enum:
+        - FX
+        - IRD
+        - Equity
+        - Credit
+        - Commodity
+        - FixedIncome
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
   securitySchemes:
     bearerAuth:
       type: http

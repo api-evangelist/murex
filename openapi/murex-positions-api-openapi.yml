@@ -130,12 +130,6 @@ paths:
           description: Unauthorized
 components:
   parameters:
-    portfolioId:
-      name: portfolioId
-      in: query
-      description: Portfolio or book identifier
-      schema:
-        type: string
     offset:
       name: offset
       in: query
@@ -143,6 +137,12 @@ components:
       schema:
         type: integer
         default: 0
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
     deskId:
       name: deskId
       in: query

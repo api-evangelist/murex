@@ -91,36 +91,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    PV01Result:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        asOfDate:
-          type: string
-          format: date
-        totalPV01:
-          type: number
-          description: Total PV01 across all tenors
-        byCurrency:
-          type: array
-          items:
-            type: object
-            properties:
-              currency:
-                type: string
-              totalPV01:
-                type: number
-              tenorBuckets:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    tenor:
-                      type: string
-                      description: Tenor bucket (e.g., 1M, 3M, 1Y, 5Y, 10Y)
-                    pv01:
-                      type: number
     SensitivityResult:
       type: object
       properties:
@@ -160,6 +130,36 @@ components:
                 type: number
               vega:
                 type: number
+    PV01Result:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalPV01:
+          type: number
+          description: Total PV01 across all tenors
+        byCurrency:
+          type: array
+          items:
+            type: object
+            properties:
+              currency:
+                type: string
+              totalPV01:
+                type: number
+              tenorBuckets:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tenor:
+                      type: string
+                      description: Tenor bucket (e.g., 1M, 3M, 1Y, 5Y, 10Y)
+                    pv01:
+                      type: number
   parameters:
     portfolioId:
       name: portfolioId

@@ -84,6 +84,13 @@ components:
       schema:
         type: integer
         default: 0
+    tradeId:
+      name: tradeId
+      in: path
+      required: true
+      description: Trade unique identifier
+      schema:
+        type: string
     assetClass:
       name: assetClass
       in: query
@@ -97,11 +104,10 @@ components:
         - Credit
         - Commodity
         - FixedIncome
-    tradeId:
-      name: tradeId
-      in: path
-      required: true
-      description: Trade unique identifier
+    portfolio:
+      name: portfolio
+      in: query
+      description: Filter by portfolio or book name
       schema:
         type: string
     limit:
@@ -112,12 +118,6 @@ components:
         type: integer
         default: 50
         maximum: 500
-    portfolio:
-      name: portfolio
-      in: query
-      description: Filter by portfolio or book name
-      schema:
-        type: string
   schemas:
     Trade:
       type: object

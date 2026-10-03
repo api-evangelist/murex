@@ -80,42 +80,6 @@ paths:
           description: Scenario not found
 components:
   schemas:
-    StressTestResult:
-      type: object
-      properties:
-        scenarioId:
-          type: string
-        scenarioName:
-          type: string
-        asOfDate:
-          type: string
-          format: date
-        totalImpact:
-          type: number
-          description: Total P&L impact in base currency
-        currency:
-          type: string
-        byPortfolio:
-          type: array
-          items:
-            type: object
-            properties:
-              portfolioId:
-                type: string
-              impact:
-                type: number
-        byRiskFactor:
-          type: array
-          items:
-            type: object
-            properties:
-              riskFactor:
-                type: string
-              impact:
-                type: number
-        calculatedAt:
-          type: string
-          format: date-time
     StressTestScenario:
       type: object
       properties:
@@ -163,6 +127,42 @@ components:
         asOfDate:
           type: string
           format: date
+    StressTestResult:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+        scenarioName:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+        totalImpact:
+          type: number
+          description: Total P&L impact in base currency
+        currency:
+          type: string
+        byPortfolio:
+          type: array
+          items:
+            type: object
+            properties:
+              portfolioId:
+                type: string
+              impact:
+                type: number
+        byRiskFactor:
+          type: array
+          items:
+            type: object
+            properties:
+              riskFactor:
+                type: string
+              impact:
+                type: number
+        calculatedAt:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

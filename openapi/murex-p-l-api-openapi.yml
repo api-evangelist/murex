@@ -92,42 +92,6 @@ components:
       schema:
         type: string
   schemas:
-    PnLReport:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        fromDate:
-          type: string
-          format: date
-        toDate:
-          type: string
-          format: date
-        currency:
-          type: string
-          description: Reporting currency
-        realizedPnL:
-          type: number
-          description: Total realized P&L
-        unrealizedPnL:
-          type: number
-          description: Total unrealized P&L
-        totalPnL:
-          type: number
-          description: Total P&L (realized + unrealized)
-        byAssetClass:
-          type: array
-          items:
-            type: object
-            properties:
-              assetClass:
-                type: string
-              realizedPnL:
-                type: number
-              unrealizedPnL:
-                type: number
-              totalPnL:
-                type: number
     PnLExplain:
       type: object
       properties:
@@ -165,6 +129,42 @@ components:
             unexplained:
               type: number
               description: Unexplained residual P&L
+    PnLReport:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        fromDate:
+          type: string
+          format: date
+        toDate:
+          type: string
+          format: date
+        currency:
+          type: string
+          description: Reporting currency
+        realizedPnL:
+          type: number
+          description: Total realized P&L
+        unrealizedPnL:
+          type: number
+          description: Total unrealized P&L
+        totalPnL:
+          type: number
+          description: Total P&L (realized + unrealized)
+        byAssetClass:
+          type: array
+          items:
+            type: object
+            properties:
+              assetClass:
+                type: string
+              realizedPnL:
+                type: number
+              unrealizedPnL:
+                type: number
+              totalPnL:
+                type: number
   securitySchemes:
     bearerAuth:
       type: http

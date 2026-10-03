@@ -106,28 +106,6 @@ components:
         type: integer
         default: 0
   schemas:
-    VolatilitySurfaceDefinition:
-      type: object
-      properties:
-        surfaceId:
-          type: string
-          description: Unique surface identifier
-        name:
-          type: string
-          description: Surface display name
-        underlying:
-          type: string
-          description: Underlying instrument or index
-        assetClass:
-          type: string
-          description: Asset class
-        quoteType:
-          type: string
-          enum:
-          - LogNormal
-          - Normal
-          - ShiftedLogNormal
-          description: Volatility quote convention
     VolatilitySurfaceData:
       type: object
       properties:
@@ -161,6 +139,28 @@ components:
               volatility:
                 type: number
                 description: Implied volatility value
+    VolatilitySurfaceDefinition:
+      type: object
+      properties:
+        surfaceId:
+          type: string
+          description: Unique surface identifier
+        name:
+          type: string
+          description: Surface display name
+        underlying:
+          type: string
+          description: Underlying instrument or index
+        assetClass:
+          type: string
+          description: Asset class
+        quoteType:
+          type: string
+          enum:
+          - LogNormal
+          - Normal
+          - ShiftedLogNormal
+          description: Volatility quote convention
   securitySchemes:
     bearerAuth:
       type: http
