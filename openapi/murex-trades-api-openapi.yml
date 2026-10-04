@@ -77,33 +77,6 @@ paths:
           description: Trade not found
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    tradeId:
-      name: tradeId
-      in: path
-      required: true
-      description: Trade unique identifier
-      schema:
-        type: string
-    assetClass:
-      name: assetClass
-      in: query
-      description: Filter by asset class
-      schema:
-        type: string
-        enum:
-        - FX
-        - IRD
-        - Equity
-        - Credit
-        - Commodity
-        - FixedIncome
     portfolio:
       name: portfolio
       in: query
@@ -118,6 +91,33 @@ components:
         type: integer
         default: 50
         maximum: 500
+    assetClass:
+      name: assetClass
+      in: query
+      description: Filter by asset class
+      schema:
+        type: string
+        enum:
+        - FX
+        - IRD
+        - Equity
+        - Credit
+        - Commodity
+        - FixedIncome
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    tradeId:
+      name: tradeId
+      in: path
+      required: true
+      description: Trade unique identifier
+      schema:
+        type: string
   schemas:
     Trade:
       type: object

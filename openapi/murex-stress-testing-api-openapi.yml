@@ -80,40 +80,6 @@ paths:
           description: Scenario not found
 components:
   schemas:
-    StressTestScenario:
-      type: object
-      properties:
-        scenarioId:
-          type: string
-          description: Unique scenario identifier
-        name:
-          type: string
-          description: Scenario name
-        description:
-          type: string
-          description: Scenario description
-        type:
-          type: string
-          enum:
-          - Historical
-          - Hypothetical
-          - Regulatory
-          description: Scenario type
-        shocks:
-          type: array
-          description: Market factor shocks in the scenario
-          items:
-            type: object
-            properties:
-              riskFactor:
-                type: string
-              shockType:
-                type: string
-                enum:
-                - Absolute
-                - Relative
-              shockValue:
-                type: number
     StressTestRequest:
       type: object
       required:
@@ -163,6 +129,40 @@ components:
         calculatedAt:
           type: string
           format: date-time
+    StressTestScenario:
+      type: object
+      properties:
+        scenarioId:
+          type: string
+          description: Unique scenario identifier
+        name:
+          type: string
+          description: Scenario name
+        description:
+          type: string
+          description: Scenario description
+        type:
+          type: string
+          enum:
+          - Historical
+          - Hypothetical
+          - Regulatory
+          description: Scenario type
+        shocks:
+          type: array
+          description: Market factor shocks in the scenario
+          items:
+            type: object
+            properties:
+              riskFactor:
+                type: string
+              shockType:
+                type: string
+                enum:
+                - Absolute
+                - Relative
+              shockValue:
+                type: number
   securitySchemes:
     bearerAuth:
       type: http

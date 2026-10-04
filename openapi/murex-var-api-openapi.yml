@@ -167,16 +167,16 @@ components:
           type: boolean
           description: Whether VaR was breached
   parameters:
-    portfolioId:
-      name: portfolioId
-      in: query
-      description: Portfolio or book identifier
-      schema:
-        type: string
     deskId:
       name: deskId
       in: query
       description: Trading desk identifier
+      schema:
+        type: string
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
       schema:
         type: string
   securitySchemes:

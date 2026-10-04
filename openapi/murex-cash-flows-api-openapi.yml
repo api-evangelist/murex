@@ -70,28 +70,6 @@ paths:
         '401':
           description: Unauthorized
 components:
-  parameters:
-    portfolioId:
-      name: portfolioId
-      in: query
-      description: Portfolio or book identifier
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
   schemas:
     CashFlow:
       type: object
@@ -140,6 +118,28 @@ components:
           - Pay
           - Receive
           description: Cash flow direction
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
+    portfolioId:
+      name: portfolioId
+      in: query
+      description: Portfolio or book identifier
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

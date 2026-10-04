@@ -124,6 +124,22 @@ paths:
         '404':
           description: Confirmation not found
 components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        maximum: 500
   schemas:
     Confirmation:
       type: object
@@ -176,22 +192,6 @@ components:
           type: string
           format: date-time
           description: Creation timestamp
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        maximum: 500
   securitySchemes:
     bearerAuth:
       type: http

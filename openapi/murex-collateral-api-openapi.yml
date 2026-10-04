@@ -106,54 +106,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    CollateralAgreement:
-      type: object
-      properties:
-        agreementId:
-          type: string
-          description: Unique agreement identifier
-        agreementType:
-          type: string
-          enum:
-          - CSA
-          - ISDA
-          - GMRA
-          - GMSLA
-          description: Agreement type
-        counterpartyId:
-          type: string
-          description: Counterparty identifier
-        counterpartyName:
-          type: string
-          description: Counterparty name
-        status:
-          type: string
-          enum:
-          - Active
-          - Suspended
-          - Terminated
-          description: Agreement status
-        baseCurrency:
-          type: string
-          description: Agreement base currency
-        threshold:
-          type: number
-          description: Threshold amount
-        minimumTransferAmount:
-          type: number
-          description: Minimum transfer amount
-        independentAmount:
-          type: number
-          description: Independent amount
-        currentExposure:
-          type: number
-          description: Current credit exposure
-        collateralHeld:
-          type: number
-          description: Collateral held value
-        collateralPosted:
-          type: number
-          description: Collateral posted value
     MarginCall:
       type: object
       properties:
@@ -202,6 +154,54 @@ components:
           type: string
           format: date-time
           description: When the margin call was issued
+    CollateralAgreement:
+      type: object
+      properties:
+        agreementId:
+          type: string
+          description: Unique agreement identifier
+        agreementType:
+          type: string
+          enum:
+          - CSA
+          - ISDA
+          - GMRA
+          - GMSLA
+          description: Agreement type
+        counterpartyId:
+          type: string
+          description: Counterparty identifier
+        counterpartyName:
+          type: string
+          description: Counterparty name
+        status:
+          type: string
+          enum:
+          - Active
+          - Suspended
+          - Terminated
+          description: Agreement status
+        baseCurrency:
+          type: string
+          description: Agreement base currency
+        threshold:
+          type: number
+          description: Threshold amount
+        minimumTransferAmount:
+          type: number
+          description: Minimum transfer amount
+        independentAmount:
+          type: number
+          description: Independent amount
+        currentExposure:
+          type: number
+          description: Current credit exposure
+        collateralHeld:
+          type: number
+          description: Collateral held value
+        collateralPosted:
+          type: number
+          description: Collateral posted value
   parameters:
     offset:
       name: offset
