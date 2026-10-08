@@ -284,6 +284,12 @@ apis:
   - type: OpenAPI
     url: openapi/murex-volatility-api-openapi.yml
 common:
+  - type: Plans
+    url: plans/murex-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/murex-rate-limits.yml
+  - type: FinOps
+    url: finops/murex-finops.yml
   - type: CapabilityMap
     url: capabilities/murex-capability-edges.yml
     name: Murex Business Capability Map
